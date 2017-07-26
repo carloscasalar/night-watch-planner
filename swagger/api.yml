@@ -1,0 +1,134 @@
+# Night Watch planner API
+swagger: '2.0'
+info:
+  title: Night Watch Planner API
+  description: Planner to optimize Night Watchs in RPGs
+  version: "1.0.0"
+host: localhost:3000
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /optimize:
+    post:
+      summary: Rewatchs an optimized nigth watch plan for the provided characters.
+      description: Rewatchs an optimized nigth watch plan for the provided characters.
+      operationId: getOptimizedPlan
+      parameters:
+        - name: planRequest
+          in: body
+          description: Details of the plan request.
+          required: true
+          schema:
+            $ref: '#/definitions/PlanRequest'
+
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Plan generated
+          schema:
+            $ref: '#/definitions/Plan'
+        403:
+          description: Bad request
+          schema:
+            properties:
+              message:
+                type: string
+                description: Error message
+definitions:
+  Sense:
+    description: Relevant senses that allows a _PC_ to be aware of intruders at a relevant distance.
+    type: string
+    default: Normal
+    enum:
+      - Blindsight
+      - Darkvision
+      - Low light
+      - Normal
+      - Scent
+
+  Character:
+    properties:
+      name:
+        type: string
+      senses:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/definitions/Sense'
+      requiredSleepTime:
+        description: |
+          Time that character spend sleeping in minutes.
+          By default it is 8h (480 minutes)
+        type: integer
+        minimum: 1
+        default: 480
+    required:
+      - name
+      - senses
+
+  Party:
+    description: A party of characters
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/definitions/Character'
+
+  PlanRequest:
+    description: Body of a plan request.
+    properties:
+      lengthOfWatch:
+        description: Lenth of a watch in minutes.
+        type: integer
+        minimum: 1
+        default: 60
+      maxWatchs:
+        description: Maximum watchs in which night watch divides.
+        type: integer
+        minimum: 1
+        default: 8
+      firstNightWatch:
+        description: |
+          First watch that happens in dark condition.
+          The number of the first watch is one (not zero).
+          By default all watchs happen in dark condition.
+        type: integer
+        default: 1
+        minimum: 1
+      lastNightWatch:
+        description: |
+          Last watch that happens in dark condition.
+          The number of the first watch is one (not zero).
+          By default all watchs after the first in dark condition happen also in dark condition.
+        type: integer
+        minimum: 1
+      party:
+        $ref: '#/definitions/Party'
+    required:
+      - lengthOfWatch
+      - maxWatchs
+      - party
+
+  Watch:
+    description: Details of a watch.
+    properties:
+      characters:
+        description: List of PC names in the watch.
+        type: array
+        items:
+          type: string
+    required:
+      - characters
+
+  Plan:
+    description: Night watch plan
+    properties:
+      watchs:
+        type: array
+        items:
+          $ref: '#/definitions/Watch'
+    required:
+      - watchs
