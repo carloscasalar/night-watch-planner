@@ -13,8 +13,8 @@ produces:
 paths:
   /optimize:
     post:
-      summary: Rewatchs an optimized nigth watch plan for the provided characters.
-      description: Rewatchs an optimized nigth watch plan for the provided characters.
+      summary: Rewatches an optimized nigth watch plan for the provided characters.
+      description: Rewatches an optimized nigth watch plan for the provided characters.
       operationId: getOptimizedPlan
       parameters:
         - name: planRequest
@@ -86,7 +86,7 @@ definitions:
         minimum: 1
         default: 60
       maxWatchs:
-        description: Maximum watchs in which night watch divides.
+        description: Maximum watches in which night watch divides.
         type: integer
         minimum: 1
         default: 8
@@ -94,7 +94,7 @@ definitions:
         description: |
           First watch that happens in dark condition.
           The number of the first watch is one (not zero).
-          By default all watchs happen in dark condition.
+          By default all watches happen in dark condition.
         type: integer
         default: 1
         minimum: 1
@@ -102,7 +102,7 @@ definitions:
         description: |
           Last watch that happens in dark condition.
           The number of the first watch is one (not zero).
-          By default all watchs after the first in dark condition happen also in dark condition.
+          By default all watches after the first in dark condition happen also in dark condition.
         type: integer
         minimum: 1
       party:
@@ -151,7 +151,7 @@ definitions:
   Plan:
     description: Night watch plan
     properties:
-      watchs:
+      watches:
         type: array
         items:
           $ref: '#/definitions/Watch'
@@ -161,4 +161,4 @@ definitions:
         items:
           $ref: '#/definitions/CharacterWatchSummary'
     required:
-      - watchs
+      - watches
