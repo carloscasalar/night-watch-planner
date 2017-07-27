@@ -22,10 +22,10 @@ public class GeneratePlan {
 
             List<String> characters = new ArrayList<String>();
             characters.add(character.getName());
-            Watch watch = new Watch(characters);
+            Watch watch = new Watch(characters, new ArrayList<>());
             watchs.add(watch);
         });
-        Plan plan = new Plan(watchs);
+        Plan plan = new Plan(watchs, new ArrayList<>());
         return plan;
     }
 }

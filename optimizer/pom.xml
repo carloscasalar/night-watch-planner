@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>es.carloscasalar</groupId>
-	<artifactId>night-watch-planner</artifactId>
+	<groupId>es.carloscasalar.night-watch-planner</groupId>
+	<artifactId>optimizer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>night-watch-planner</name>
-	<description>Night Watch planner and optimizer</description>
+	<name>>Night Watch optimizer</name>
+	<description>Night Watch optimizer backend</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -39,6 +39,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.optaplanner</groupId>
+			<artifactId>optaplanner-core</artifactId>
 		</dependency>
 	</dependencies>
 
