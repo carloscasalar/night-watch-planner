@@ -115,13 +115,38 @@ definitions:
   Watch:
     description: Details of a watch.
     properties:
-      characters:
-        description: List of PC names in the watch.
+      sleepingCharacters:
+        description: List of PC names sleeping during the watch.
         type: array
+        minItems: 1
+        items:
+          type: string
+      watchfulCharacters:
+        description: List of PC names watchful during the watch.
+        type: array
+        minItems: 1
         items:
           type: string
     required:
-      - characters
+      - sleepingCharacters
+      - watchfulCharacters
+
+  CharacterWatchSummary:
+    description: Watch summary of a character
+    properties:
+      characterName:
+        description: Name of the character
+        type: string
+      sleepingTime:
+        description: Acumulated speeping time (in minutes) along the night
+        type: integer
+      maxConsecutiveSleepingTime:
+        description: Maximum uninterrupted interval of time sleeping during the night
+        type: integer
+    required:
+      - character
+      - sleepingTime
+      - maxConsecutiveSleepingTime
 
   Plan:
     description: Night watch plan
@@ -130,5 +155,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Watch'
+      watchSummary:
+        description: Summary of the characters watch
+        type: array
+        items:
+          $ref: '#/definitions/CharacterWatchSummary'
     required:
       - watchs
