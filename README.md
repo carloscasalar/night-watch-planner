@@ -8,7 +8,7 @@ Sample Plan Request with this body:
 ```json
 {
 	"lengthOfWatch": 60,
-	"maxWatchs": 8,
+	"maxWatches": 8,
 	"party": [
 		{
 			"name": "Gandalf",
@@ -38,5 +38,10 @@ Sample Plan Request with this body:
 curl --request POST \
   --url http://localhost:3000/v1/optimize \
   --header 'content-type: application/json' \
-  --data '{\n	"lengthOfWatch": 60,\n	"maxWatchs": 8,\n	"party": [\n		{\n			"name": "Gandalf",\n			"senses": ["Low light"],\n			"requiredSleepTime": 480\n		},\n		{\n			"name": "Legolas",\n			"senses": ["Low light"],\n			"requiredSleepTime": 240\n		},\n		{\n			"name": "Gimli",\n			"senses": ["Darkvision"],\n			"requiredSleepTime": 480\n		},\n		{\n			"name": "Boromir",\n			"senses": ["Normal"],\n			"requiredSleepTime": 480\n		}\n	]\n}'
+  --data '{\n	"lengthOfWatch": 60,\n	"maxWatches": 8,\n	"party": [\n		{\n			"name": "Gandalf",\n			"senses": ["Low light"],\n			"requiredSleepTime": 480\n		},\n		{\n			"name": "Legolas",\n			"senses": ["Low light"],\n			"requiredSleepTime": 240\n		},\n		{\n			"name": "Gimli",\n			"senses": ["Darkvision"],\n			"requiredSleepTime": 480\n		},\n		{\n			"name": "Boromir",\n			"senses": ["Normal"],\n			"requiredSleepTime": 480\n		}\n	]\n}'
 ```
+
+## Work in progress
+Currently following steps in https://docs.optaplanner.org/7.3.0.Final/optaplanner-docs/html_single/index.html#cloudBalancingDomainModel
+
+About solver config: https://docs.optaplanner.org/7.3.0.Final/optaplanner-docs/html_single/index.html#solverConfigurationByJavaAPI
