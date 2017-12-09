@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Body of a plan request.
@@ -38,6 +39,6 @@ public class PlanRequest {
     @NotNull
     @Valid
     @Size(min = 1)
-    private List<Character> party;
+    private Set<Character> party;
 }
 

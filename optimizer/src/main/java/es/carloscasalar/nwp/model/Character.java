@@ -31,4 +31,3 @@ public class Character {
     private Integer requiredSleepTime;
 
 }
-

@@ -1,0 +1,45 @@
+<solver>
+
+    <termination>
+        <terminationCompositionStyle>OR</terminationCompositionStyle>
+        <millisecondsSpentLimit>5000</millisecondsSpentLimit>
+        <bestScoreLimit>0hard/0medium/0soft</bestScoreLimit>
+    </termination>
+
+    <scanAnnotatedClasses>
+        <packageInclude>es.carloscasalar.nwp.model</packageInclude>
+    </scanAnnotatedClasses>
+
+    <scoreDirectorFactory>
+        <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+        <easyScoreCalculatorClass>es.carloscasalar.nwp.model.score.PlanScoreCalculator</easyScoreCalculatorClass>
+    </scoreDirectorFactory>
+
+    <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+    </constructionHeuristic>
+
+
+    <constructionHeuristic>
+        <queuedEntityPlacer>
+            <entitySelector id="placerEntitySelector">
+                <cacheType>PHASE</cacheType>
+                <entityClass>es.carloscasalar.nwp.model.Watch</entityClass>
+            </entitySelector>
+            <changeMoveSelector>
+                <entitySelector mimicSelectorRef="placerEntitySelector"/>
+            </changeMoveSelector>
+        </queuedEntityPlacer>
+    </constructionHeuristic>
+
+    <localSearch>
+        <unionMoveSelector>
+            <changeMoveSelector>
+                <entitySelector>
+                    <entityClass>es.carloscasalar.nwp.model.Watch</entityClass>
+                </entitySelector>
+            </changeMoveSelector>
+        </unionMoveSelector>
+    </localSearch>
+
+</solver>

@@ -1,11 +1,12 @@
 package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
+import org.optaplanner.core.api.domain.entity.PlanningEntity;
+import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Details of a watch.
@@ -13,13 +14,17 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@PlanningEntity
+@Builder
 public class Watch {
-    @JsonProperty("sleepingCharacters")
     @NotNull
-    private List<String> sleepingCharacters;
+    private Integer order;
 
     @JsonProperty("watchfulCharacters")
     @NotNull
-    private List<String> watchfulCharacters;
+    @PlanningVariable(valueRangeProviderRefs = { "feasibleSoloWatches", "feasiblePairWatches", "feasibleTrioWatches" })
+    @Singular
+    private Set<Character> watchfulCharacters;
 }
 

@@ -5,10 +5,14 @@ import es.carloscasalar.nwp.model.PlanRequest;
 import es.carloscasalar.nwp.model.Watch;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.optaplanner.core.api.solver.Solver;
+import org.optaplanner.core.api.solver.SolverFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -17,15 +21,22 @@ public class GeneratePlan {
 
     public Plan execute(PlanRequest planRequest) {
         log.debug("Hello from GeneratePlan use case");
-        List<Watch> watches = new ArrayList<Watch>();
+        /*Set<Watch> watches = new HashSet<>();
         planRequest.getParty().forEach(character -> {
-
-            List<String> characters = new ArrayList<String>();
-            characters.add(character.getName());
-            Watch watch = new Watch(characters, new ArrayList<>());
+            Watch watch = Watch.builder()
+                    .watchfulCharacter(character)
+                    .build();
             watches.add(watch);
         });
-        Plan plan = new Plan(watches, new ArrayList<>());
-        return plan;
+
+        return new Plan(planRequest);
+        */
+        Plan problem = new Plan(planRequest);
+
+        SolverFactory<Plan> factory = SolverFactory
+                .createFromXmlResource("NightWatchSolverConfig.xml");
+        Solver<Plan> solver = factory.buildSolver();
+
+        return solver.solve(problem);
     }
 }
