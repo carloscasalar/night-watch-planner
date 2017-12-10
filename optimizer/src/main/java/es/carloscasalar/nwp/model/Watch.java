@@ -1,6 +1,7 @@
 package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import es.carloscasalar.nwp.model.score.WatchDifficultyWeightFactory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@PlanningEntity
+@PlanningEntity(difficultyWeightFactoryClass = WatchDifficultyWeightFactory.class)
 @Builder
 public class Watch {
     @NotNull

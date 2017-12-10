@@ -2,6 +2,7 @@ package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import java.util.Set;
  */
 @AllArgsConstructor
 @Data
+@Builder
 public class PlanRequest {
     @JsonProperty("lengthOfWatch")
     @NotNull
