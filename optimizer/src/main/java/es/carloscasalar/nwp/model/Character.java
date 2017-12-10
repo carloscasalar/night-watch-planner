@@ -29,5 +29,4 @@ public class Character {
     @JsonProperty("requiredSleepTime")
     @Min(1)
     private Integer requiredSleepTime;
-
 }
