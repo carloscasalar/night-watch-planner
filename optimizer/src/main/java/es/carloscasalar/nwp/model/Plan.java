@@ -1,7 +1,12 @@
 package es.carloscasalar.nwp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
@@ -13,9 +18,12 @@ import org.optaplanner.core.api.score.buildin.hardmediumsoftlong.HardMediumSoftL
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -33,17 +41,21 @@ public class Plan {
     @Setter
     private HardMediumSoftLongScore score;
 
+    @JsonIgnore
     @ProblemFactCollectionProperty
     private Set<Character> characters;
 
+    @JsonIgnore
     @ValueRangeProvider(id = "feasibleSoloWatches")
-    private Set<Set<Character>> feasibleSoloWatches;
+    private Set<List<Character>> feasibleSoloWatches;
 
+    @JsonIgnore
     @ValueRangeProvider(id = "feasiblePairWatches")
-    private Set<Set<Character>> feasiblePairWatches;
+    private Set<List<Character>> feasiblePairWatches;
 
+    @JsonIgnore
     @ValueRangeProvider(id = "feasibleTrioWatches")
-    private Set<Set<Character>> feasibleTrioWatches;
+    private Set<List<Character>> feasibleTrioWatches;
 
     @JsonProperty("watches")
     @NotNull
@@ -51,7 +63,7 @@ public class Plan {
     @PlanningEntityCollectionProperty
     @Getter
     @Setter
-    private Set<Watch> watches;
+    private List<Watch> watches;
 
     @JsonProperty("watchSummary")
     @NotNull
@@ -76,36 +88,38 @@ public class Plan {
 
     }
 
-    private Set<Set<Character>> populateFeasibleSoloWatches(Set<Character> party) {
-        Set<Set<Character>> feasibleSet = party.stream().map(character -> new HashSet<>(Collections.singletonList(character))).collect(Collectors.toSet());
+    private Set<List<Character>> populateFeasibleSoloWatches(Set<Character> party) {
+        Set<List<Character>> soloCharacters = party.stream().map(character -> new ArrayList<>(Collections.singletonList(character))).collect(Collectors.toSet());
 
-        return feasibleSet;
+        return soloCharacters;
     }
 
-    private Set<Set<Character>> populateFeasiblePairWatches(Set<Character> party) {
-        Set<Set<Character>> feasibleSet = new HashSet<>();
+    private Set<List<Character>> populateFeasiblePairWatches(Set<Character> party) {
+        Set<List<Character>> feasiblePairs = new HashSet<>();
 
         party.forEach(characterA -> {
             party.stream()
                     .filter(c -> !c.equals(characterA))
                     .forEach(characterB -> {
-                        Set<Character> feasiblePair = new HashSet<>(Arrays.asList(characterA, characterB));
-                        feasibleSet.add(feasiblePair);
+                        List<Character> feasiblePair = Arrays.asList(characterA, characterB);
+                        feasiblePair.sort(Comparator.comparing(Character::getName));
+                        feasiblePairs.add(feasiblePair);
                     });
         });
 
-        return feasibleSet;
+        return feasiblePairs;
     }
 
-    private Set<Set<Character>> populateFeasibleTrioWatches(Set<Character> party, Set<Set<Character>> feasiblePairs) {
-        Set<Set<Character>> feasibleSet = new HashSet<>();
+    private Set<List<Character>> populateFeasibleTrioWatches(Set<Character> party, Set<List<Character>> feasiblePairs) {
+        Set<List<Character>> feasibleSet = new HashSet<>();
 
         party.forEach(characterA -> {
             feasiblePairs.stream()
                     .filter(feasiblePair -> !feasiblePair.contains(characterA))
                     .forEach(feasiblePair -> {
-                        Set<Character> feasibleTrio = new HashSet<>(feasiblePair);
+                        List<Character> feasibleTrio = new ArrayList<>(feasiblePair);
                         feasibleTrio.add(characterA);
+                        feasibleTrio.sort(Comparator.comparing(Character::getName));
                         feasibleSet.add(feasibleTrio);
                     });
         });
@@ -113,15 +127,15 @@ public class Plan {
         return feasibleSet;
     }
 
-    private Set<Watch> populateWatches(final int numberOfWatches) {
-        final Set<Watch> watches = new HashSet<>();
-        IntStream.range(1, numberOfWatches + 1).parallel().forEach(watchOrder -> {
-            watches.add(
-                    Watch.builder()
-                            .order(watchOrder)
-                            .build()
-            );
-        });
+    private List<Watch> populateWatches(final int numberOfWatches) {
+        final List<Watch> watches = new ArrayList<>();
+        IntStream.range(1, numberOfWatches + 1).forEach(watchOrder ->
+                watches.add(
+                        Watch.builder()
+                                .order(watchOrder)
+                                .build()
+                )
+        );
         return watches;
     }
 

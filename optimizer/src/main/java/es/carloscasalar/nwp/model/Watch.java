@@ -1,12 +1,16 @@
 package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Singular;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 import javax.validation.constraints.NotNull;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Details of a watch.
@@ -23,8 +27,7 @@ public class Watch {
 
     @JsonProperty("watchfulCharacters")
     @NotNull
-    @PlanningVariable(valueRangeProviderRefs = { "feasibleSoloWatches", "feasiblePairWatches", "feasibleTrioWatches" })
+    @PlanningVariable(valueRangeProviderRefs = {"feasibleSoloWatches", "feasiblePairWatches", "feasibleTrioWatches"})
     @Singular
-    private Set<Character> watchfulCharacters;
+    private List<Character> watchfulCharacters;
 }
-

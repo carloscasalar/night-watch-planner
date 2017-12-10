@@ -9,10 +9,7 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Comparator;
 
 @Service
 @AllArgsConstructor
@@ -37,6 +34,9 @@ public class GeneratePlan {
                 .createFromXmlResource("NightWatchSolverConfig.xml");
         Solver<Plan> solver = factory.buildSolver();
 
-        return solver.solve(problem);
+        Plan optimizedPlan = solver.solve(problem);
+        log.debug("Solved watches:", optimizedPlan.getWatches());
+//        optimizedPlan.getWatches().sort(Comparator.comparing(Watch::getOrder));
+        return optimizedPlan;
     }
 }
