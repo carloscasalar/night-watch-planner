@@ -22,7 +22,7 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
                         plan.getWatches()
                                 .stream()
                                 .filter(watch -> !watch.hasWatchfulCharacter(character))
-                                .count() > 0)
+                                .count() == plan.getWatches().size())
                 .count();
         return emptyWatches + lazyCharacters;
     }

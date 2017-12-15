@@ -3,7 +3,6 @@ package es.carloscasalar.nwp.model.score;
 import es.carloscasalar.nwp.model.Character;
 import es.carloscasalar.nwp.model.Plan;
 import es.carloscasalar.nwp.model.PlanRequest;
-import es.carloscasalar.nwp.model.Sense;
 import es.carloscasalar.nwp.model.Watch;
 import es.carloscasalar.nwp.model.fixtures.CharacterFactory;
 import org.junit.Before;
@@ -15,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;

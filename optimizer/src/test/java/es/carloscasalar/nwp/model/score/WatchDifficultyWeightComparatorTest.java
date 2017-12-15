@@ -60,7 +60,7 @@ public class WatchDifficultyWeightComparatorTest {
     }
 
     @Test
-    public void two_watch_with_the_same_number_of_character_weigh_the_same(){
+    public void two_watch_with_the_same_number_of_character_weigh_the_same() {
         Watch twoWatchfulCharactersWatch = Watch.builder()
                 .watchfulCharacter(characterFactory.getDwarf("Character A"))
                 .watchfulCharacter(characterFactory.getElf("Character B"))
