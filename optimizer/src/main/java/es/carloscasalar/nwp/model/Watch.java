@@ -1,13 +1,9 @@
 package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import es.carloscasalar.nwp.model.score.CharacterListStrengthComparatorBySize;
 import es.carloscasalar.nwp.model.score.WatchDifficultyWeightComparator;
-import es.carloscasalar.nwp.model.score.WatchDifficultyWeightFactory;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Singular;
+import lombok.*;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
@@ -32,7 +28,20 @@ public class Watch {
 
     @JsonProperty("watchfulCharacters")
     @NotNull
-    @PlanningVariable(valueRangeProviderRefs = {"feasibleSoloWatches", "feasiblePairWatches", "feasibleTrioWatches"})
+    @PlanningVariable(
+            nullable = true,
+            strengthComparatorClass = CharacterListStrengthComparatorBySize.class,
+            valueRangeProviderRefs = {"feasibleSoloWatches", "feasiblePairWatches", "feasibleTrioWatches"}
+    )
     @Singular
     private List<Character> watchfulCharacters;
+
+    public boolean hasWatchfulCharacters(final int numberOfCharacters) {
+        return watchfulCharacters == null ? (numberOfCharacters == 0) : (numberOfCharacters == watchfulCharacters.size());
+    }
+
+    public boolean hasWatchfulCharacter(final Character character) {
+        return watchfulCharacters != null && watchfulCharacters.contains(character);
+    }
+
 }

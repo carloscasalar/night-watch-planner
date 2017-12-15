@@ -36,7 +36,6 @@ public class GeneratePlan {
 
         Plan optimizedPlan = solver.solve(problem);
         log.debug("Solved watches:", optimizedPlan.getWatches());
-//        optimizedPlan.getWatches().sort(Comparator.comparing(Watch::getOrder));
         return optimizedPlan;
     }
 }

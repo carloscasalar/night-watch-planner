@@ -15,20 +15,20 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
     }
 
     private long hardScore(Plan plan) {
-        long emptyWatches = -plan.getWatches().stream().filter(watch -> watch.getWatchfulCharacters().size() == 0).count();
+        long emptyWatches = -plan.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters(0)).count();
         long lazyCharacters = -plan.getCharacters()
                 .stream()
                 .filter(character ->
                         plan.getWatches()
                                 .stream()
-                                .filter(watch -> !watch.getWatchfulCharacters().contains(character))
-                .count()>0)
+                                .filter(watch -> !watch.hasWatchfulCharacter(character))
+                                .count() > 0)
                 .count();
         return emptyWatches + lazyCharacters;
     }
 
     private long mediumScore(Plan plan) {
-        long soloWatches = -plan.getWatches().stream().filter(watch -> watch.getWatchfulCharacters().size() == 1).count();
+        long soloWatches = -plan.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters( 1)).count();
 
         int numOfCharacters = plan.getCharacters().size();
         int watchesCount = plan.getWatches().size();
@@ -38,8 +38,9 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
     }
 
     private long softScore(Plan plan) {
-        long trioWatches = -plan.getWatches().stream().filter(watch -> watch.getWatchfulCharacters().size() == 3).count();
+        long trioWatches = -plan.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters( 3)).count();
         int maxNumberOfWatchesWanted = plan.getWatches().size() - plan.getMaxNumberOfWatches();
         return trioWatches + maxNumberOfWatchesWanted;
     }
+
 }

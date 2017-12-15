@@ -2,7 +2,7 @@
 
     <termination>
         <terminationCompositionStyle>OR</terminationCompositionStyle>
-        <millisecondsSpentLimit>2000</millisecondsSpentLimit>
+        <millisecondsSpentLimit>1000</millisecondsSpentLimit>
         <bestScoreLimit>0hard/0medium/0soft</bestScoreLimit>
     </termination>
 
@@ -19,10 +19,14 @@
     </scoreDirectorFactory>
 
     <constructionHeuristic>
-        <!--<constructionHeuristicType>FIRST_FIT</constructionHeuristicType>-->
-        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+        <!--<constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>-->
+        <!--<constructionHeuristicType>WEAKEST_FIT</constructionHeuristicType>-->
+        <!--<constructionHeuristicType>STRONGEST_FIT</constructionHeuristicType>-->
         <forager>
-            <pickEarlyType>FIRST_NON_DETERIORATING_SCORE</pickEarlyType>
+            <!--<pickEarlyType>FIRST_FEASIBLE_SCORE</pickEarlyType>-->
+            <pickEarlyType>FIRST_FEASIBLE_SCORE_OR_NON_DETERIORATING_HARD</pickEarlyType><!-- good for only_down -->
+            <!--<pickEarlyType>FIRST_NON_DETERIORATING_SCORE</pickEarlyType>-->
         </forager>
     </constructionHeuristic>
 

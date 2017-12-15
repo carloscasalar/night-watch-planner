@@ -13,10 +13,12 @@ import static org.junit.Assert.assertEquals;
 public class WatchDifficultyWeightComparatorTest {
 
     private CharacterFactory characterFactory;
+    private WatchDifficultyWeightComparator comparator;
 
     @Before
     public void init() {
         characterFactory = new CharacterFactory();
+        comparator = new WatchDifficultyWeightComparator();
     }
 
     @Test
@@ -29,7 +31,6 @@ public class WatchDifficultyWeightComparatorTest {
                 .watchfulCharacter(characterFactory.getDwarf("Character A"))
                 .build();
 
-        WatchDifficultyWeightComparator comparator = new WatchDifficultyWeightComparator();
         assertEquals(
                 "Compare a watch with 1 character against a 2 character watch",
                 -1,
@@ -49,7 +50,6 @@ public class WatchDifficultyWeightComparatorTest {
                 .watchfulCharacter(characterFactory.getDwarf("Character A"))
                 .build();
 
-        WatchDifficultyWeightComparator comparator = new WatchDifficultyWeightComparator();
         assertEquals(
                 "Compare a watch with 2 character against a 1 character watch",
                 1,
@@ -70,7 +70,6 @@ public class WatchDifficultyWeightComparatorTest {
                 .watchfulCharacter(characterFactory.getDwarf("Character D"))
                 .build();
 
-        WatchDifficultyWeightComparator comparator = new WatchDifficultyWeightComparator();
         assertEquals(
                 "Compare two watch with the same number of characters",
                 0,
