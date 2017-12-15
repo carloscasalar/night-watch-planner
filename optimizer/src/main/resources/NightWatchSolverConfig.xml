@@ -32,15 +32,21 @@
 
 
     <constructionHeuristic>
-        <queuedEntityPlacer>
-            <entitySelector id="placerEntitySelector">
+        <queuedValuePlacer>
+            <valueSelector id="placerValueSelector">
                 <cacheType>PHASE</cacheType>
-                <entityClass>es.carloscasalar.nwp.model.Watch</entityClass>
-            </entitySelector>
+                <selectionOrder>SORTED</selectionOrder>
+                <sorterManner>INCREASING_STRENGTH</sorterManner>
+            </valueSelector>
             <changeMoveSelector>
-                <entitySelector mimicSelectorRef="placerEntitySelector"/>
+                <entitySelector>
+                    <cacheType>PHASE</cacheType>
+                    <selectionOrder>SORTED</selectionOrder>
+                    <sorterManner>DECREASING_DIFFICULTY</sorterManner>
+                </entitySelector>
+                <valueSelector mimicSelectorRef="placerValueSelector"/>
             </changeMoveSelector>
-        </queuedEntityPlacer>
+        </queuedValuePlacer>
     </constructionHeuristic>
 
     <localSearch>
