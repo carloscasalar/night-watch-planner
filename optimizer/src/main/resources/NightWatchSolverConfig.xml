@@ -21,6 +21,9 @@
     <constructionHeuristic>
         <!--<constructionHeuristicType>FIRST_FIT</constructionHeuristicType>-->
         <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+        <forager>
+            <pickEarlyType>FIRST_NON_DETERIORATING_SCORE</pickEarlyType>
+        </forager>
     </constructionHeuristic>
 
 

@@ -7,6 +7,7 @@ import es.carloscasalar.nwp.model.Sense;
 import es.carloscasalar.nwp.model.Watch;
 import es.carloscasalar.nwp.model.fixtures.CharacterFactory;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -57,6 +58,7 @@ public class WatchDifficultyWeightFactoryTest {
                 .build();
     }
 
+    @Ignore
     @Test
     public void if_a_character_is_lazy_new_watch_with_him_should_be_stronger() {
         Watch watchWithLegolas = Watch.builder()
@@ -72,6 +74,7 @@ public class WatchDifficultyWeightFactoryTest {
         assertEquals("new watch with a new watchful character should be stronger", 1, watchDifficultyWeightFactory.createSorterWeight(plan, watchWithGimli));
     }
 
+    @Ignore
     @Test
     public void if_a_character_is_already_doing_a_watch_a_new_watch_with_him_should_be_weaker() {
         Watch watchWithLegolas = Watch.builder()
