@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>>Night Watch optimizer</name>
+	<name>Night Watch optimizer</name>
 	<description>Night Watch optimizer backend</description>
 
 	<parent>
@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-        <optaplanner.version>7.4.1.Final</optaplanner.version>
+        <optaplanner.version>7.5.0.Final</optaplanner.version>
 	</properties>
 
 	<dependencies>
