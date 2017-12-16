@@ -21,9 +21,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class WatchDifficultyWeightFactoryTest {
 
-    private CharacterFactory characterFactory;
     private Plan plan;
-    private Set<Character> characters;
     private Character legolas;
     private Character gimli;
     private Character boromir;
@@ -33,7 +31,7 @@ public class WatchDifficultyWeightFactoryTest {
 
     @Before
     public void init() {
-        characterFactory = new CharacterFactory();
+        CharacterFactory characterFactory = new CharacterFactory();
 
         watchDifficultyWeightFactory = new WatchDifficultyWeightFactory();
 
@@ -42,7 +40,7 @@ public class WatchDifficultyWeightFactoryTest {
         boromir = characterFactory.getHuman("Boromir");
         aragorn = characterFactory.getHuman("Aragorn");
 
-        characters = new HashSet<>();
+        Set<Character> characters = new HashSet<>();
         characters.addAll(Arrays.asList(legolas, gimli, boromir, aragorn));
 
         PlanRequest planRequest = PlanRequest

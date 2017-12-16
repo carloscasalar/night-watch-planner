@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 public class PlanScoreCalculatorTest {
 
     private PlanScoreCalculator planScoreCalculator;
-    private CharacterFactory characterFactory;
 
     private Set<Character> partyOfFourElves;
 
@@ -35,7 +34,7 @@ public class PlanScoreCalculatorTest {
     public void init() {
         planScoreCalculator = new PlanScoreCalculator();
 
-        characterFactory = new CharacterFactory();
+        CharacterFactory characterFactory = new CharacterFactory();
 
         legolas = characterFactory.getElf("Legolas");
         silvara = characterFactory.getElf("Silvara");
