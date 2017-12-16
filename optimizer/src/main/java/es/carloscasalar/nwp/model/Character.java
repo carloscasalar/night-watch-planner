@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(exclude = {"senses", "requiredSleepTime"})
+@ToString(exclude = {"senses", "requiredSleepTime"})
 public class Character {
     @JsonProperty("name")
     @NotNull
@@ -29,6 +31,4 @@ public class Character {
     @JsonProperty("requiredSleepTime")
     @Min(1)
     private Integer requiredSleepTime;
-
 }
-

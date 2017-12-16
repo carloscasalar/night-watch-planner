@@ -1,0 +1,62 @@
+<solver>
+
+    <termination>
+        <terminationCompositionStyle>OR</terminationCompositionStyle>
+        <millisecondsSpentLimit>1000</millisecondsSpentLimit>
+        <bestScoreLimit>0hard/0medium/0soft</bestScoreLimit>
+    </termination>
+
+    <randomType>MERSENNE_TWISTER</randomType>
+    <environmentMode>FAST_ASSERT</environmentMode>
+
+    <scanAnnotatedClasses>
+        <packageInclude>es.carloscasalar.nwp.model</packageInclude>
+    </scanAnnotatedClasses>
+
+    <scoreDirectorFactory>
+        <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+        <easyScoreCalculatorClass>es.carloscasalar.nwp.model.score.PlanScoreCalculator</easyScoreCalculatorClass>
+    </scoreDirectorFactory>
+
+    <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+        <!--<constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>-->
+        <!--<constructionHeuristicType>WEAKEST_FIT</constructionHeuristicType>-->
+        <!--<constructionHeuristicType>STRONGEST_FIT</constructionHeuristicType>-->
+        <forager>
+            <!--<pickEarlyType>FIRST_FEASIBLE_SCORE</pickEarlyType>-->
+            <pickEarlyType>FIRST_FEASIBLE_SCORE_OR_NON_DETERIORATING_HARD</pickEarlyType><!-- good for only_down -->
+            <!--<pickEarlyType>FIRST_NON_DETERIORATING_SCORE</pickEarlyType>-->
+        </forager>
+    </constructionHeuristic>
+
+
+    <constructionHeuristic>
+        <queuedValuePlacer>
+            <valueSelector id="placerValueSelector">
+                <cacheType>PHASE</cacheType>
+                <selectionOrder>SORTED</selectionOrder>
+                <sorterManner>INCREASING_STRENGTH</sorterManner>
+            </valueSelector>
+            <changeMoveSelector>
+                <entitySelector>
+                    <cacheType>PHASE</cacheType>
+                    <selectionOrder>SORTED</selectionOrder>
+                    <sorterManner>DECREASING_DIFFICULTY</sorterManner>
+                </entitySelector>
+                <valueSelector mimicSelectorRef="placerValueSelector"/>
+            </changeMoveSelector>
+        </queuedValuePlacer>
+    </constructionHeuristic>
+
+    <localSearch>
+        <unionMoveSelector>
+            <changeMoveSelector>
+                <entitySelector>
+                    <entityClass>es.carloscasalar.nwp.model.Watch</entityClass>
+                </entitySelector>
+            </changeMoveSelector>
+        </unionMoveSelector>
+    </localSearch>
+
+</solver>

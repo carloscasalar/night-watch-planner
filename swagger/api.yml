@@ -85,7 +85,7 @@ definitions:
         type: integer
         minimum: 1
         default: 60
-      maxWatchs:
+      maxWatches:
         description: Maximum watches in which night watch divides.
         type: integer
         minimum: 1
@@ -109,7 +109,7 @@ definitions:
         $ref: '#/definitions/Party'
     required:
       - lengthOfWatch
-      - maxWatchs
+      - maxWatches
       - party
 
   Watch:
