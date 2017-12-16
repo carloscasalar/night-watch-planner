@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.0.3 [WIP]
+
+### Add
+* Optimizer now try to find a plan where every character rest for the required sleep time.
+
 ## v0.0.2 2017-12-15
 
 ### Add
