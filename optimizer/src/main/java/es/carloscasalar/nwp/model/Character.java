@@ -21,14 +21,14 @@ import java.util.List;
 public class Character {
     @JsonProperty("name")
     @NotNull
-    private String name;
+    private final String name;
 
     @JsonProperty("senses")
     @NotNull
     @Size(min = 1)
-    private List<Sense> senses;
+    private final List<Sense> senses;
 
     @JsonProperty("requiredSleepTime")
     @Min(1)
-    private Integer requiredSleepTime;
+    private final Integer requiredSleepTime;
 }

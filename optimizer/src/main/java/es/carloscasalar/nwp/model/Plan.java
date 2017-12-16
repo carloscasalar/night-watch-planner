@@ -2,11 +2,7 @@ package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
@@ -18,13 +14,7 @@ import org.optaplanner.core.api.score.buildin.hardmediumsoftlong.HardMediumSoftL
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -144,4 +134,13 @@ public class Plan {
         return ValueRangeFactory.createIntValueRange(minNumberOfWatches, maxNumberOfWatches);
     }
 
+    public Integer minLengthNightwatchWithSleeping(Character character) {
+        return character.getRequiredSleepTime() / numberOfWatchesWhereIsSleeping(character);
+    }
+
+    private Integer numberOfWatchesWhereIsSleeping(Character character) {
+        return (int) watches.stream()
+                .filter(watch -> watch.isSleeping(character))
+                .count();
+    }
 }

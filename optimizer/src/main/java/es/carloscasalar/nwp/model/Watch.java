@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * Details of a watch.
+ * Detail of a watch.
  */
 
 @Data
@@ -44,4 +44,7 @@ public class Watch {
         return watchfulCharacters != null && watchfulCharacters.contains(character);
     }
 
+    public boolean isSleeping(Character character) {
+        return !hasWatchfulCharacter(character);
+    }
 }
