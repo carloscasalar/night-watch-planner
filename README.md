@@ -1,4 +1,4 @@
-# Night Watch Planner
+# Night Watch Planner v0.0.2
 
 Just a Night watch planner optimizer for use in RPGs like _[Pathfinder](http://paizo.com/pathfinder)_.
 
@@ -34,6 +34,7 @@ Sample Plan Request with this body:
 }
 ```
 
+curl command to test the endpoing:
 ```
 curl --request POST \
   --url http://localhost:3000/v1/optimize \
@@ -66,11 +67,12 @@ curl --request POST \
 }'
 ```
 
-## Work in progress
-Currently following steps in https://docs.optaplanner.org/7.3.0.Final/optaplanner-docs/html_single/index.html#cloudBalancingDomainModel
-
-About solver config: https://docs.optaplanner.org/7.3.0.Final/optaplanner-docs/html_single/index.html#solverConfigurationByJavaAPI
-
-About planning variables: https://docs.optaplanner.org/7.4.1.Final/optaplanner-docs/html_single/index.html#planningVariable
-
-About chains:  https://docs.optaplanner.org/7.4.1.Final/optaplanner-docs/html_single/index.html#chainedPlanningVariable
+## Rules
+Optimizer follow this rules in order to find the best night watch plan:
+  * Hard rules (for a plan to be feasible):
+    * Plan has no empty watches.
+    * There is no lazy characters.
+  * Medium rules (very nice to have):
+    * No solo watches.
+  * Soft rules (nice to have):
+    * No overloaded watches (more than two characters in the same watch).
