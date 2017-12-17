@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+
+    working_directory: ~/night-watch-planner
+
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+
+    steps:
+
+      - checkout
+
+      - restore_cache:
+          key: circleci-night-watch-planner-{{ checksum "optimizer/pom.xml" }}
+
+      - run: mvn -f optimizer/pom.xml dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-night-watch-planner-{{ checksum "optimizer/pom.xml" }}
+
+      - run: mvn -f optimizer/pom.xml package
+
+      - store_test_results:
+          path: optimizer/target/surefire-reports
+
+      - store_artifacts:
+          path: optimizer/target/omptimizer-0.0.3-SNAPSHOT.jar
