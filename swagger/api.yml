@@ -127,9 +127,13 @@ definitions:
         minItems: 1
         items:
           type: string
+      length:
+        description: Length of the watch in minutes
+        type: integer
     required:
       - sleepingCharacters
       - watchfulCharacters
+      - length
 
   CharacterWatchSummary:
     description: Watch summary of a character

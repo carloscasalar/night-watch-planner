@@ -143,4 +143,13 @@ public class Plan {
                 .filter(watch -> watch.isSleeping(character))
                 .count();
     }
+
+    public Integer requiredTimeForCharactersSleepingIn(Watch watch) {
+        Optional<Integer> requiredLengthForWatch = watch.sleepingCharacters(characters)
+                .stream()
+                .map(this::minLengthNightwatchWithSleeping)
+                .max(Integer::compareTo);
+        return requiredLengthForWatch.orElse(0);
+
+    }
 }
