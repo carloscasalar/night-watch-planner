@@ -97,7 +97,7 @@ public class PlanSleepTimeTest {
     }
 
     @Test
-    public void minimun_sleeping_time_should_be_rounded_down() {
+    public void minimum_sleeping_time_should_be_rounded_down() {
         Plan plan = new Plan();
 
         plan.setCharacters(new HashSet<>());
@@ -129,5 +129,4 @@ public class PlanSleepTimeTest {
         assertEquals("Each turn in witch he is sleeping should last for 400/3 minutes rounded up = 133 minutes",
                 Integer.valueOf(133), minLengthForWatchesWhereAlteredIsSleeping);
     }
-
 }
