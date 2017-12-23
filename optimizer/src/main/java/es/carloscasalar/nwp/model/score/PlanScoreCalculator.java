@@ -39,8 +39,8 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
 
     private long softScore(Plan plan) {
         long trioWatches = -plan.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters( 3)).count();
-        int maxNumberOfWatchesWanted = plan.getWatches().size() - plan.getMaxNumberOfWatches();
-        return trioWatches + maxNumberOfWatchesWanted;
+
+        return trioWatches;
     }
 
 }

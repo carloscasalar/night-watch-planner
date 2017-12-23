@@ -76,7 +76,6 @@ public class PlanScoreCalculatorTest {
 
         Plan plan = new Plan();
         plan.setCharacters(partyOfFourElves);
-        plan.setMaxNumberOfWatches(4);
         plan.setWatches(Arrays.asList(watch1, watch2, watch3, watch4));
 
         Score score = planScoreCalculator.calculateScore(plan);
@@ -111,7 +110,6 @@ public class PlanScoreCalculatorTest {
 
         Plan plan = new Plan();
         plan.setCharacters(partyOfFourElves);
-        plan.setMaxNumberOfWatches(4);
         plan.setWatches(Arrays.asList(soloFirstWatch, watch2, watch3, watch4));
 
         Score score = planScoreCalculator.calculateScore(plan);
@@ -148,7 +146,6 @@ public class PlanScoreCalculatorTest {
 
         Plan plan = new Plan();
         plan.setCharacters(partyOfFourElves);
-        plan.setMaxNumberOfWatches(4);
         plan.setWatches(Arrays.asList(overLoadedWatch, watch2, watch3, watch4));
 
         Score score = planScoreCalculator.calculateScore(plan);
@@ -185,7 +182,6 @@ public class PlanScoreCalculatorTest {
         List<Watch> watchesWithLazyLegolas = Arrays.asList(watch1, watch2, watch3, watch4);
         Plan plan = new Plan();
         plan.setCharacters(partyOfFourElves);
-        plan.setMaxNumberOfWatches(4);
         plan.setWatches(watchesWithLazyLegolas);
 
         Score score = planScoreCalculator.calculateScore(plan);
@@ -220,7 +216,6 @@ public class PlanScoreCalculatorTest {
         List<Watch> watchesWithLazyLegolas = Arrays.asList(emptyWatch, watch2, watch3, watch4);
         Plan plan = new Plan();
         plan.setCharacters(partyOfFourElves);
-        plan.setMaxNumberOfWatches(4);
         plan.setWatches(watchesWithLazyLegolas);
 
         Score score = planScoreCalculator.calculateScore(plan);

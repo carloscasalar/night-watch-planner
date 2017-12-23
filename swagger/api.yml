@@ -85,11 +85,11 @@ definitions:
         type: integer
         minimum: 1
         default: 60
-      maxWatches:
-        description: Maximum watches in which night watch divides.
+      maxTotalTimeSpent:
+        description: Maximum total time spent in minutes.
         type: integer
-        minimum: 1
-        default: 8
+        minimum: 60
+        default: 720
       firstNightWatch:
         description: |
           First watch that happens in dark condition.

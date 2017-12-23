@@ -2,8 +2,15 @@
 
 ## v0.0.3 [WIP]
 
+### Modified
+* Plan request contains maximum total time instead of maximum number of watches.
+* Plan is initialized with a number of watches equal to the minimum character sleep hours 
+  time plus the maximum required character sleep time.
+
 ### Add
-* Optimizer now try to find a plan where every character rest for the required sleep time.
+* All non lazy characters sleep at minimum their required sleep time in all found solutions.
+* New hard rules:
+  * Total time spent is not greater than the one specified in plan request.
 
 ## v0.0.2 2017-12-15
 

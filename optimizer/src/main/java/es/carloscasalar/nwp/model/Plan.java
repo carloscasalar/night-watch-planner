@@ -7,8 +7,6 @@ import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProperty;
-import org.optaplanner.core.api.domain.valuerange.CountableValueRange;
-import org.optaplanner.core.api.domain.valuerange.ValueRangeFactory;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardmediumsoftlong.HardMediumSoftLongScore;
 
@@ -60,21 +58,13 @@ public class Plan {
     @Valid
     private Set<CharacterWatchSummary> watchSummary;
 
-    @Getter
-    private Integer minNumberOfWatches;
-
-    @Getter
-    private Integer maxNumberOfWatches;
-
     @Builder()
     public Plan(final PlanRequest planRequest) {
         this.characters = planRequest.getParty();
         this.feasibleSoloWatches = populateFeasibleSoloWatches(planRequest.getParty());
         this.feasiblePairWatches = populateFeasiblePairWatches(planRequest.getParty());
         this.feasibleTrioWatches = populateFeasibleTrioWatches(planRequest.getParty(), this.feasiblePairWatches);
-        this.minNumberOfWatches = planRequest.getParty().size() / 2;
-        this.maxNumberOfWatches = planRequest.getMaxWatches();
-        this.watches = populateWatches(this.maxNumberOfWatches);
+        this.watches = populateWatches(this.characters);
 
     }
 
@@ -117,21 +107,28 @@ public class Plan {
         return feasibleSet;
     }
 
-    private List<Watch> populateWatches(final int numberOfWatches) {
+    private List<Watch> populateWatches(final Set<Character> party) {
         final List<Watch> watches = new ArrayList<>();
-        IntStream.range(1, numberOfWatches + 1).forEach(watchOrder ->
+        IntStream.range(0, numberOfWatchesToGenerate(party)).forEach(watchOrder ->
                 watches.add(
                         Watch.builder()
-                                .order(watchOrder)
+                                .order(watchOrder + 1)
                                 .build()
                 )
         );
         return watches;
     }
 
-    @ValueRangeProvider(id = "numOfWatches")
-    public CountableValueRange<Integer> getTimeRangeValue() {
-        return ValueRangeFactory.createIntValueRange(minNumberOfWatches, maxNumberOfWatches);
+    private int numberOfWatchesToGenerate(Set<Character> party) {
+        List<Integer> sleepTimes = party.stream()
+                .map(Character::getRequiredSleepTime)
+                .sorted(Integer::compareTo)
+                .collect(Collectors.toList());
+
+        int minRequiredSleepingHours = sleepTimes.get(0) / 60;
+        int maxRequiredSleepingHours = sleepTimes.get(sleepTimes.size() - 1) / 60;
+
+        return minRequiredSleepingHours + maxRequiredSleepingHours;
     }
 
     public Integer minLengthNightwatchWithSleeping(Character character) {

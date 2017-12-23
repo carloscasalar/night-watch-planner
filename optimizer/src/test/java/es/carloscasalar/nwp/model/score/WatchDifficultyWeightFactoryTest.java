@@ -45,7 +45,7 @@ public class WatchDifficultyWeightFactoryTest {
 
         PlanRequest planRequest = PlanRequest
                 .builder()
-                .maxWatches(8)
+                .maxTotalTimeSpent(8*60)
                 .party(characters)
                 .build();
 

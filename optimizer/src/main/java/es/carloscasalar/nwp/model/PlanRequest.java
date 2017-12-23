@@ -23,10 +23,10 @@ public class PlanRequest {
     @Min(1)
     private Integer lengthOfWatch;
 
-    @JsonProperty("maxWatches")
+    @JsonProperty("maxTotalTimeSpent")
     @NotNull
-    @Min(1)
-    private Integer maxWatches;
+    @Min(60)
+    private Integer maxTotalTimeSpent;
 
     @JsonProperty("firstNightWatch")
     @Min(1)
