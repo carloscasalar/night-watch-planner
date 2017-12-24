@@ -28,7 +28,7 @@ public class PlanInitializationTest {
     public void plan_with_8h_sleeping_character_and_6h_sleeping_should_be_initialized_with_14_watches() {
         Set<Character> party = new HashSet<>();
         party.add(characterFactory.getHuman("8h sleeping character"));
-        party.add(characterFactory.getAlteredHuman("6h sleeping character", 6*60));
+        party.add(characterFactory.getAlteredHuman("6h sleeping character", 6 * 60));
         PlanRequest planRequest = PlanRequest.builder()
                 .party(party)
                 .build();

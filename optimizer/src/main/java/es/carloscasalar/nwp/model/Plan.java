@@ -46,7 +46,7 @@ public class Plan {
     @JsonIgnore
     private PlanRequest planRequest;
 
-    @JsonProperty("watches")
+    @JsonIgnore
     @NotNull
     @Valid
     @PlanningEntityCollectionProperty
@@ -160,4 +160,13 @@ public class Plan {
                 .sum();
     }
 
+    @JsonProperty("watches")
+    public List<Watch> compactedWatches() {
+        List<Watch> watches = this.watches.stream().map(Watch::copy).collect(Collectors.toList());
+
+        RestState restState = new RestState(characters);
+
+        watches.forEach(watch -> watch.applySleepTime(restState));
+        return watches;
+    }
 }

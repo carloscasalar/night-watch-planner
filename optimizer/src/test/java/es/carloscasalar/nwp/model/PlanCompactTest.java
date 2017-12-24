@@ -1,0 +1,102 @@
+package es.carloscasalar.nwp.model;
+
+import es.carloscasalar.nwp.model.fixtures.CharacterFactory;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+@RunWith(MockitoJUnitRunner.class)
+public class PlanCompactTest {
+    private static final Integer TWO_HOURS = 60 * 2;
+    private static final Integer FOUR_HOURS = 60 * 4;
+    private static final Integer EIGHT_HOURS = 60 * 8;
+    private static final Integer SIX_HOURS = 60 * 6;
+    private static final Integer TEN_HOURS = 60 * 10;
+
+    private CharacterFactory characterFactory;
+
+    @Before
+    public void init() {
+        characterFactory = new CharacterFactory();
+    }
+
+    @Test
+    public void plan_where_all_characters_sleep_exactly_their_required_sleep_time_should_stay_the_same() {
+        Watch watchOfOneCharacter = Watch.builder()
+                .order(1)
+                .watchfulCharacter(characterFactory.getAlteredHuman("Character A", EIGHT_HOURS))
+                .length(FOUR_HOURS)
+                .build();
+
+        Watch watchOfTwoCharacters = Watch.builder()
+                .order(2)
+                .watchfulCharacter(characterFactory.getAlteredHuman("Character B", EIGHT_HOURS))
+                .watchfulCharacter(characterFactory.getAlteredHuman("Character C", EIGHT_HOURS))
+                .length(FOUR_HOURS)
+                .build();
+
+        Watch watchOfThreeCharacters = Watch.builder()
+                .order(3)
+                .watchfulCharacter(characterFactory.getAlteredHuman("Character D", EIGHT_HOURS))
+                .watchfulCharacter(characterFactory.getAlteredHuman("Character E", EIGHT_HOURS))
+                .watchfulCharacter(characterFactory.getAlteredHuman("Character F", EIGHT_HOURS))
+                .length(FOUR_HOURS)
+                .build();
+
+        List<Watch> originalWatches = Arrays.asList(watchOfOneCharacter, watchOfTwoCharacters, watchOfThreeCharacters);
+        Set<Character> party = new HashSet<>();
+        originalWatches.forEach(watch -> party.addAll(watch.getWatchfulCharacters()));
+
+        Plan plan = new Plan();
+        plan.setCharacters(party);
+        plan.setWatches(new ArrayList<>(originalWatches));
+
+        assertEquals(originalWatches, plan.compactedWatches());
+    }
+
+    @Test
+    public void should_awake_character_that_sleep_too_much_from_watches_where_the_does_not_need_to_sleep_any_more() {
+        Character chAsl4h = characterFactory.getAlteredHuman("Character A req sleep 4h", FOUR_HOURS);
+        Character chBsl6h = characterFactory.getAlteredHuman("Character B req sleep 6h", SIX_HOURS);
+        Character chCsl6h = characterFactory.getAlteredHuman("Character C req sleep 6h", SIX_HOURS);
+        Character chDsl6h = characterFactory.getAlteredHuman("Character D req sleep 6h", SIX_HOURS);
+
+        Watch watch1 = Watch.builder()
+                .order(1)
+                .watchfulCharacter(chAsl4h)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch2 = Watch.builder()
+                .order(2)
+                .watchfulCharacter(chBsl6h)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch3 = Watch.builder()
+                .order(3)
+                .watchfulCharacter(chCsl6h)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch4 = Watch.builder()
+                .order(4)
+                .watchfulCharacter(chDsl6h)
+                .length(TWO_HOURS)
+                .build();
+
+        Set<Character> party = new HashSet<>(Arrays.asList(chAsl4h,chBsl6h,chCsl6h,chDsl6h));
+
+        Plan plan = new Plan();
+        plan.setCharacters(party);
+        plan.setWatches(Arrays.asList(watch1, watch2, watch3, watch4));
+
+        Watch watch4AfterCompact = plan.compactedWatches().stream().filter(watch -> watch.getOrder() == 4).findFirst().orElse(watch4);
+
+        assertTrue("Character A should awake in watch 4 because she has already sleep her four hours",
+                watch4AfterCompact.getWatchfulCharacters().contains(chAsl4h));
+    }
+}

@@ -11,6 +11,7 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariableReference;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,5 +58,31 @@ public class Watch {
         return party.stream()
                 .filter(this::isSleeping)
                 .collect(Collectors.toList());
+    }
+
+    public Watch copy() {
+        return Watch.builder()
+                .order(order)
+                .watchfulCharacters(new ArrayList<>(watchfulCharacters))
+                .length(length)
+                .build();
+    }
+
+    public void applySleepTime(RestState restState) {
+        wakeUpRestedCharacters(restState);
+        restState.applySleepingTime(this);
+    }
+
+    private void wakeUpRestedCharacters(RestState restState) {
+        restState.getRestedCharacters().forEach(character -> {
+           if(!watchfulCharacters.contains(character)){
+               addWatchfulCharacter(character);
+           }
+        });
+    }
+
+    private void addWatchfulCharacter(Character character) {
+        watchfulCharacters = new ArrayList<>(watchfulCharacters);
+        watchfulCharacters.add(character);
     }
 }
