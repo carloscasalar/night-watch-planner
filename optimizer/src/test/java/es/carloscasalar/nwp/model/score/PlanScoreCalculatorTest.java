@@ -24,7 +24,6 @@ public class PlanScoreCalculatorTest {
     private static final Integer TWO_HOURS = 60 * 2;
     private static final Integer FOUR_HOURS = 60 * 4;
     private static final Integer EIGHT_HOURS = 60 * 8;
-    private static final Integer SIX_HOURS = 60 * 6;
     private static final Integer TEN_HOURS = 60 * 10;
 
     private PlanScoreCalculator planScoreCalculator;

@@ -2,12 +2,13 @@
 
     <termination>
         <terminationCompositionStyle>OR</terminationCompositionStyle>
-        <millisecondsSpentLimit>1000</millisecondsSpentLimit>
+        <millisecondsSpentLimit>60000</millisecondsSpentLimit>
         <bestScoreLimit>0hard/0medium/0soft</bestScoreLimit>
     </termination>
 
     <randomType>MERSENNE_TWISTER</randomType>
     <environmentMode>FAST_ASSERT</environmentMode>
+    <!--<environmentMode>PRODUCTION</environmentMode>-->
 
     <scanAnnotatedClasses>
         <packageInclude>es.carloscasalar.nwp.model</packageInclude>
@@ -19,8 +20,8 @@
     </scoreDirectorFactory>
 
     <constructionHeuristic>
-        <!--<constructionHeuristicType>FIRST_FIT</constructionHeuristicType>-->
-        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+        <!--<constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>-->
         <!--<constructionHeuristicType>WEAKEST_FIT</constructionHeuristicType>-->
         <!--<constructionHeuristicType>STRONGEST_FIT</constructionHeuristicType>-->
         <forager>
