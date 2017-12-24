@@ -25,8 +25,6 @@ import java.util.stream.IntStream;
 public class Plan {
 
     @PlanningScore
-    @Getter
-    @Setter
     private HardMediumSoftLongScore score;
 
     @JsonIgnore
@@ -45,6 +43,9 @@ public class Plan {
     @ValueRangeProvider(id = "feasibleTrioWatches")
     private Set<List<Character>> feasibleTrioWatches;
 
+    @JsonIgnore
+    private PlanRequest planRequest;
+
     @JsonProperty("watches")
     @NotNull
     @Valid
@@ -60,6 +61,7 @@ public class Plan {
 
     @Builder()
     public Plan(final PlanRequest planRequest) {
+        this.planRequest = planRequest;
         this.characters = planRequest.getParty();
         this.feasibleSoloWatches = populateFeasibleSoloWatches(planRequest.getParty());
         this.feasiblePairWatches = populateFeasiblePairWatches(planRequest.getParty());
@@ -69,9 +71,9 @@ public class Plan {
     }
 
     private Set<List<Character>> populateFeasibleSoloWatches(Set<Character> party) {
-        Set<List<Character>> soloCharacters = party.stream().map(character -> new ArrayList<>(Collections.singletonList(character))).collect(Collectors.toSet());
-
-        return soloCharacters;
+        return party.stream()
+                .map(character -> new ArrayList<>(Collections.singletonList(character)))
+                .collect(Collectors.toSet());
     }
 
     private Set<List<Character>> populateFeasiblePairWatches(Set<Character> party) {
@@ -149,4 +151,13 @@ public class Plan {
         return requiredLengthForWatch.orElse(0);
 
     }
+
+    @JsonProperty("totalTime")
+    public Integer totalTime() {
+        return watches.stream()
+                .filter(watch -> watch.getLength() != null)
+                .mapToInt(Watch::getLength)
+                .sum();
+    }
+
 }

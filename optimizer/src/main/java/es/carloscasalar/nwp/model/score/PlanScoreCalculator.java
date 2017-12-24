@@ -24,11 +24,12 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
                                 .filter(watch -> watch.isSleeping(character))
                                 .count() == plan.getWatches().size())
                 .count();
-        return emptyWatches + lazyCharacters;
+        long tooMuchTime = plan.totalTime() > plan.getPlanRequest().getMaxTotalTimeSpent() ? -1 : 0;
+        return emptyWatches + lazyCharacters + tooMuchTime;
     }
 
     private long mediumScore(Plan plan) {
-        long soloWatches = -plan.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters( 1)).count();
+        long soloWatches = -plan.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters(1)).count();
 
         int numOfCharacters = plan.getCharacters().size();
         int watchesCount = plan.getWatches().size();
@@ -38,7 +39,7 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
     }
 
     private long softScore(Plan plan) {
-        long trioWatches = -plan.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters( 3)).count();
+        long trioWatches = -plan.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters(3)).count();
 
         return trioWatches;
     }
