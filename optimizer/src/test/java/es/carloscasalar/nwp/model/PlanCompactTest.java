@@ -9,6 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -17,7 +18,6 @@ public class PlanCompactTest {
     private static final Integer FOUR_HOURS = 60 * 4;
     private static final Integer EIGHT_HOURS = 60 * 8;
     private static final Integer SIX_HOURS = 60 * 6;
-    private static final Integer TEN_HOURS = 60 * 10;
 
     private CharacterFactory characterFactory;
 
@@ -61,7 +61,7 @@ public class PlanCompactTest {
     }
 
     @Test
-    public void should_awake_character_that_sleep_too_much_from_watches_where_the_does_not_need_to_sleep_any_more() {
+    public void should_wake_up_character_that_sleep_too_much_from_watches_where_the_does_not_need_to_sleep_any_more() {
         Character chAsl4h = characterFactory.getAlteredHuman("Character A req sleep 4h", FOUR_HOURS);
         Character chBsl6h = characterFactory.getAlteredHuman("Character B req sleep 6h", SIX_HOURS);
         Character chCsl6h = characterFactory.getAlteredHuman("Character C req sleep 6h", SIX_HOURS);
@@ -88,7 +88,7 @@ public class PlanCompactTest {
                 .length(TWO_HOURS)
                 .build();
 
-        Set<Character> party = new HashSet<>(Arrays.asList(chAsl4h,chBsl6h,chCsl6h,chDsl6h));
+        Set<Character> party = new HashSet<>(Arrays.asList(chAsl4h, chBsl6h, chCsl6h, chDsl6h));
 
         Plan plan = new Plan();
         plan.setCharacters(party);
@@ -98,5 +98,82 @@ public class PlanCompactTest {
 
         assertTrue("Character A should awake in watch 4 because she has already sleep her four hours",
                 watch4AfterCompact.getWatchfulCharacters().contains(chAsl4h));
+    }
+
+    @Test
+    public void a_watch_with_only_a_no_rested_should_be_filled_character_filled_with_a_rested_character() {
+        Character chA = characterFactory.getAlteredHuman("Character A req sleep 2h", TWO_HOURS);
+        Character chB = characterFactory.getAlteredHuman("Character B req sleep 4h", FOUR_HOURS);
+        Character chC = characterFactory.getAlteredHuman("Character C req sleep 2h", TWO_HOURS);
+
+        Watch watch1 = Watch.builder()
+                .order(1)
+                .watchfulCharacter(chA)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch2 = Watch.builder()
+                .order(2)
+                .watchfulCharacter(chB)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch3 = Watch.builder()
+                .order(3)
+                .watchfulCharacter(chC)
+                .length(TWO_HOURS)
+                .build();
+
+        Set<Character> party = new HashSet<>(Arrays.asList(chA, chB, chC));
+
+        Plan plan = new Plan();
+        plan.setCharacters(party);
+        plan.setWatches(Arrays.asList(watch1, watch2, watch3));
+
+        Watch watch2AfterCompact = plan.compactedWatches().stream().filter(watch -> watch.getOrder() == 2).findFirst().orElse(watch2);
+        assertEquals("In  second shift Characters B (2h remain to sleep) and Character C (already rested) should do the shift together",
+                Arrays.asList(chB, chC),
+                watch2AfterCompact.getWatchfulCharacters());
+    }
+
+    @Test
+    public void after_wake_up_character_if_shift_is_overloaded_should_send_to_sleep_almost_rested_characters() {
+        Character chA = characterFactory.getAlteredHuman("Character A req sleep 2h", TWO_HOURS);
+        Character chB = characterFactory.getAlteredHuman("Character B req sleep 8h", EIGHT_HOURS);
+        Character chC = characterFactory.getAlteredHuman("Character C req sleep 6h", SIX_HOURS);
+        Character chD = characterFactory.getAlteredHuman("Character D req sleep 8h", EIGHT_HOURS);
+        Character chE = characterFactory.getAlteredHuman("Character C req sleep 6h", SIX_HOURS);
+
+        Watch watch1 = Watch.builder()
+                .order(1)
+                .watchfulCharacter(chA)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch2 = Watch.builder()
+                .order(2)
+                .watchfulCharacter(chB)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch3 = Watch.builder()
+                .order(3)
+                .watchfulCharacter(chC)
+                .watchfulCharacter(chD)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch4 = Watch.builder()
+                .order(4)
+                .watchfulCharacter(chE)
+                .length(FOUR_HOURS)
+                .build();
+
+        Set<Character> party = new HashSet<>(Arrays.asList(chA, chB, chC, chD));
+
+        Plan plan = new Plan();
+        plan.setCharacters(party);
+        plan.setWatches(Arrays.asList(watch1, watch2, watch3, watch4));
+
+        Watch watch4AfterCompact = plan.compactedWatches().stream().filter(watch -> watch.getOrder() == 4).findFirst().orElse(watch4);
+
+        assertEquals("In watch 3, 'A' should be awake (because he is rested) and 'C' should go to sleep because he has less hours to sleep",
+                Arrays.asList(chC, chA),
+                watch4AfterCompact.getWatchfulCharacters());
     }
 }

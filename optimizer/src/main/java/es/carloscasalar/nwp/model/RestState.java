@@ -1,5 +1,6 @@
 package es.carloscasalar.nwp.model;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,5 +29,14 @@ public class RestState {
 
     private Integer applySleepingTime(Character character, Integer minutes) {
         return sleptTime.put(character, sleptTime.get(character) + minutes);
+    }
+
+    public List<Character> getMostRestedCharacters() {
+        List<Character> mostRested = sleptTime.keySet()
+                .stream()
+                .filter(character -> sleptTime.get(character) < character.getRequiredSleepTime())
+                .sorted((characterA, characterB) -> sleptTime.get(characterB).compareTo(sleptTime.get(characterA)))
+                .collect(Collectors.toList());
+        return mostRested;
     }
 }

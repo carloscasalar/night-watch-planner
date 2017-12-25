@@ -29,6 +29,8 @@ import java.util.stream.Collectors;
 )
 @Builder
 public class Watch {
+    private static final int OVERLOADED_SIZE = 2;
+
     @NotNull
     private Integer order;
 
@@ -70,15 +72,43 @@ public class Watch {
 
     public void applySleepTime(RestState restState) {
         wakeUpRestedCharacters(restState);
+        sendMostRestedCharactersToSleep(restState);
+
         restState.applySleepingTime(this);
     }
 
     private void wakeUpRestedCharacters(RestState restState) {
         restState.getRestedCharacters().forEach(character -> {
-           if(!watchfulCharacters.contains(character)){
-               addWatchfulCharacter(character);
-           }
+            if (!watchfulCharacters.contains(character)) {
+                addWatchfulCharacter(character);
+            }
         });
+    }
+
+    private void sendMostRestedCharactersToSleep(RestState restState) {
+        if (isOverloaded()) {
+            List<Character> unnecessaryCharacters = restState.getMostRestedCharacters()
+                    .stream()
+                    .filter(character -> watchfulCharacters.contains(character))
+                    .limit(overloadCount())
+                    .collect(Collectors.toList());
+            removeWatchfulCharacter(unnecessaryCharacters);
+        }
+    }
+
+    private int overloadCount() {
+        return watchfulCharacters.size() - OVERLOADED_SIZE;
+    }
+
+
+    private boolean isOverloaded() {
+        return watchfulCharacters.size() > OVERLOADED_SIZE;
+    }
+
+    private void removeWatchfulCharacter(List<Character> unnecessaryCharacters) {
+        watchfulCharacters = watchfulCharacters.stream()
+                .filter(character -> !unnecessaryCharacters.contains(character))
+                .collect(Collectors.toList());
     }
 
     private void addWatchfulCharacter(Character character) {
