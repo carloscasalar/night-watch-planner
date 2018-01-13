@@ -62,6 +62,10 @@ public class Watch {
                 .collect(Collectors.toList());
     }
 
+    public boolean hasSleepingCharacters(Set<Character> characters) {
+        return !sleepingCharacters(characters).isEmpty();
+    }
+
     public Watch copy() {
         return Watch.builder()
                 .order(order)

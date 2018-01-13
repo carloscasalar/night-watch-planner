@@ -176,4 +176,36 @@ public class PlanCompactTest {
                 Arrays.asList(chC, chA),
                 watch4AfterCompact.getWatchfulCharacters());
     }
+
+    @Test
+    public void watch_should_be_removed_if_all_character_are_awake(){
+        Character chA = characterFactory.getAlteredHuman("Character A req sleep 4h", FOUR_HOURS);
+        Character chB = characterFactory.getAlteredHuman("Character B req sleep 4h", FOUR_HOURS);
+
+        Watch watch1 = Watch.builder()
+                .order(1)
+                .watchfulCharacter(chA)
+                .length(FOUR_HOURS)
+                .build();
+        Watch watch2 = Watch.builder()
+                .order(2)
+                .watchfulCharacter(chB)
+                .length(FOUR_HOURS)
+                .build();
+        Watch watch3 = Watch.builder()
+                .order(3)
+                .watchfulCharacter(chA)
+                .length(TWO_HOURS)
+                .build();
+
+        Set<Character> party = new HashSet<>(Arrays.asList(chA, chB));
+
+        Plan plan = new Plan();
+        plan.setCharacters(party);
+        plan.setWatches(Arrays.asList(watch1, watch2, watch3));
+
+        List<Watch> compacted = plan.compactedWatches();
+
+        assertEquals("Compacted pan should have only two watches because in the third all characters are awake", 2, compacted.size());
+    }
 }

@@ -162,11 +162,16 @@ public class Plan {
 
     @JsonProperty("watches")
     public List<Watch> compactedWatches() {
-        List<Watch> watches = this.watches.stream().map(Watch::copy).collect(Collectors.toList());
+        List<Watch> watches = this.watches.stream()
+                .map(Watch::copy)
+                .collect(Collectors.toList());
 
         RestState restState = new RestState(characters);
 
         watches.forEach(watch -> watch.applySleepTime(restState));
-        return watches;
+
+        return watches.stream()
+                .filter(watch -> watch.hasSleepingCharacters(characters))
+                .collect(Collectors.toList());
     }
 }
