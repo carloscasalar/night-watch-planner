@@ -119,4 +119,13 @@ public class Watch {
         watchfulCharacters = new ArrayList<>(watchfulCharacters);
         watchfulCharacters.add(character);
     }
+
+    public boolean hasSameWatchfulCharacters(Watch watch) {
+        return watchfulCharacters.containsAll(watch.watchfulCharacters) &&
+                watch.watchfulCharacters.containsAll(watchfulCharacters);
+    }
+
+    public void addLength(Integer length) {
+        this.length = this.length + length;
+    }
 }

@@ -178,7 +178,7 @@ public class PlanCompactTest {
     }
 
     @Test
-    public void watch_should_be_removed_if_all_character_are_awake(){
+    public void watch_should_be_removed_if_all_character_are_awake() {
         Character chA = characterFactory.getAlteredHuman("Character A req sleep 4h", FOUR_HOURS);
         Character chB = characterFactory.getAlteredHuman("Character B req sleep 4h", FOUR_HOURS);
 
@@ -207,5 +207,41 @@ public class PlanCompactTest {
         List<Watch> compacted = plan.compactedWatches();
 
         assertEquals("Compacted pan should have only two watches because in the third all characters are awake", 2, compacted.size());
+    }
+
+    @Test
+    public void consecutive_same_characters_watches_should_join_into_a_single_watch_lasting_the_total() {
+        Character chA = characterFactory.getAlteredHuman("Character A req sleep 8h", EIGHT_HOURS);
+        Character chB = characterFactory.getAlteredHuman("Character B req sleep 4h", FOUR_HOURS);
+        Character chC = characterFactory.getAlteredHuman("Character C req sleep 4h", FOUR_HOURS);
+
+        Watch watch1 = Watch.builder()
+                .order(1)
+                .watchfulCharacter(chA)
+                .length(FOUR_HOURS)
+                .build();
+        Watch watch2 = Watch.builder()
+                .order(2)
+                .watchfulCharacter(chB)
+                .watchfulCharacter(chC)
+                .length(TWO_HOURS)
+                .build();
+        Watch watch3 = Watch.builder()
+                .order(3)
+                .watchfulCharacter(chB)
+                .watchfulCharacter(chC)
+                .length(SIX_HOURS)
+                .build();
+
+        Set<Character> party = new HashSet<>(Arrays.asList(chA, chB));
+
+        Plan plan = new Plan();
+        plan.setCharacters(party);
+        plan.setWatches(Arrays.asList(watch1, watch2, watch3));
+
+        List<Watch> compacted = plan.compactedWatches();
+
+        assertEquals("Compacted pan should have only two watches because the last two ones should be joined", 2, compacted.size());
+        assertEquals("Last watch should last the sum of the joined ones", EIGHT_HOURS, compacted.get(1).getLength());
     }
 }

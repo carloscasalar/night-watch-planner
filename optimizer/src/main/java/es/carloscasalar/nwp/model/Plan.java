@@ -162,6 +162,16 @@ public class Plan {
 
     @JsonProperty("watches")
     public List<Watch> compactedWatches() {
+        List<Watch> watches = awakeRestedCharacters();
+
+        watches = deleteWatchesWithNoSleepingCharacters(watches);
+
+        watches = joinWatchesWithSameWatchfulCharacters(watches);
+
+        return watches;
+    }
+
+    private List<Watch> awakeRestedCharacters() {
         List<Watch> watches = this.watches.stream()
                 .map(Watch::copy)
                 .collect(Collectors.toList());
@@ -169,9 +179,33 @@ public class Plan {
         RestState restState = new RestState(characters);
 
         watches.forEach(watch -> watch.applySleepTime(restState));
+        return watches;
+    }
 
+    private List<Watch> deleteWatchesWithNoSleepingCharacters(List<Watch> watches) {
         return watches.stream()
                 .filter(watch -> watch.hasSleepingCharacters(characters))
                 .collect(Collectors.toList());
+    }
+
+    private List<Watch> joinWatchesWithSameWatchfulCharacters(List<Watch> watches) {
+        List<Watch> joined = new ArrayList<>();
+
+        watches.stream().forEach(watch -> {
+            Optional<Watch> watchWithSameWatchfulCharacters = watchWithSameWatchfulCharacters(joined, watch);
+            if (watchWithSameWatchfulCharacters.isPresent()) {
+                watchWithSameWatchfulCharacters.get().addLength(watch.getLength());
+            } else {
+                joined.add(watch);
+            }
+        });
+
+        return joined;
+    }
+
+    private Optional<Watch> watchWithSameWatchfulCharacters(List<Watch> watches, Watch watch) {
+        return watches.stream()
+                .filter(w -> w.hasSameWatchfulCharacters(watch))
+                .findFirst();
     }
 }
