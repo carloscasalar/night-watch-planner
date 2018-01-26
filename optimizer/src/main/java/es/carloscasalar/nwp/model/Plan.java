@@ -63,20 +63,20 @@ public class Plan {
     public Plan(final PlanRequest planRequest) {
         this.planRequest = planRequest;
         this.characters = planRequest.getParty();
-        this.feasibleSoloWatches = populateFeasibleSoloWatches(planRequest.getParty());
-        this.feasiblePairWatches = populateFeasiblePairWatches(planRequest.getParty());
-        this.feasibleTrioWatches = populateFeasibleTrioWatches(planRequest.getParty(), this.feasiblePairWatches);
-        this.watches = populateWatches(this.characters);
+        this.feasibleSoloWatches = feasibleSoloWatches(planRequest.getParty());
+        this.feasiblePairWatches = feasiblePairWatches(planRequest.getParty());
+        this.feasibleTrioWatches = feasibleTrioWatches(planRequest.getParty(), this.feasiblePairWatches);
+        this.watches = initWatches(this.characters);
 
     }
 
-    private Set<List<Character>> populateFeasibleSoloWatches(Set<Character> party) {
+    private Set<List<Character>> feasibleSoloWatches(Set<Character> party) {
         return party.stream()
                 .map(character -> new ArrayList<>(Collections.singletonList(character)))
                 .collect(Collectors.toSet());
     }
 
-    private Set<List<Character>> populateFeasiblePairWatches(Set<Character> party) {
+    private Set<List<Character>> feasiblePairWatches(Set<Character> party) {
         Set<List<Character>> feasiblePairs = new HashSet<>();
 
         party.forEach(characterA -> {
@@ -92,7 +92,7 @@ public class Plan {
         return feasiblePairs;
     }
 
-    private Set<List<Character>> populateFeasibleTrioWatches(Set<Character> party, Set<List<Character>> feasiblePairs) {
+    private Set<List<Character>> feasibleTrioWatches(Set<Character> party, Set<List<Character>> feasiblePairs) {
         Set<List<Character>> feasibleSet = new HashSet<>();
 
         party.forEach(characterA -> {
@@ -109,7 +109,7 @@ public class Plan {
         return feasibleSet;
     }
 
-    private List<Watch> populateWatches(final Set<Character> party) {
+    private List<Watch> initWatches(final Set<Character> party) {
         final List<Watch> watches = new ArrayList<>();
         IntStream.range(0, numberOfWatchesToGenerate(party)).forEach(watchOrder ->
                 watches.add(
