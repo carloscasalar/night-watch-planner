@@ -39,9 +39,7 @@ public class PartyNightWatch {
     }
 
     private void fillWatchLengths() {
-        watches.stream()
-                .parallel()
-                .forEach(watch -> watch.setLength(requiredTimeForCharactersSleepingIn(watch)));
+        watches.forEach(watch -> watch.setLength(requiredTimeForCharactersSleepingIn(watch)));
     }
 
     private void awakeRestedCharacters() {

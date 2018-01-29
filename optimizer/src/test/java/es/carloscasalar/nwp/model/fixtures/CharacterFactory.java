@@ -3,8 +3,7 @@ package es.carloscasalar.nwp.model.fixtures;
 import es.carloscasalar.nwp.model.Character;
 import es.carloscasalar.nwp.model.Sense;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class CharacterFactory {
     private static final List<Sense> LOW_LIGHT_VISION = Collections.singletonList(Sense.LOW_LIGHT);
@@ -34,4 +33,7 @@ public class CharacterFactory {
         return new Character(name, DARK_VISION, EIGHT_HOURS);
     }
 
+    public Set<Character> partyWith(Character... characters) {
+        return new HashSet<>(Arrays.asList(characters));
+    }
 }
