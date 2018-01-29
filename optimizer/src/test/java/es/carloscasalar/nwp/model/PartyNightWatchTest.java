@@ -3,17 +3,13 @@ package es.carloscasalar.nwp.model;
 import es.carloscasalar.nwp.model.fixtures.CharacterFactory;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(MockitoJUnitRunner.class)
-public class PlanCompactTest {
+public class PartyNightWatchTest {
     private static final Integer TWO_HOURS = 60 * 2;
     private static final Integer FOUR_HOURS = 60 * 4;
     private static final Integer EIGHT_HOURS = 60 * 8;
@@ -24,6 +20,35 @@ public class PlanCompactTest {
     @Before
     public void init() {
         characterFactory = new CharacterFactory();
+    }
+
+    @Test
+    public void total_spent_time_should_be_the_sum_of_all_watches_length() {
+        Set<Character> noCharacters = Collections.emptySet();
+
+        PartyNightWatch partyNightWatch = new PartyNightWatch(
+                noCharacters,
+                Arrays.asList(
+                        Watch.builder()
+                                .order(1)
+                                .length(TWO_HOURS)
+                                .build(),
+                        Watch.builder()
+                                .order(2)
+                                .length(TWO_HOURS)
+                                .build(),
+                        Watch.builder()
+                                .order(3)
+                                .length(TWO_HOURS)
+                                .build(),
+                        Watch.builder()
+                                .order(4)
+                                .length(TWO_HOURS)
+                                .build()
+                ));
+
+        assertEquals("Total time should be the sum of all watches time",
+                EIGHT_HOURS, partyNightWatch.totalTime());
     }
 
     @Test
@@ -53,11 +78,9 @@ public class PlanCompactTest {
         Set<Character> party = new HashSet<>();
         originalWatches.forEach(watch -> party.addAll(watch.getWatchfulCharacters()));
 
-        Plan plan = new Plan();
-        plan.setCharacters(party);
-        plan.setWatches(new ArrayList<>(originalWatches));
+        PartyNightWatch partyNightWatch = new PartyNightWatch(party, new ArrayList<>(originalWatches));
 
-        assertEquals(originalWatches, plan.compactedWatches());
+        assertEquals(originalWatches, partyNightWatch.adjust().getWatches());
     }
 
     @Test
@@ -90,11 +113,13 @@ public class PlanCompactTest {
 
         Set<Character> party = new HashSet<>(Arrays.asList(chAsl4h, chBsl6h, chCsl6h, chDsl6h));
 
-        Plan plan = new Plan();
-        plan.setCharacters(party);
-        plan.setWatches(Arrays.asList(watch1, watch2, watch3, watch4));
+        PartyNightWatch partyNightWatch = new PartyNightWatch(party, Arrays.asList(watch1, watch2, watch3, watch4));
+        partyNightWatch.adjust();
 
-        Watch watch4AfterCompact = plan.compactedWatches().stream().filter(watch -> watch.getOrder() == 4).findFirst().orElse(watch4);
+        Watch watch4AfterCompact = partyNightWatch.getWatches().stream()
+                .filter(watch -> watch.getOrder() == 4)
+                .findFirst()
+                .orElse(watch4);
 
         assertTrue("Character A should awake in watch 4 because she has already sleep her four hours",
                 watch4AfterCompact.getWatchfulCharacters().contains(chAsl4h));
@@ -124,11 +149,14 @@ public class PlanCompactTest {
 
         Set<Character> party = new HashSet<>(Arrays.asList(chA, chB, chC));
 
-        Plan plan = new Plan();
-        plan.setCharacters(party);
-        plan.setWatches(Arrays.asList(watch1, watch2, watch3));
+        PartyNightWatch partyNightWatch = new PartyNightWatch(party, Arrays.asList(watch1, watch2, watch3));
+        partyNightWatch.adjust();
 
-        Watch watch2AfterCompact = plan.compactedWatches().stream().filter(watch -> watch.getOrder() == 2).findFirst().orElse(watch2);
+        Watch watch2AfterCompact = partyNightWatch.getWatches().stream()
+                .filter(watch -> watch.getOrder() == 2)
+                .findFirst()
+                .orElse(watch2);
+
         assertEquals("In  second shift Characters B (2h remain to sleep) and Character C (already rested) should do the shift together",
                 Arrays.asList(chB, chC),
                 watch2AfterCompact.getWatchfulCharacters());
@@ -166,15 +194,17 @@ public class PlanCompactTest {
 
         Set<Character> party = new HashSet<>(Arrays.asList(chA, chB, chC, chD));
 
-        Plan plan = new Plan();
-        plan.setCharacters(party);
-        plan.setWatches(Arrays.asList(watch1, watch2, watch3, watch4));
+        PartyNightWatch partyNightWatch = new PartyNightWatch(party, Arrays.asList(watch1, watch2, watch3, watch4));
+        partyNightWatch.adjust();
 
-        Watch watch4AfterCompact = plan.compactedWatches().stream().filter(watch -> watch.getOrder() == 4).findFirst().orElse(watch4);
+        Watch watch3AfterCompact = partyNightWatch.getWatches().stream()
+                .filter(watch -> watch.getOrder() == 3)
+                .findFirst()
+                .orElse(watch4);
 
         assertEquals("In watch 3, 'A' should be awake (because he is rested) and 'C' should go to sleep because he has less hours to sleep",
                 Arrays.asList(chC, chA),
-                watch4AfterCompact.getWatchfulCharacters());
+                watch3AfterCompact.getWatchfulCharacters());
     }
 
     @Test
@@ -200,13 +230,10 @@ public class PlanCompactTest {
 
         Set<Character> party = new HashSet<>(Arrays.asList(chA, chB));
 
-        Plan plan = new Plan();
-        plan.setCharacters(party);
-        plan.setWatches(Arrays.asList(watch1, watch2, watch3));
-
-        List<Watch> compacted = plan.compactedWatches();
-
-        assertEquals("Compacted pan should have only two watches because in the third all characters are awake", 2, compacted.size());
+        PartyNightWatch partyNightWatch = new PartyNightWatch(party, Arrays.asList(watch1, watch2, watch3));
+        partyNightWatch.adjust();
+        assertEquals("Compacted pan should have only two watches because in the third all characters are awake",
+                2, partyNightWatch.numberOfWatches());
     }
 
     @Test
@@ -235,13 +262,10 @@ public class PlanCompactTest {
 
         Set<Character> party = new HashSet<>(Arrays.asList(chA, chB));
 
-        Plan plan = new Plan();
-        plan.setCharacters(party);
-        plan.setWatches(Arrays.asList(watch1, watch2, watch3));
+        PartyNightWatch compactedPartyNightWatch = new PartyNightWatch(party, Arrays.asList(watch1, watch2, watch3)).adjust();
 
-        List<Watch> compacted = plan.compactedWatches();
 
-        assertEquals("Compacted pan should have only two watches because the last two ones should be joined", 2, compacted.size());
-        assertEquals("Last watch should last the sum of the joined ones", EIGHT_HOURS, compacted.get(1).getLength());
+        assertEquals("Compacted plan should have only two watches because the last two ones should be joined", 2, compactedPartyNightWatch.numberOfWatches());
+        assertEquals("Last watch should last the sum of the joined ones", EIGHT_HOURS, compactedPartyNightWatch.getWatches().get(1).getLength());
     }
 }

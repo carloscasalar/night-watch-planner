@@ -24,6 +24,8 @@ import java.util.stream.IntStream;
 @NoArgsConstructor
 public class Plan {
 
+    private static final int ONE_HOUR = 60;
+
     @PlanningScore
     private HardMediumSoftLongScore score;
 
@@ -79,15 +81,13 @@ public class Plan {
     private Set<List<Character>> feasiblePairWatches(Set<Character> party) {
         Set<List<Character>> feasiblePairs = new HashSet<>();
 
-        party.forEach(characterA -> {
-            party.stream()
-                    .filter(c -> !c.equals(characterA))
-                    .forEach(characterB -> {
-                        List<Character> feasiblePair = Arrays.asList(characterA, characterB);
-                        feasiblePair.sort(Comparator.comparing(Character::getName));
-                        feasiblePairs.add(feasiblePair);
-                    });
-        });
+        party.forEach(characterA -> party.stream()
+                .filter(c -> !c.equals(characterA))
+                .forEach(characterB -> {
+                    List<Character> feasiblePair = Arrays.asList(characterA, characterB);
+                    feasiblePair.sort(Comparator.comparing(Character::getName));
+                    feasiblePairs.add(feasiblePair);
+                }));
 
         return feasiblePairs;
     }
@@ -95,16 +95,14 @@ public class Plan {
     private Set<List<Character>> feasibleTrioWatches(Set<Character> party, Set<List<Character>> feasiblePairs) {
         Set<List<Character>> feasibleSet = new HashSet<>();
 
-        party.forEach(characterA -> {
-            feasiblePairs.stream()
-                    .filter(feasiblePair -> !feasiblePair.contains(characterA))
-                    .forEach(feasiblePair -> {
-                        List<Character> feasibleTrio = new ArrayList<>(feasiblePair);
-                        feasibleTrio.add(characterA);
-                        feasibleTrio.sort(Comparator.comparing(Character::getName));
-                        feasibleSet.add(feasibleTrio);
-                    });
-        });
+        party.forEach(characterA -> feasiblePairs.stream()
+                .filter(feasiblePair -> !feasiblePair.contains(characterA))
+                .forEach(feasiblePair -> {
+                    List<Character> feasibleTrio = new ArrayList<>(feasiblePair);
+                    feasibleTrio.add(characterA);
+                    feasibleTrio.sort(Comparator.comparing(Character::getName));
+                    feasibleSet.add(feasibleTrio);
+                }));
 
         return feasibleSet;
     }
@@ -115,6 +113,7 @@ public class Plan {
                 watches.add(
                         Watch.builder()
                                 .order(watchOrder + 1)
+                                .length(ONE_HOUR)
                                 .build()
                 )
         );
@@ -127,8 +126,8 @@ public class Plan {
                 .sorted(Integer::compareTo)
                 .collect(Collectors.toList());
 
-        int minRequiredSleepingHours = sleepTimes.get(0) / 60;
-        int maxRequiredSleepingHours = sleepTimes.get(sleepTimes.size() - 1) / 60;
+        int minRequiredSleepingHours = sleepTimes.get(0) / ONE_HOUR;
+        int maxRequiredSleepingHours = sleepTimes.get(sleepTimes.size() - 1) / ONE_HOUR;
 
         return minRequiredSleepingHours + maxRequiredSleepingHours;
     }
@@ -152,60 +151,9 @@ public class Plan {
 
     }
 
-    @JsonProperty("totalTime")
-    public Integer totalTime() {
-        return watches.stream()
-                .filter(watch -> watch.getLength() != null)
-                .mapToInt(Watch::getLength)
-                .sum();
+    @JsonProperty("compacted")
+    public PartyNightWatch compactedPartyNightWatch() {
+        return new PartyNightWatch(characters, watches).adjust();
     }
 
-    @JsonProperty("watches")
-    public List<Watch> compactedWatches() {
-        List<Watch> watches = awakeRestedCharacters();
-
-        watches = deleteWatchesWithNoSleepingCharacters(watches);
-
-        watches = joinWatchesWithSameWatchfulCharacters(watches);
-
-        return watches;
-    }
-
-    private List<Watch> awakeRestedCharacters() {
-        List<Watch> watches = this.watches.stream()
-                .map(Watch::copy)
-                .collect(Collectors.toList());
-
-        RestState restState = new RestState(characters);
-
-        watches.forEach(watch -> watch.applySleepTime(restState));
-        return watches;
-    }
-
-    private List<Watch> deleteWatchesWithNoSleepingCharacters(List<Watch> watches) {
-        return watches.stream()
-                .filter(watch -> watch.hasSleepingCharacters(characters))
-                .collect(Collectors.toList());
-    }
-
-    private List<Watch> joinWatchesWithSameWatchfulCharacters(List<Watch> watches) {
-        List<Watch> joined = new ArrayList<>();
-
-        watches.stream().forEach(watch -> {
-            Optional<Watch> watchWithSameWatchfulCharacters = watchWithSameWatchfulCharacters(joined, watch);
-            if (watchWithSameWatchfulCharacters.isPresent()) {
-                watchWithSameWatchfulCharacters.get().addLength(watch.getLength());
-            } else {
-                joined.add(watch);
-            }
-        });
-
-        return joined;
-    }
-
-    private Optional<Watch> watchWithSameWatchfulCharacters(List<Watch> watches, Watch watch) {
-        return watches.stream()
-                .filter(w -> w.hasSameWatchfulCharacters(watch))
-                .findFirst();
-    }
 }

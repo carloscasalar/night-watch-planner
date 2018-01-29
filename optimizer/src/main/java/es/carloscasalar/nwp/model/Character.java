@@ -1,14 +1,12 @@
 package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +14,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 @Data
+@Builder
 @EqualsAndHashCode(exclude = {"senses", "requiredSleepTime"})
 @ToString(exclude = {"senses", "requiredSleepTime"})
 public class Character {
@@ -31,4 +30,12 @@ public class Character {
     @JsonProperty("requiredSleepTime")
     @Min(1)
     private final Integer requiredSleepTime;
+
+    public Character copy() {
+        return Character.builder()
+                .name(name)
+                .senses(new ArrayList<>(senses))
+                .requiredSleepTime(requiredSleepTime)
+                .build();
+    }
 }

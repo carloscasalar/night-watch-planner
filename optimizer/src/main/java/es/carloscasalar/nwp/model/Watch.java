@@ -1,18 +1,16 @@
 package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import es.carloscasalar.nwp.model.listener.WatchLengthListener;
 import es.carloscasalar.nwp.model.score.CharacterListStrengthComparatorBySize;
 import es.carloscasalar.nwp.model.score.WatchDifficultyWeightComparator;
 import lombok.*;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
-import org.optaplanner.core.api.domain.variable.CustomShadowVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
-import org.optaplanner.core.api.domain.variable.PlanningVariableReference;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,8 +42,6 @@ public class Watch {
     @Singular
     private List<Character> watchfulCharacters;
 
-    @CustomShadowVariable(variableListenerClass = WatchLengthListener.class,
-            sources = {@PlanningVariableReference(variableName = "watchfulCharacters")})
     private Integer length;
 
     public boolean hasWatchfulCharacters(final int numberOfCharacters) {
@@ -67,18 +63,25 @@ public class Watch {
     }
 
     public Watch copy() {
-        return Watch.builder()
-                .order(order)
-                .watchfulCharacters(new ArrayList<>(watchfulCharacters))
-                .length(length)
-                .build();
+        Watch copy = new Watch();
+
+        copy.setOrder(order);
+        copy.setLength(length);
+        copy.setWatchfulCharacters(new ArrayList<>());
+
+        if (watchfulCharacters != null) {
+            copy.getWatchfulCharacters().addAll(watchfulCharacters);
+        }
+
+        return copy;
     }
 
-    public void applySleepTime(RestState restState) {
+    public Watch applySleepTime(RestState restState) {
         wakeUpRestedCharacters(restState);
         sendMostRestedCharactersToSleep(restState);
 
         restState.applySleepingTime(this);
+        return this;
     }
 
     private void wakeUpRestedCharacters(RestState restState) {
@@ -126,6 +129,6 @@ public class Watch {
     }
 
     public void addLength(Integer length) {
-        this.length = this.length + length;
+        this.length = Optional.ofNullable(this.length).orElse(0) + Optional.ofNullable(length).orElse(0);
     }
 }

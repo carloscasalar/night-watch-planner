@@ -24,8 +24,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class WatchLengthListenerTest {
 
-    private static Integer THIRTEEN_HOURS = 13 * 60;
-
     private WatchLengthListener listener;
     private Character kitiara;
     private Character tanis;
@@ -129,7 +127,7 @@ public class WatchLengthListenerTest {
 class PlanScoreDirectorStub implements ScoreDirector<Plan> {
     private Plan plan;
 
-    public PlanScoreDirectorStub(Plan plan) {
+    PlanScoreDirectorStub(Plan plan) {
         this.plan = plan;
     }
 

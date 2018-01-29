@@ -2,11 +2,12 @@
 
     <termination>
         <terminationCompositionStyle>OR</terminationCompositionStyle>
-        <millisecondsSpentLimit>60000</millisecondsSpentLimit>
+        <millisecondsSpentLimit>10000</millisecondsSpentLimit>
         <bestScoreLimit>0hard/0medium/0soft</bestScoreLimit>
     </termination>
 
     <randomType>MERSENNE_TWISTER</randomType>
+    <!--<environmentMode>FULL_ASSERT</environmentMode>-->
     <environmentMode>FAST_ASSERT</environmentMode>
     <!--<environmentMode>PRODUCTION</environmentMode>-->
 

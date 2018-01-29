@@ -9,7 +9,7 @@ public class RestState {
 
     private final Map<Character, Integer> sleptTime;
 
-    public RestState(Set<Character> party) {
+    public RestState(final Set<Character> party) {
         sleptTime = party.stream().collect(Collectors.toMap(character -> character, character -> 0));
     }
 
@@ -21,6 +21,9 @@ public class RestState {
     }
 
     public void applySleepingTime(Watch watch) {
+        if (watch.getLength() == null) {
+            return;
+        }
         sleptTime.keySet()
                 .stream()
                 .filter(watch::isSleeping)
@@ -32,11 +35,10 @@ public class RestState {
     }
 
     public List<Character> getMostRestedCharacters() {
-        List<Character> mostRested = sleptTime.keySet()
+        return sleptTime.keySet()
                 .stream()
                 .filter(character -> sleptTime.get(character) < character.getRequiredSleepTime())
                 .sorted((characterA, characterB) -> sleptTime.get(characterB).compareTo(sleptTime.get(characterA)))
                 .collect(Collectors.toList());
-        return mostRested;
     }
 }

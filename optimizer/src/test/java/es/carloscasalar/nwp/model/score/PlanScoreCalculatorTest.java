@@ -1,7 +1,7 @@
 package es.carloscasalar.nwp.model.score;
 
 import es.carloscasalar.nwp.model.Character;
-import es.carloscasalar.nwp.model.Plan;
+import es.carloscasalar.nwp.model.PartyNightWatch;
 import es.carloscasalar.nwp.model.PlanRequest;
 import es.carloscasalar.nwp.model.Watch;
 import es.carloscasalar.nwp.model.fixtures.CharacterFactory;
@@ -84,12 +84,14 @@ public class PlanScoreCalculatorTest {
                 .length(TWO_HOURS)
                 .build();
 
-        Plan plan = new Plan();
-        plan.setCharacters(partyOfFourElves);
-        plan.setWatches(Arrays.asList(watch1, watch2, watch3, watch4));
-        plan.setPlanRequest(PlanRequest.builder().maxTotalTimeSpent(EIGHT_HOURS).build());
+        PartyNightWatch partyNightWatch = new PartyNightWatch(
+                partyOfFourElves,
+                Arrays.asList(watch1, watch2, watch3, watch4)
+        );
 
-        Score score = planScoreCalculator.calculateScore(plan);
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(EIGHT_HOURS).build();
+
+        Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
 
         assertEquals("score should be 0", "0", score.toShortString());
     }
@@ -123,12 +125,14 @@ public class PlanScoreCalculatorTest {
                 .length(TWO_HOURS)
                 .build();
 
-        Plan plan = new Plan();
-        plan.setCharacters(partyOfFourElves);
-        plan.setWatches(Arrays.asList(soloFirstWatch, watch2, watch3, watch4));
-        plan.setPlanRequest(PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build());
+        PartyNightWatch partyNightWatch = new PartyNightWatch(
+                partyOfFourElves,
+                Arrays.asList(soloFirstWatch, watch2, watch3, watch4)
+        );
 
-        Score score = planScoreCalculator.calculateScore(plan);
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build();
+
+        Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
 
         assertEquals("-1medium", score.toShortString());
     }
@@ -164,12 +168,14 @@ public class PlanScoreCalculatorTest {
                 .length(TWO_HOURS)
                 .build();
 
-        Plan plan = new Plan();
-        plan.setCharacters(partyOfFourElves);
-        plan.setWatches(Arrays.asList(overLoadedWatch, watch2, watch3, watch4));
-        plan.setPlanRequest(PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build());
+        PartyNightWatch partyNightWatch = new PartyNightWatch(
+                partyOfFourElves,
+                Arrays.asList(overLoadedWatch, watch2, watch3, watch4)
+        );
 
-        Score score = planScoreCalculator.calculateScore(plan);
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build();
+
+        Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
 
         assertEquals("-1soft", score.toShortString());
     }
@@ -205,12 +211,12 @@ public class PlanScoreCalculatorTest {
                 .build();
 
         List<Watch> watchesWithLazyLegolas = Arrays.asList(watch1, watch2, watch3, watch4);
-        Plan plan = new Plan();
-        plan.setCharacters(partyOfFourElves);
-        plan.setWatches(watchesWithLazyLegolas);
-        plan.setPlanRequest(PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build());
+        PartyNightWatch partyNightWatch = new PartyNightWatch(partyOfFourElves, watchesWithLazyLegolas);
 
-        Score score = planScoreCalculator.calculateScore(plan);
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build();
+
+        Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
+
 
         assertEquals("-1hard", score.toShortString());
     }
@@ -245,23 +251,20 @@ public class PlanScoreCalculatorTest {
                 .length(FOUR_HOURS)
                 .build();
 
-        List<Watch> watchesWithLazyLegolas = Arrays.asList(watch1, watch2, watch3, watch4);
-        Plan plan = Plan.builder()
-                .planRequest(PlanRequest.builder()
-                        .maxTotalTimeSpent(EIGHT_HOURS)
-                        .party(partyOfFourElves)
-                        .build())
-                .build();
+        PartyNightWatch partyNightWatch = new PartyNightWatch(
+                partyOfFourElves,
+                Arrays.asList(watch1, watch2, watch3, watch4)
+        );
 
-        plan.setWatches(watchesWithLazyLegolas);
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(EIGHT_HOURS).build();
 
-        Score score = planScoreCalculator.calculateScore(plan);
+        Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
 
         assertEquals("score should not be feasible", "-1hard", score.toShortString());
     }
 
     @Test
-    public void a_plan_with_an_empty_Watch_not_be_feasible() {
+    public void a_plan_with_an_empty_Watch_should_not_be_feasible() {
         Watch emptyWatch = Watch.builder()
                 .order(1)
                 .build();
@@ -287,13 +290,15 @@ public class PlanScoreCalculatorTest {
                 .length(TWO_HOURS)
                 .build();
 
-        List<Watch> watchesWithLazyLegolas = Arrays.asList(emptyWatch, watch2, watch3, watch4);
-        Plan plan = new Plan();
-        plan.setCharacters(partyOfFourElves);
-        plan.setWatches(watchesWithLazyLegolas);
-        plan.setPlanRequest(PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build());
+        PartyNightWatch partyNightWatch = new PartyNightWatch(
+                partyOfFourElves,
+                Arrays.asList(emptyWatch, watch2, watch3, watch4)
+        );
 
-        Score score = planScoreCalculator.calculateScore(plan);
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build();
+
+        Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
+
 
         assertEquals("-1hard", score.toShortString());
     }

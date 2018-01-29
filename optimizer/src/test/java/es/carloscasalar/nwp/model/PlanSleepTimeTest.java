@@ -14,9 +14,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class PlanSleepTimeTest {
 
-    private static final Integer TWO_HOURS = 60*2;
-    private static final Integer EIGHT_HOURS = 60*8;
-
     private Character kitiara;
     private Character sturm;
     private Character characterThatSleeps400minutes;
@@ -133,32 +130,4 @@ public class PlanSleepTimeTest {
                 Integer.valueOf(133), minLengthForWatchesWhereAlteredIsSleeping);
     }
 
-    @Test
-    public void total_spent_time_should_be_the_sum_of_all_watches_length(){
-        Plan plan = new Plan();
-
-        plan.setWatches(
-                Arrays.asList(
-                        Watch.builder()
-                                .order(1)
-                                .length(TWO_HOURS)
-                                .build(),
-                        Watch.builder()
-                                .order(2)
-                                .length(TWO_HOURS)
-                                .build(),
-                        Watch.builder()
-                                .order(3)
-                                .length(TWO_HOURS)
-                                .build(),
-                        Watch.builder()
-                                .order(4)
-                                .length(TWO_HOURS)
-                                .build()
-                )
-        );
-
-        assertEquals("Total time should be the sum of all watches time",
-                EIGHT_HOURS, plan.totalTime());
-    }
 }
