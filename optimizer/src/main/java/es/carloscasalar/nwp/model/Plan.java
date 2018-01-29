@@ -132,25 +132,6 @@ public class Plan {
         return minRequiredSleepingHours + maxRequiredSleepingHours;
     }
 
-    public Integer minLengthNightwatchWithSleeping(Character character) {
-        return character.getRequiredSleepTime() / numberOfWatchesWhereIsSleeping(character);
-    }
-
-    private Integer numberOfWatchesWhereIsSleeping(Character character) {
-        return (int) watches.stream()
-                .filter(watch -> watch.isSleeping(character))
-                .count();
-    }
-
-    public Integer requiredTimeForCharactersSleepingIn(Watch watch) {
-        Optional<Integer> requiredLengthForWatch = watch.sleepingCharacters(characters)
-                .stream()
-                .map(this::minLengthNightwatchWithSleeping)
-                .max(Integer::compareTo);
-        return requiredLengthForWatch.orElse(0);
-
-    }
-
     @JsonProperty("compacted")
     public PartyNightWatch compactedPartyNightWatch() {
         return new PartyNightWatch(characters, watches).adjust();
