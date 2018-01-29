@@ -9,7 +9,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Collection;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
