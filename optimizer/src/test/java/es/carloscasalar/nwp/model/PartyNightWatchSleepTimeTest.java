@@ -9,7 +9,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class PartyNightWatchTest {
+public class PartyNightWatchSleepTimeTest {
     private static final Integer TWO_HOURS = 60 * 2;
     private static final Integer FOUR_HOURS = 60 * 4;
     private static final Integer EIGHT_HOURS = 60 * 8;
@@ -52,7 +52,7 @@ public class PartyNightWatchTest {
     }
 
     @Test
-    public void plan_where_all_characters_sleep_exactly_their_required_sleep_time_should_stay_the_same() {
+    public void plan_where_all_characters_sleep_exactly_their_required_sleep_time_should_stay_the_same_after_adjust() {
         Watch watchOfOneCharacter = Watch.builder()
                 .order(1)
                 .watchfulCharacter(characterFactory.getAlteredHuman("Character A", EIGHT_HOURS))
@@ -79,8 +79,9 @@ public class PartyNightWatchTest {
         originalWatches.forEach(watch -> party.addAll(watch.getWatchfulCharacters()));
 
         PartyNightWatch partyNightWatch = new PartyNightWatch(party, new ArrayList<>(originalWatches));
+        partyNightWatch.adjust();
 
-        assertEquals(originalWatches, partyNightWatch.adjust().getWatches());
+        assertEquals(originalWatches, partyNightWatch.getWatches());
     }
 
     @Test
