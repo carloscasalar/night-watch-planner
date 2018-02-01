@@ -110,11 +110,7 @@ public class Plan {
     private List<Watch> initWatches(final Set<Character> party) {
         final List<Watch> watches = new ArrayList<>();
         IntStream.range(0, numberOfWatchesToGenerate(party)).forEach(watchOrder ->
-                watches.add(
-                        Watch.builder()
-                                .length(ONE_HOUR)
-                                .build()
-                )
+                watches.add(new Watch())
         );
         return watches;
     }
