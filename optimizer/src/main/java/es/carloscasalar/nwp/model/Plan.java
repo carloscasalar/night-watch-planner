@@ -112,7 +112,6 @@ public class Plan {
         IntStream.range(0, numberOfWatchesToGenerate(party)).forEach(watchOrder ->
                 watches.add(
                         Watch.builder()
-                                .order(watchOrder + 1)
                                 .length(ONE_HOUR)
                                 .build()
                 )

@@ -2,12 +2,14 @@ package es.carloscasalar.nwp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Data
+@ToString
+@EqualsAndHashCode
 public class PartyNightWatch {
     private final Set<Character> party;
     private final List<Watch> watches;
@@ -30,6 +32,40 @@ public class PartyNightWatch {
         return watches.size();
     }
 
+    public int partySize() {
+        return party.size();
+    }
+
+    public Watch getWatch(int numberOfWatch) {
+        if (numberOfWatch <= 0 || numberOfWatch > watches.size()) {
+            throw new WatchNotFoundException(numberOfWatch);
+        }
+
+        return watches.get(numberOfWatch - 1);
+    }
+
+    public long numberOfWatchesWithoutWatchfulCharacters() {
+        return watches.stream().filter(watch -> watch.hasWatchfulCharacters(0)).count();
+    }
+
+    public long numberOfLazyCharacters() {
+        return party
+                .stream()
+                .filter(character ->
+                        watches
+                                .stream()
+                                .filter(watch -> watch.isSleeping(character))
+                                .count() == watches.size())
+                .count();
+    }
+
+    public long numberOfSoloWatches() {
+        return watches.stream().filter(watch -> watch.isSoloWatch()).count();
+    }
+
+    public long numberOfOverloadedWatches(){
+        return watches.stream().filter(watch -> watch.isOverloaded()).count();
+    }
     public PartyNightWatch adjust() {
         fillWatchLengths();
         awakeRestedCharacters();

@@ -22,31 +22,24 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
     }
 
     private long hardScore(PartyNightWatch partyNightWatch, PlanRequest planRequest) {
-        long emptyWatches = -partyNightWatch.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters(0)).count();
-        long lazyCharacters = -partyNightWatch.getParty()
-                .stream()
-                .filter(character ->
-                        partyNightWatch.getWatches()
-                                .stream()
-                                .filter(watch -> watch.isSleeping(character))
-                                .count() == partyNightWatch.getWatches().size())
-                .count();
+        long emptyWatches = -partyNightWatch.numberOfWatchesWithoutWatchfulCharacters();
+        long lazyCharacters = -partyNightWatch.numberOfLazyCharacters();
         long tooMuchTime = partyNightWatch.totalTime() > planRequest.getMaxTotalTimeSpent() ? -1 : 0;
         return emptyWatches + lazyCharacters + tooMuchTime;
     }
 
     private long mediumScore(PartyNightWatch partyNightWatch) {
-        long soloWatches = -partyNightWatch.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters(1)).count();
+        long soloWatches = -partyNightWatch.numberOfSoloWatches();
 
-        int numOfCharacters = partyNightWatch.getParty().size();
-        int watchesCount = partyNightWatch.getWatches().size();
+        int numOfCharacters = partyNightWatch.partySize();
+        int watchesCount = partyNightWatch.numberOfWatches();
         int numberOfWatchesScore = watchesCount > numOfCharacters / 2 ? 0 : (numOfCharacters / 2) - watchesCount;
 
         return soloWatches + numberOfWatchesScore;
     }
 
     private long softScore(PartyNightWatch partyNightWatch) {
-        long trioWatches = -partyNightWatch.getWatches().stream().filter(watch -> watch.hasWatchfulCharacters(3)).count();
+        long trioWatches = -partyNightWatch.numberOfOverloadedWatches();
 
         return trioWatches;
     }

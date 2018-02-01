@@ -57,28 +57,24 @@ public class PlanScoreCalculatorTest {
     @Test
     public void a_plan_where_all_characters_do_watch_in_pairs_and_has_no_lazy_characters_should_be_perfect() {
         Watch watch1 = Watch.builder()
-                .order(1)
                 .watchfulCharacter(legolas)
                 .watchfulCharacter(silvara)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(laurana)
                 .watchfulCharacter(gilthanas)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch4 = Watch.builder()
-                .order(4)
                 .watchfulCharacter(gilthanas)
                 .watchfulCharacter(legolas)
                 .length(TWO_HOURS)
@@ -99,27 +95,23 @@ public class PlanScoreCalculatorTest {
     @Test
     public void a_plan_where_all_characters_do_watch_with_no_lazy_characters_but_one_of_them_do_watch_alone_should_be_feasible_but_not_perfect() {
         Watch soloFirstWatch = Watch.builder()
-                .order(1)
                 .watchfulCharacter(legolas)
                 .length(FOUR_HOURS)
                 .build();
 
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(laurana)
                 .watchfulCharacter(gilthanas)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch4 = Watch.builder()
-                .order(4)
                 .watchfulCharacter(gilthanas)
                 .watchfulCharacter(legolas)
                 .length(TWO_HOURS)
@@ -140,7 +132,6 @@ public class PlanScoreCalculatorTest {
     @Test
     public void a_plan_where_all_characters_do_watch_with_no_lazy_characters_but_three_of_them_do_watch_together_should_be_almost_perfect() {
         Watch overLoadedWatch = Watch.builder()
-                .order(1)
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(legolas)
                 .watchfulCharacter(gilthanas)
@@ -148,21 +139,18 @@ public class PlanScoreCalculatorTest {
                 .build();
 
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(laurana)
                 .watchfulCharacter(gilthanas)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch4 = Watch.builder()
-                .order(4)
                 .watchfulCharacter(gilthanas)
                 .watchfulCharacter(legolas)
                 .length(TWO_HOURS)
@@ -183,28 +171,24 @@ public class PlanScoreCalculatorTest {
     @Test
     public void a_plan_where_all_characters_do_watch_in_pairs_and_has_one_lazy_characters_should_not_be_feasible() {
         Watch watch1 = Watch.builder()
-                .order(1)
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(laurana)
                 .watchfulCharacter(gilthanas)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch4 = Watch.builder()
-                .order(4)
                 .watchfulCharacter(gilthanas)
                 .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
@@ -224,28 +208,24 @@ public class PlanScoreCalculatorTest {
     @Test
     public void a_plan_where_all_characters_do_watch_in_pairs_and_has_no_lazy_characters_but_last_more_than_max_length_should_not_be_feasible() {
         Watch watch1 = Watch.builder()
-                .order(1)
                 .watchfulCharacter(legolas)
                 .watchfulCharacter(silvara)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(laurana)
                 .watchfulCharacter(gilthanas)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch4 = Watch.builder()
-                .order(4)
                 .watchfulCharacter(gilthanas)
                 .watchfulCharacter(legolas)
                 .length(FOUR_HOURS)
@@ -265,26 +245,21 @@ public class PlanScoreCalculatorTest {
 
     @Test
     public void a_plan_with_an_empty_Watch_should_not_be_feasible() {
-        Watch emptyWatch = Watch.builder()
-                .order(1)
-                .build();
+        Watch emptyWatch = new Watch();
 
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(laurana)
                 .watchfulCharacter(gilthanas)
                 .length(TWO_HOURS)
                 .build();
 
         Watch watch4 = Watch.builder()
-                .order(4)
                 .watchfulCharacter(gilthanas)
                 .watchfulCharacter(legolas)
                 .length(TWO_HOURS)

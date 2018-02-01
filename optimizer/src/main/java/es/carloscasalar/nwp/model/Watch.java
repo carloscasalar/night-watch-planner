@@ -29,9 +29,6 @@ import java.util.stream.Collectors;
 public class Watch {
     private static final int OVERLOADED_SIZE = 2;
 
-    @NotNull
-    private Integer order;
-
     @JsonProperty("watchfulCharacters")
     @NotNull
     @PlanningVariable(
@@ -64,8 +61,6 @@ public class Watch {
 
     public Watch copy() {
         Watch copy = new Watch();
-
-        copy.setOrder(order);
         copy.setLength(length);
         copy.setWatchfulCharacters(new ArrayList<>());
 
@@ -108,8 +103,12 @@ public class Watch {
     }
 
 
-    private boolean isOverloaded() {
+    public boolean isOverloaded() {
         return watchfulCharacters.size() > OVERLOADED_SIZE;
+    }
+
+    public boolean isSoloWatch() {
+        return watchfulCharacters.size() == 1;
     }
 
     private void removeWatchfulCharacter(List<Character> unnecessaryCharacters) {

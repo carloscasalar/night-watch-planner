@@ -12,7 +12,6 @@ public class WatchTest {
     public void copy_a_watch_with_no_watchful_characters_should_generate_a_watch_with_empty_list_of_watchful_characters() {
         Watch watch = new Watch();
         watch.setLength(1);
-        watch.setOrder(1);
 
         Watch copy = watch.copy();
 
@@ -20,24 +19,12 @@ public class WatchTest {
     }
 
     @Test
-    public void copy_watch_with_no_length_should_generate_no_length_watch(){
+    public void copy_watch_with_no_length_should_generate_no_length_watch() {
         Watch watch = new Watch();
         watch.setWatchfulCharacters(new ArrayList<>());
-        watch.setOrder(1);
 
         Watch copy = watch.copy();
 
         assertEquals(null, copy.getLength());
-    }
-
-    @Test
-    public void copy_watch_with_no_order_should_generate_no_order_watch(){
-        Watch watch = new Watch();
-        watch.setWatchfulCharacters(new ArrayList<>());
-        watch.setLength(1);
-
-        Watch copy = watch.copy();
-
-        assertEquals(null, copy.getOrder());
     }
 }

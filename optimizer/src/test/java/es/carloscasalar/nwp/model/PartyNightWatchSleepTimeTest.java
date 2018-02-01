@@ -30,19 +30,15 @@ public class PartyNightWatchSleepTimeTest {
                 noCharacters,
                 Arrays.asList(
                         Watch.builder()
-                                .order(1)
                                 .length(TWO_HOURS)
                                 .build(),
                         Watch.builder()
-                                .order(2)
                                 .length(TWO_HOURS)
                                 .build(),
                         Watch.builder()
-                                .order(3)
                                 .length(TWO_HOURS)
                                 .build(),
                         Watch.builder()
-                                .order(4)
                                 .length(TWO_HOURS)
                                 .build()
                 ));
@@ -54,20 +50,17 @@ public class PartyNightWatchSleepTimeTest {
     @Test
     public void plan_where_all_characters_sleep_exactly_their_required_sleep_time_should_stay_the_same_after_adjust() {
         Watch watchOfOneCharacter = Watch.builder()
-                .order(1)
                 .watchfulCharacter(characterFactory.getAlteredHuman("Character A", EIGHT_HOURS))
                 .length(FOUR_HOURS)
                 .build();
 
         Watch watchOfTwoCharacters = Watch.builder()
-                .order(2)
                 .watchfulCharacter(characterFactory.getAlteredHuman("Character B", EIGHT_HOURS))
                 .watchfulCharacter(characterFactory.getAlteredHuman("Character C", EIGHT_HOURS))
                 .length(FOUR_HOURS)
                 .build();
 
         Watch watchOfThreeCharacters = Watch.builder()
-                .order(3)
                 .watchfulCharacter(characterFactory.getAlteredHuman("Character D", EIGHT_HOURS))
                 .watchfulCharacter(characterFactory.getAlteredHuman("Character E", EIGHT_HOURS))
                 .watchfulCharacter(characterFactory.getAlteredHuman("Character F", EIGHT_HOURS))
@@ -81,7 +74,9 @@ public class PartyNightWatchSleepTimeTest {
         PartyNightWatch partyNightWatch = new PartyNightWatch(party, new ArrayList<>(originalWatches));
         partyNightWatch.adjust();
 
-        assertEquals(originalWatches, partyNightWatch.getWatches());
+        assertEquals("first watch should stay the same", watchOfOneCharacter, partyNightWatch.getWatch(1));
+        assertEquals("second watch should stay the same", watchOfTwoCharacters, partyNightWatch.getWatch(2));
+        assertEquals("third watch should stay the same", watchOfThreeCharacters, partyNightWatch.getWatch(3));
     }
 
     @Test
@@ -92,22 +87,18 @@ public class PartyNightWatchSleepTimeTest {
         Character chDsl6h = characterFactory.getAlteredHuman("Character D req sleep 6h", SIX_HOURS);
 
         Watch watch1 = Watch.builder()
-                .order(1)
                 .watchfulCharacter(chAsl4h)
                 .length(TWO_HOURS)
                 .build();
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(chBsl6h)
                 .length(TWO_HOURS)
                 .build();
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(chCsl6h)
                 .length(TWO_HOURS)
                 .build();
         Watch watch4 = Watch.builder()
-                .order(4)
                 .watchfulCharacter(chDsl6h)
                 .length(TWO_HOURS)
                 .build();
@@ -117,10 +108,7 @@ public class PartyNightWatchSleepTimeTest {
         PartyNightWatch partyNightWatch = new PartyNightWatch(party, Arrays.asList(watch1, watch2, watch3, watch4));
         partyNightWatch.adjust();
 
-        Watch watch4AfterCompact = partyNightWatch.getWatches().stream()
-                .filter(watch -> watch.getOrder() == 4)
-                .findFirst()
-                .orElse(watch4);
+        Watch watch4AfterCompact = partyNightWatch.getWatch(4);
 
         assertTrue("Character A should awake in watch 4 because she has already sleep her four hours",
                 watch4AfterCompact.getWatchfulCharacters().contains(chAsl4h));
@@ -133,17 +121,14 @@ public class PartyNightWatchSleepTimeTest {
         Character chC = characterFactory.getAlteredHuman("Character C req sleep 2h", TWO_HOURS);
 
         Watch watch1 = Watch.builder()
-                .order(1)
                 .watchfulCharacter(chA)
                 .length(TWO_HOURS)
                 .build();
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(chB)
                 .length(TWO_HOURS)
                 .build();
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(chC)
                 .length(TWO_HOURS)
                 .build();
@@ -153,10 +138,7 @@ public class PartyNightWatchSleepTimeTest {
         PartyNightWatch partyNightWatch = new PartyNightWatch(party, Arrays.asList(watch1, watch2, watch3));
         partyNightWatch.adjust();
 
-        Watch watch2AfterCompact = partyNightWatch.getWatches().stream()
-                .filter(watch -> watch.getOrder() == 2)
-                .findFirst()
-                .orElse(watch2);
+        Watch watch2AfterCompact = partyNightWatch.getWatch(2);
 
         assertEquals("In  second shift Characters B (2h remain to sleep) and Character C (already rested) should do the shift together",
                 Arrays.asList(chB, chC),
@@ -172,23 +154,19 @@ public class PartyNightWatchSleepTimeTest {
         Character chE = characterFactory.getAlteredHuman("Character C req sleep 6h", SIX_HOURS);
 
         Watch watch1 = Watch.builder()
-                .order(1)
                 .watchfulCharacter(chA)
                 .length(TWO_HOURS)
                 .build();
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(chB)
                 .length(TWO_HOURS)
                 .build();
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(chC)
                 .watchfulCharacter(chD)
                 .length(TWO_HOURS)
                 .build();
         Watch watch4 = Watch.builder()
-                .order(4)
                 .watchfulCharacter(chE)
                 .length(FOUR_HOURS)
                 .build();
@@ -198,10 +176,7 @@ public class PartyNightWatchSleepTimeTest {
         PartyNightWatch partyNightWatch = new PartyNightWatch(party, Arrays.asList(watch1, watch2, watch3, watch4));
         partyNightWatch.adjust();
 
-        Watch watch3AfterCompact = partyNightWatch.getWatches().stream()
-                .filter(watch -> watch.getOrder() == 3)
-                .findFirst()
-                .orElse(watch4);
+        Watch watch3AfterCompact = partyNightWatch.getWatch(3);
 
         assertEquals("In watch 3, 'A' should be awake (because he is rested) and 'C' should go to sleep because he has less hours to sleep",
                 Arrays.asList(chC, chA),
@@ -214,17 +189,14 @@ public class PartyNightWatchSleepTimeTest {
         Character chB = characterFactory.getAlteredHuman("Character B req sleep 4h", FOUR_HOURS);
 
         Watch watch1 = Watch.builder()
-                .order(1)
                 .watchfulCharacter(chA)
                 .length(FOUR_HOURS)
                 .build();
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(chB)
                 .length(FOUR_HOURS)
                 .build();
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(chA)
                 .length(TWO_HOURS)
                 .build();
@@ -244,18 +216,15 @@ public class PartyNightWatchSleepTimeTest {
         Character chC = characterFactory.getAlteredHuman("Character C req sleep 4h", FOUR_HOURS);
 
         Watch watch1 = Watch.builder()
-                .order(1)
                 .watchfulCharacter(chA)
                 .length(FOUR_HOURS)
                 .build();
         Watch watch2 = Watch.builder()
-                .order(2)
                 .watchfulCharacter(chB)
                 .watchfulCharacter(chC)
                 .length(TWO_HOURS)
                 .build();
         Watch watch3 = Watch.builder()
-                .order(3)
                 .watchfulCharacter(chB)
                 .watchfulCharacter(chC)
                 .length(SIX_HOURS)
@@ -267,6 +236,6 @@ public class PartyNightWatchSleepTimeTest {
 
 
         assertEquals("Compacted plan should have only two watches because the last two ones should be joined", 2, compactedPartyNightWatch.numberOfWatches());
-        assertEquals("Last watch should last the sum of the joined ones", EIGHT_HOURS, compactedPartyNightWatch.getWatches().get(1).getLength());
+        assertEquals("Last watch should last the sum of the joined ones", EIGHT_HOURS, compactedPartyNightWatch.getWatch(2).getLength());
     }
 }
