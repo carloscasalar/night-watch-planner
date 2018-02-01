@@ -48,7 +48,7 @@ public class Plan {
     @JsonIgnore
     private PlanRequest planRequest;
 
-    @JsonIgnore
+    @JsonProperty("originalPlan")
     @NotNull
     @Valid
     @PlanningEntityCollectionProperty

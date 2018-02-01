@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 public class PartyNightWatch {
     private final Set<Character> party;
+
+    @JsonProperty
     private final List<Watch> watches;
 
     public PartyNightWatch(final Set<Character> party, final List<Watch> watches) {
@@ -63,9 +65,10 @@ public class PartyNightWatch {
         return watches.stream().filter(watch -> watch.isSoloWatch()).count();
     }
 
-    public long numberOfOverloadedWatches(){
+    public long numberOfOverloadedWatches() {
         return watches.stream().filter(watch -> watch.isOverloaded()).count();
     }
+
     public PartyNightWatch adjust() {
         fillWatchLengths();
         awakeRestedCharacters();
