@@ -33,14 +33,9 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
 
     private long mediumScore(PartyNightWatch partyNightWatch) {
         long soloWatches = -partyNightWatch.numberOfSoloWatches();
-
-        int numOfCharacters = partyNightWatch.partySize();
-        int watchesCount = partyNightWatch.numberOfWatches();
-        int numberOfWatchesScore = watchesCount > numOfCharacters / 2 ? 0 : (numOfCharacters / 2) - watchesCount;
-
         int overSleepScore = -overSleepScore(partyNightWatch.totalOverSleepTime());
 
-        return soloWatches + numberOfWatchesScore + overSleepScore;
+        return soloWatches + overSleepScore;
     }
 
     private long softScore(PartyNightWatch partyNightWatch) {
@@ -48,6 +43,6 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
     }
 
     private int overSleepScore(int totalOverSleepMinutes) {
-        return totalOverSleepMinutes/ OVER_SLEEP_MINUTE_PENALTY;
+        return totalOverSleepMinutes / OVER_SLEEP_MINUTE_PENALTY;
     }
 }
