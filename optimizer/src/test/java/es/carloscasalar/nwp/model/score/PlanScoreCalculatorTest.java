@@ -21,10 +21,13 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class PlanScoreCalculatorTest {
 
+    private static final Integer ONE_HOUR = 60;
     private static final Integer TWO_HOURS = 60 * 2;
     private static final Integer FOUR_HOURS = 60 * 4;
     private static final Integer EIGHT_HOURS = 60 * 8;
     private static final Integer TEN_HOURS = 60 * 10;
+
+    private static final CharacterFactory characterFactory = new CharacterFactory();
 
     private PlanScoreCalculator planScoreCalculator;
 
@@ -39,8 +42,6 @@ public class PlanScoreCalculatorTest {
     @Before
     public void init() {
         planScoreCalculator = new PlanScoreCalculator();
-
-        CharacterFactory characterFactory = new CharacterFactory();
 
         legolas = characterFactory.getElf("Legolas");
         silvara = characterFactory.getElf("Silvara");
@@ -102,27 +103,15 @@ public class PlanScoreCalculatorTest {
         Watch watch2 = Watch.builder()
                 .watchfulCharacter(silvara)
                 .watchfulCharacter(laurana)
-                .length(TWO_HOURS)
-                .build();
-
-        Watch watch3 = Watch.builder()
-                .watchfulCharacter(laurana)
-                .watchfulCharacter(gilthanas)
-                .length(TWO_HOURS)
-                .build();
-
-        Watch watch4 = Watch.builder()
-                .watchfulCharacter(gilthanas)
-                .watchfulCharacter(legolas)
-                .length(TWO_HOURS)
+                .length(FOUR_HOURS)
                 .build();
 
         PartyNightWatch partyNightWatch = new PartyNightWatch(
-                partyOfFourElves,
-                Arrays.asList(soloFirstWatch, watch2, watch3, watch4)
+                characterFactory.partyWith(legolas, silvara, laurana),
+                Arrays.asList(soloFirstWatch, watch2)
         );
 
-        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build();
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(EIGHT_HOURS).build();
 
         Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
 
@@ -171,8 +160,8 @@ public class PlanScoreCalculatorTest {
     @Test
     public void a_plan_where_all_characters_do_watch_in_pairs_and_has_one_lazy_characters_should_not_be_feasible() {
         Watch watch1 = Watch.builder()
+                .watchfulCharacter(legolas)
                 .watchfulCharacter(silvara)
-                .watchfulCharacter(laurana)
                 .length(TWO_HOURS)
                 .build();
 
@@ -190,17 +179,19 @@ public class PlanScoreCalculatorTest {
 
         Watch watch4 = Watch.builder()
                 .watchfulCharacter(gilthanas)
-                .watchfulCharacter(laurana)
+                .watchfulCharacter(legolas)
                 .length(TWO_HOURS)
                 .build();
 
-        List<Watch> watchesWithLazyLegolas = Arrays.asList(watch1, watch2, watch3, watch4);
-        PartyNightWatch partyNightWatch = new PartyNightWatch(partyOfFourElves, watchesWithLazyLegolas);
+        Character lazyHuman = characterFactory.getHuman("Lazy standard human");
+        Set<Character> partyOfFourElvesAndALazyHuman = characterFactory.partyWith(legolas, laurana, silvara, gilthanas, lazyHuman);
+
+        List<Watch> watchesWithLazyUndead = Arrays.asList(watch1, watch2, watch3, watch4);
+        PartyNightWatch partyNightWatch = new PartyNightWatch(partyOfFourElvesAndALazyHuman, watchesWithLazyUndead);
 
         PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(TEN_HOURS).build();
 
         Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
-
 
         assertEquals("-1hard", score.toShortString());
     }
@@ -228,7 +219,7 @@ public class PlanScoreCalculatorTest {
         Watch watch4 = Watch.builder()
                 .watchfulCharacter(gilthanas)
                 .watchfulCharacter(legolas)
-                .length(FOUR_HOURS)
+                .length(TWO_HOURS)
                 .build();
 
         PartyNightWatch partyNightWatch = new PartyNightWatch(
@@ -236,7 +227,7 @@ public class PlanScoreCalculatorTest {
                 Arrays.asList(watch1, watch2, watch3, watch4)
         );
 
-        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(EIGHT_HOURS).build();
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(FOUR_HOURS).build();
 
         Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
 
@@ -276,5 +267,44 @@ public class PlanScoreCalculatorTest {
 
 
         assertEquals("-1hard", score.toShortString());
+    }
+
+    @Test
+    public void a_plan_where_a_character_oversleep_30_minutes_should_be_scored_minus_3_medium() {
+        Character alteredHuman = characterFactory.getAlteredHuman("Human that need to sleep only 3h 30m", 60 * 3 + 30);
+        Watch watch1 = Watch.builder()
+                .watchfulCharacter(alteredHuman)
+                .watchfulCharacter(silvara)
+                .length(TWO_HOURS)
+                .build();
+
+        Watch watch2 = Watch.builder()
+                .watchfulCharacter(silvara)
+                .watchfulCharacter(laurana)
+                .length(TWO_HOURS)
+                .build();
+
+        Watch watch3 = Watch.builder()
+                .watchfulCharacter(laurana)
+                .watchfulCharacter(gilthanas)
+                .length(TWO_HOURS)
+                .build();
+
+        Watch watch4 = Watch.builder()
+                .watchfulCharacter(gilthanas)
+                .watchfulCharacter(alteredHuman)
+                .length(TWO_HOURS)
+                .build();
+
+        PartyNightWatch partyNightWatch = new PartyNightWatch(
+                new HashSet(Arrays.asList(silvara, laurana, gilthanas, alteredHuman)),
+                Arrays.asList(watch1, watch2, watch3, watch4)
+        );
+
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(EIGHT_HOURS).build();
+
+        Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
+
+        assertEquals("score should be 0", "-3medium", score.toShortString());
     }
 }

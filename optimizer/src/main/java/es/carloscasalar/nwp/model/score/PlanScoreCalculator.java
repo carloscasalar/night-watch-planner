@@ -8,6 +8,9 @@ import org.optaplanner.core.api.score.buildin.hardmediumsoftlong.HardMediumSoftL
 import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
 
 public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
+
+    private static final int OVER_SLEEP_MINUTE_PENALTY = 10;
+
     @Override
     public Score calculateScore(Plan plan) {
         PartyNightWatch partyNightWatch = plan.compactedPartyNightWatch();
@@ -35,13 +38,16 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
         int watchesCount = partyNightWatch.numberOfWatches();
         int numberOfWatchesScore = watchesCount > numOfCharacters / 2 ? 0 : (numOfCharacters / 2) - watchesCount;
 
-        return soloWatches + numberOfWatchesScore;
+        int overSleepScore = -overSleepScore(partyNightWatch.totalOverSleepTime());
+
+        return soloWatches + numberOfWatchesScore + overSleepScore;
     }
 
     private long softScore(PartyNightWatch partyNightWatch) {
-        long trioWatches = -partyNightWatch.numberOfOverloadedWatches();
-
-        return trioWatches;
+        return -partyNightWatch.numberOfOverloadedWatches();
     }
 
+    private int overSleepScore(int totalOverSleepMinutes) {
+        return totalOverSleepMinutes/ OVER_SLEEP_MINUTE_PENALTY;
+    }
 }

@@ -38,4 +38,9 @@ public class Character {
                 .requiredSleepTime(requiredSleepTime)
                 .build();
     }
+
+    public int overSleepTime(int totalTimeSleeping) {
+        int excess = totalTimeSleeping - requiredSleepTime;
+        return excess > 0 ? excess : 0;
+    }
 }

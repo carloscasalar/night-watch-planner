@@ -5,7 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @ToString
@@ -24,7 +28,7 @@ public class PartyNightWatch {
     @JsonProperty("totalTime")
     public Integer totalTime() {
         return watches.stream()
-                .filter(watch -> watch.getLength() != null)
+                .filter(Watch::hasLength)
                 .mapToInt(Watch::getLength)
                 .sum();
     }
@@ -62,11 +66,17 @@ public class PartyNightWatch {
     }
 
     public long numberOfSoloWatches() {
-        return watches.stream().filter(watch -> watch.isSoloWatch()).count();
+        return watches.stream().filter(Watch::isSoloWatch).count();
     }
 
     public long numberOfOverloadedWatches() {
-        return watches.stream().filter(watch -> watch.isOverloaded()).count();
+        return watches.stream().filter(Watch::isOverloaded).count();
+    }
+
+    public int totalOverSleepTime() {
+        return party.stream()
+                .mapToInt(character -> character.overSleepTime(this.totalSleepingTime(character)))
+                .sum();
     }
 
     public PartyNightWatch adjust() {
@@ -92,7 +102,6 @@ public class PartyNightWatch {
                 .collect(Collectors.toList());
         replaceWatches(trimmedWatches);
     }
-
 
     private void joinWatchesWithSameWatchfulCharacters() {
         List<Watch> joined = new ArrayList<>();
@@ -137,5 +146,13 @@ public class PartyNightWatch {
                 .max(Integer::compareTo);
         return requiredLengthForWatch.orElse(0);
 
+    }
+
+    private int totalSleepingTime(Character character) {
+        return watches.stream()
+                .filter(Watch::hasLength)
+                .filter(watch -> watch.isSleeping(character))
+                .mapToInt(Watch::getLength)
+                .sum();
     }
 }

@@ -130,4 +130,8 @@ public class Watch {
     public void addLength(Integer length) {
         this.length = Optional.ofNullable(this.length).orElse(0) + Optional.ofNullable(length).orElse(0);
     }
+
+    public boolean hasLength() {
+        return length != null;
+    }
 }
