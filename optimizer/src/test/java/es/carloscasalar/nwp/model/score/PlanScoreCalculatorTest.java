@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class PlanScoreCalculatorTest {
 
+    private static final Integer HALF_HOUR = 30;
     private static final Integer ONE_HOUR = 60;
     private static final Integer TWO_HOURS = 60 * 2;
     private static final Integer FOUR_HOURS = 60 * 4;
@@ -197,7 +198,7 @@ public class PlanScoreCalculatorTest {
     }
 
     @Test
-    public void a_plan_where_all_characters_do_watch_in_pairs_and_has_no_lazy_characters_but_last_more_than_max_length_should_not_be_feasible() {
+    public void a_plan_where_all_characters_do_watch_in_pairs_and_has_no_lazy_characters_but_last_4h_than_max_length_should_not_be_feasible() {
         Watch watch1 = Watch.builder()
                 .watchfulCharacter(legolas)
                 .watchfulCharacter(silvara)
@@ -231,9 +232,46 @@ public class PlanScoreCalculatorTest {
 
         Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
 
-        assertEquals("score should not be feasible", "-1hard", score.toShortString());
+        assertEquals("score should not be feasible by 8 half hours (four hours of excess)", "-8hard", score.toShortString());
     }
 
+    @Test
+    public void a_plan_where_all_characters_do_watch_in_pairs_and_has_no_lazy_characters_but_last_30m_than_max_length_should_not_be_feasible() {
+        Watch watch1 = Watch.builder()
+                .watchfulCharacter(legolas)
+                .watchfulCharacter(silvara)
+                .length(TWO_HOURS)
+                .build();
+
+        Watch watch2 = Watch.builder()
+                .watchfulCharacter(silvara)
+                .watchfulCharacter(laurana)
+                .length(TWO_HOURS)
+                .build();
+
+        Watch watch3 = Watch.builder()
+                .watchfulCharacter(laurana)
+                .watchfulCharacter(gilthanas)
+                .length(TWO_HOURS)
+                .build();
+
+        Watch watch4 = Watch.builder()
+                .watchfulCharacter(gilthanas)
+                .watchfulCharacter(legolas)
+                .length(TWO_HOURS)
+                .build();
+
+        PartyNightWatch partyNightWatch = new PartyNightWatch(
+                partyOfFourElves,
+                Arrays.asList(watch1, watch2, watch3, watch4)
+        );
+
+        PlanRequest planRequest = PlanRequest.builder().maxTotalTimeSpent(EIGHT_HOURS - HALF_HOUR).build();
+
+        Score score = planScoreCalculator.calculateScore(partyNightWatch, planRequest);
+
+        assertEquals("score should not be feasible by 1 half hours (30 min of excess)", "-1hard", score.toShortString());
+    }
     @Test
     public void a_plan_with_an_empty_Watch_should_not_be_feasible() {
         Watch emptyWatch = new Watch();

@@ -10,6 +10,7 @@ import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
 public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
 
     private static final int OVER_SLEEP_MINUTE_PENALTY = 10;
+    private static final int TO_MUCH_PENALTY = 30;
 
     @Override
     public Score calculateScore(Plan plan) {
@@ -27,8 +28,8 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
     private long hardScore(PartyNightWatch partyNightWatch, PlanRequest planRequest) {
         long emptyWatches = -partyNightWatch.numberOfWatchesWithoutWatchfulCharacters();
         long lazyCharacters = -partyNightWatch.numberOfLazyCharacters();
-        long tooMuchTime = partyNightWatch.totalTime() > planRequest.getMaxTotalTimeSpent() ? -1 : 0;
-        return emptyWatches + lazyCharacters + tooMuchTime;
+        int timeScore = -totalTimeScore(partyNightWatch.totalTime(), planRequest.getMaxTotalTimeSpent());
+        return emptyWatches + lazyCharacters + timeScore;
     }
 
     private long mediumScore(PartyNightWatch partyNightWatch) {
@@ -36,6 +37,14 @@ public class PlanScoreCalculator implements EasyScoreCalculator<Plan> {
         int overSleepScore = -overSleepScore(partyNightWatch.totalOverSleepTime());
 
         return soloWatches + overSleepScore;
+    }
+
+    private int totalTimeScore(Integer partyNightLength, Integer maxTotalTimeSpent) {
+        if(maxTotalTimeSpent>=partyNightLength){
+            return 0;
+        }
+        int difference = partyNightLength - maxTotalTimeSpent;
+        return difference / TO_MUCH_PENALTY;
     }
 
     private long softScore(PartyNightWatch partyNightWatch) {
