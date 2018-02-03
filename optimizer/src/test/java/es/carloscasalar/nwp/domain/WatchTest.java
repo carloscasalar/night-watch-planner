@@ -1,4 +1,4 @@
-package es.carloscasalar.nwp.model;
+package es.carloscasalar.nwp.domain;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package es.carloscasalar.nwp.model;
+package es.carloscasalar.nwp.domain;
 
 import java.util.List;
 import java.util.Map;

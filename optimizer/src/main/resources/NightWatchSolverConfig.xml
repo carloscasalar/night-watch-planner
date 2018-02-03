@@ -12,12 +12,12 @@
     <!--<environmentMode>PRODUCTION</environmentMode>-->
 
     <scanAnnotatedClasses>
-        <packageInclude>es.carloscasalar.nwp.model</packageInclude>
+        <packageInclude>es.carloscasalar.nwp.domain</packageInclude>
     </scanAnnotatedClasses>
 
     <scoreDirectorFactory>
         <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
-        <easyScoreCalculatorClass>es.carloscasalar.nwp.model.score.PlanScoreCalculator</easyScoreCalculatorClass>
+        <easyScoreCalculatorClass>es.carloscasalar.nwp.score.PlanScoreCalculator</easyScoreCalculatorClass>
     </scoreDirectorFactory>
 
     <constructionHeuristic>
@@ -55,7 +55,7 @@
         <unionMoveSelector>
             <changeMoveSelector>
                 <entitySelector>
-                    <entityClass>es.carloscasalar.nwp.model.Watch</entityClass>
+                    <entityClass>es.carloscasalar.nwp.domain.Watch</entityClass>
                 </entitySelector>
             </changeMoveSelector>
         </unionMoveSelector>

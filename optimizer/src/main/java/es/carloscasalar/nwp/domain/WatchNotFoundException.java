@@ -1,4 +1,4 @@
-package es.carloscasalar.nwp.model;
+package es.carloscasalar.nwp.domain;
 
 public class WatchNotFoundException extends RuntimeException {
     public WatchNotFoundException(int order) {

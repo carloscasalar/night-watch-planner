@@ -1,7 +1,7 @@
-package es.carloscasalar.nwp.model.score;
+package es.carloscasalar.nwp.score;
 
-import es.carloscasalar.nwp.model.Character;
-import es.carloscasalar.nwp.model.Watch;
+import es.carloscasalar.nwp.domain.Character;
+import es.carloscasalar.nwp.domain.Watch;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import java.util.Collections;

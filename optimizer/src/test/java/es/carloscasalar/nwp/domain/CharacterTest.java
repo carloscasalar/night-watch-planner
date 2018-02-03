@@ -1,6 +1,6 @@
-package es.carloscasalar.nwp.model;
+package es.carloscasalar.nwp.domain;
 
-import es.carloscasalar.nwp.model.fixtures.CharacterFactory;
+import es.carloscasalar.nwp.domain.fixtures.CharacterFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;

@@ -1,4 +1,4 @@
-package es.carloscasalar.nwp.model;
+package es.carloscasalar.nwp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

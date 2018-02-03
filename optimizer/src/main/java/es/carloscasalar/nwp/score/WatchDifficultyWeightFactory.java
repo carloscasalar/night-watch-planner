@@ -1,8 +1,8 @@
-package es.carloscasalar.nwp.model.score;
+package es.carloscasalar.nwp.score;
 
-import es.carloscasalar.nwp.model.Character;
-import es.carloscasalar.nwp.model.Plan;
-import es.carloscasalar.nwp.model.Watch;
+import es.carloscasalar.nwp.domain.Character;
+import es.carloscasalar.nwp.domain.Plan;
+import es.carloscasalar.nwp.domain.Watch;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionSorterWeightFactory;
 

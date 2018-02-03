@@ -1,8 +1,8 @@
-package es.carloscasalar.nwp.model.score;
+package es.carloscasalar.nwp.score;
 
-import es.carloscasalar.nwp.model.PartyNightWatch;
-import es.carloscasalar.nwp.model.Plan;
-import es.carloscasalar.nwp.model.PlanRequest;
+import es.carloscasalar.nwp.domain.PartyNightWatch;
+import es.carloscasalar.nwp.domain.Plan;
+import es.carloscasalar.nwp.domain.PlanRequest;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.api.score.buildin.hardmediumsoftlong.HardMediumSoftLongScore;
 import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;

@@ -1,7 +1,7 @@
-package es.carloscasalar.nwp.model.fixtures;
+package es.carloscasalar.nwp.domain.fixtures;
 
-import es.carloscasalar.nwp.model.Character;
-import es.carloscasalar.nwp.model.Sense;
+import es.carloscasalar.nwp.domain.Character;
+import es.carloscasalar.nwp.domain.Sense;
 
 import java.util.*;
 

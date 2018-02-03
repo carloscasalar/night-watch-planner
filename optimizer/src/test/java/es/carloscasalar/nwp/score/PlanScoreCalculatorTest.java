@@ -1,10 +1,10 @@
-package es.carloscasalar.nwp.model.score;
+package es.carloscasalar.nwp.score;
 
-import es.carloscasalar.nwp.model.Character;
-import es.carloscasalar.nwp.model.PartyNightWatch;
-import es.carloscasalar.nwp.model.PlanRequest;
-import es.carloscasalar.nwp.model.Watch;
-import es.carloscasalar.nwp.model.fixtures.CharacterFactory;
+import es.carloscasalar.nwp.domain.Character;
+import es.carloscasalar.nwp.domain.PartyNightWatch;
+import es.carloscasalar.nwp.domain.PlanRequest;
+import es.carloscasalar.nwp.domain.Watch;
+import es.carloscasalar.nwp.domain.fixtures.CharacterFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
