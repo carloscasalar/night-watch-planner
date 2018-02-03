@@ -1,9 +1,13 @@
 package es.carloscasalar.nwp.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import es.carloscasalar.nwp.score.CharacterListStrengthComparatorBySize;
-import es.carloscasalar.nwp.score.WatchDifficultyWeightComparator;
-import lombok.*;
+import es.carloscasalar.nwp.domain.score.CharacterListStrengthComparatorBySize;
+import es.carloscasalar.nwp.domain.score.WatchDifficultyWeightComparator;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Singular;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 

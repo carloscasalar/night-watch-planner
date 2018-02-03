@@ -1,4 +1,4 @@
-package es.carloscasalar.nwp.score;
+package es.carloscasalar.nwp.domain.score;
 
 import es.carloscasalar.nwp.domain.Character;
 import es.carloscasalar.nwp.domain.Plan;

@@ -17,7 +17,7 @@
 
     <scoreDirectorFactory>
         <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
-        <easyScoreCalculatorClass>es.carloscasalar.nwp.score.PlanScoreCalculator</easyScoreCalculatorClass>
+        <easyScoreCalculatorClass>es.carloscasalar.nwp.domain.score.PlanScoreCalculator</easyScoreCalculatorClass>
     </scoreDirectorFactory>
 
     <constructionHeuristic>
