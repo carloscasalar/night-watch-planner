@@ -2,7 +2,11 @@ package es.carloscasalar.nwp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
@@ -12,9 +16,16 @@ import org.optaplanner.core.api.score.buildin.hardmediumsoftlong.HardMediumSoftL
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Night watch plan
@@ -48,18 +59,13 @@ public class Plan {
     @JsonIgnore
     private PlanRequest planRequest;
 
-    @JsonProperty("originalPlan")
+    @JsonIgnore
     @NotNull
     @Valid
     @PlanningEntityCollectionProperty
     @Getter
     @Setter
     private List<Watch> watches;
-
-    @JsonProperty("watchSummary")
-    @NotNull
-    @Valid
-    private Set<CharacterWatchSummary> watchSummary;
 
     @Builder()
     public Plan(final PlanRequest planRequest) {
@@ -108,23 +114,31 @@ public class Plan {
     }
 
     private List<Watch> initWatches(final Set<Character> party) {
-        final List<Watch> watches = new ArrayList<>();
-        IntStream.range(0, numberOfWatchesToGenerate(party)).forEach(watchOrder ->
-                watches.add(new Watch())
-        );
+        List<Character> partyOrderedBySleepTime = party.stream()
+                .filter(Character::needsToSleep)
+                .sorted(Comparator.comparing(Character::getRequiredSleepTime))
+                .collect(Collectors.toList());
+
+        Character lessSleeperCharacter = partyOrderedBySleepTime.get(0);
+        Character mostSleepTimeCharacter = partyOrderedBySleepTime.get(partyOrderedBySleepTime.size() - 1);
+
+        List<Watch> watches = new ArrayList<>();
+        watches.addAll(generateWatches(mostSleepTimeCharacter, lessSleeperCharacter.getRequiredSleepTime()));
+        watches.addAll(generateWatches(lessSleeperCharacter, mostSleepTimeCharacter.getRequiredSleepTime()));
+
         return watches;
     }
 
-    private int numberOfWatchesToGenerate(Set<Character> party) {
-        List<Integer> sleepTimes = party.stream()
-                .map(Character::getRequiredSleepTime)
-                .sorted(Integer::compareTo)
+    private List<Watch> generateWatches(Character watchfulCharacter, Integer hoursOfWatch) {
+        int numberOfWatchesToGenerate = Math.max(1, hoursOfWatch / ONE_HOUR);
+        return Stream
+                .generate(() ->
+                        Watch.builder()
+                                .watchfulCharacter(watchfulCharacter)
+                                .length(ONE_HOUR)
+                                .build())
+                .limit(numberOfWatchesToGenerate)
                 .collect(Collectors.toList());
-
-        int minRequiredSleepingHours = sleepTimes.get(0) / ONE_HOUR;
-        int maxRequiredSleepingHours = sleepTimes.get(sleepTimes.size() - 1) / ONE_HOUR;
-
-        return minRequiredSleepingHours + maxRequiredSleepingHours;
     }
 
     @JsonProperty("compacted")

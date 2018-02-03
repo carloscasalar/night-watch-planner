@@ -19,9 +19,9 @@ public class PlanController {
     private GeneratePlan generatePlan;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Plan> optimize(@RequestBody PlanRequest planRequest) {
+    public ResponseEntity<PartyNightWatchSummary> optimize(@RequestBody PlanRequest planRequest) {
         Plan plan = generatePlan.execute(planRequest);
-
-        return new ResponseEntity<Plan>(plan, HttpStatus.OK);
+        PartyNightWatchSummary partyNightWatchSummary = new PartyNightWatchSummary(plan);
+        return new ResponseEntity<>(partyNightWatchSummary, HttpStatus.OK);
     }
 }

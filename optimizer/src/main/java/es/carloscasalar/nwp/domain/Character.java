@@ -28,7 +28,7 @@ public class Character {
     private final List<Sense> senses;
 
     @JsonProperty("requiredSleepTime")
-    @Min(1)
+    @Min(0)
     private final Integer requiredSleepTime;
 
     public Character copy() {
@@ -42,5 +42,9 @@ public class Character {
     public int overSleepTime(int totalTimeSleeping) {
         int excess = totalTimeSleeping - requiredSleepTime;
         return excess > 0 ? excess : 0;
+    }
+
+    public boolean needsToSleep() {
+        return requiredSleepTime > 0;
     }
 }

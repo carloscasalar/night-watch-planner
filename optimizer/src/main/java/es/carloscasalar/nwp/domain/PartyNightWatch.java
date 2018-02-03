@@ -3,6 +3,7 @@ package es.carloscasalar.nwp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class PartyNightWatch {
     private final Set<Character> party;
 
-    @JsonProperty
+    @Getter
     private final List<Watch> watches;
 
     public PartyNightWatch(final Set<Character> party, final List<Watch> watches) {
