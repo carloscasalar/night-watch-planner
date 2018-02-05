@@ -1,10 +1,10 @@
-package es.carloscasalar.nwp.model.score;
+package es.carloscasalar.nwp.domain.score;
 
-import es.carloscasalar.nwp.model.Character;
-import es.carloscasalar.nwp.model.Plan;
-import es.carloscasalar.nwp.model.PlanRequest;
-import es.carloscasalar.nwp.model.Watch;
-import es.carloscasalar.nwp.model.fixtures.CharacterFactory;
+import es.carloscasalar.nwp.domain.Character;
+import es.carloscasalar.nwp.domain.Plan;
+import es.carloscasalar.nwp.domain.PlanRequest;
+import es.carloscasalar.nwp.domain.Watch;
+import es.carloscasalar.nwp.domain.fixtures.CharacterFactory;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class WatchDifficultyWeightFactoryTest {
 
         PlanRequest planRequest = PlanRequest
                 .builder()
-                .maxWatches(8)
+                .maxTotalTimeSpent(8*60)
                 .party(characters)
                 .build();
 

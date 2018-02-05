@@ -8,7 +8,7 @@ Sample Plan Request with this body:
 ```json
 {
 	"lengthOfWatch": 60,
-	"maxWatches": 8,
+	"maxTotalTimeSpent": 720,
 	"party": [
 		{
 			"name": "Gandalf",
@@ -41,7 +41,7 @@ curl --request POST \
   --header 'content-type: application/json' \
   --data '{
 	"lengthOfWatch": 60,
-	"maxWatches": 8,
+	"maxTotalTimeSpent": 720,
 	"party": [
 		{
 			"name": "Gandalf",
@@ -72,7 +72,9 @@ Optimizer follow this rules in order to find the best night watch plan:
   * Hard rules (for a plan to be feasible):
     * Plan has no empty watches.
     * There is no lazy characters.
+    * Total time spent should be less than maximum in specified in plan request.
   * Medium rules (very nice to have):
     * No solo watches.
+    * No oversleeping time.
   * Soft rules (nice to have):
     * No overloaded watches (more than two characters in the same watch).

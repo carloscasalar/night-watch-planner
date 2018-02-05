@@ -1,4 +1,4 @@
-package es.carloscasalar.nwp.model;
+package es.carloscasalar.nwp.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -18,23 +18,10 @@ import java.util.Set;
 @Data
 @Builder
 public class PlanRequest {
-    @JsonProperty("lengthOfWatch")
+    @JsonProperty("maxTotalTimeSpent")
     @NotNull
-    @Min(1)
-    private Integer lengthOfWatch;
-
-    @JsonProperty("maxWatches")
-    @NotNull
-    @Min(1)
-    private Integer maxWatches;
-
-    @JsonProperty("firstNightWatch")
-    @Min(1)
-    private Integer firstNightWatch;
-
-    @JsonProperty("lastNightWatch")
-    @Min(1)
-    private Integer lastNightWatch;
+    @Min(60)
+    private Integer maxTotalTimeSpent;
 
     @JsonProperty("party")
     @NotNull

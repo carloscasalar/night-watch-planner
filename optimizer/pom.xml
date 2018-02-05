@@ -5,7 +5,7 @@
 
 	<groupId>es.carloscasalar.night-watch-planner</groupId>
 	<artifactId>optimizer</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>Night Watch optimizer</name>

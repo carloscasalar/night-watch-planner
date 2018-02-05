@@ -1,7 +1,7 @@
 package es.carloscasalar.nwp.rest;
 
-import es.carloscasalar.nwp.model.Plan;
-import es.carloscasalar.nwp.model.PlanRequest;
+import es.carloscasalar.nwp.domain.Plan;
+import es.carloscasalar.nwp.domain.PlanRequest;
 import es.carloscasalar.nwp.usecase.GeneratePlan;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,9 +19,9 @@ public class PlanController {
     private GeneratePlan generatePlan;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Plan> optimize(@RequestBody PlanRequest planRequest) {
+    public ResponseEntity<PartyNightWatchSummary> optimize(@RequestBody PlanRequest planRequest) {
         Plan plan = generatePlan.execute(planRequest);
-
-        return new ResponseEntity<Plan>(plan, HttpStatus.OK);
+        PartyNightWatchSummary partyNightWatchSummary = new PartyNightWatchSummary(plan);
+        return new ResponseEntity<>(partyNightWatchSummary, HttpStatus.OK);
     }
 }

@@ -1,6 +1,6 @@
-package es.carloscasalar.nwp.model.score;
+package es.carloscasalar.nwp.domain.score;
 
-import es.carloscasalar.nwp.model.Character;
+import es.carloscasalar.nwp.domain.Character;
 
 import java.util.Comparator;
 import java.util.List;

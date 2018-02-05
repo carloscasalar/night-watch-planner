@@ -1,7 +1,7 @@
 package es.carloscasalar.nwp.usecase;
 
-import es.carloscasalar.nwp.model.Plan;
-import es.carloscasalar.nwp.model.PlanRequest;
+import es.carloscasalar.nwp.domain.Plan;
+import es.carloscasalar.nwp.domain.PlanRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.optaplanner.core.api.solver.Solver;

@@ -3,7 +3,7 @@ swagger: '2.0'
 info:
   title: Night Watch Planner API
   description: Planner to optimize Night Watchs in RPGs
-  version: "1.0.0"
+  version: "0.0.3"
 host: localhost:3000
 schemes:
   - http
@@ -13,9 +13,9 @@ produces:
 paths:
   /optimize:
     post:
-      summary: Rewatches an optimized nigth watch plan for the provided characters.
-      description: Rewatches an optimized nigth watch plan for the provided characters.
-      operationId: getOptimizedPlan
+      summary: Proposes a night watch plan for a party of adventurers.
+      description: Proposes a night watch plan for a party of adventurers.
+      operationId: generatePlan
       parameters:
         - name: planRequest
           in: body
@@ -28,10 +28,10 @@ paths:
         - application/json
       responses:
         200:
-          description: Plan generated
+          description: Night watches proposal for the party
           schema:
             $ref: '#/definitions/Plan'
-        403:
+        400:
           description: Bad request
           schema:
             properties:
@@ -64,7 +64,7 @@ definitions:
           Time that character spend sleeping in minutes.
           By default it is 8h (480 minutes)
         type: integer
-        minimum: 1
+        minimum: 0
         default: 480
     required:
       - name
@@ -80,36 +80,15 @@ definitions:
   PlanRequest:
     description: Body of a plan request.
     properties:
-      lengthOfWatch:
-        description: Lenth of a watch in minutes.
+      maxTotalTimeSpent:
+        description: Maximum total time spent in minutes.
         type: integer
-        minimum: 1
-        default: 60
-      maxWatches:
-        description: Maximum watches in which night watch divides.
-        type: integer
-        minimum: 1
-        default: 8
-      firstNightWatch:
-        description: |
-          First watch that happens in dark condition.
-          The number of the first watch is one (not zero).
-          By default all watches happen in dark condition.
-        type: integer
-        default: 1
-        minimum: 1
-      lastNightWatch:
-        description: |
-          Last watch that happens in dark condition.
-          The number of the first watch is one (not zero).
-          By default all watches after the first in dark condition happen also in dark condition.
-        type: integer
-        minimum: 1
+        minimum: 60
+        default: 720
       party:
         $ref: '#/definitions/Party'
     required:
-      - lengthOfWatch
-      - maxWatches
+      - maxTotalTimeSpent
       - party
 
   Watch:
@@ -127,26 +106,28 @@ definitions:
         minItems: 1
         items:
           type: string
+      length:
+        description: Length of the watch in minutes
+        type: integer
     required:
       - sleepingCharacters
       - watchfulCharacters
+      - length
 
-  CharacterWatchSummary:
-    description: Watch summary of a character
+  Score:
+    description: Score of a night watch proposal. A perfect soluction is one with 0 hard, 0 medium and 0 soft scores
     properties:
-      characterName:
-        description: Name of the character
-        type: string
-      sleepingTime:
-        description: Acumulated speeping time (in minutes) along the night
+      initScore:
         type: integer
-      maxConsecutiveSleepingTime:
-        description: Maximum uninterrupted interval of time sleeping during the night
+      hardScore:
         type: integer
-    required:
-      - character
-      - sleepingTime
-      - maxConsecutiveSleepingTime
+      mediumScore:
+        type: integer
+      softScore:
+        type: integer
+      feasible:
+        description: If solution is feasible (has 0 hard score)
+        type: boolean
 
   Plan:
     description: Night watch plan
@@ -155,10 +136,11 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Watch'
-      watchSummary:
-        description: Summary of the characters watch
-        type: array
-        items:
-          $ref: '#/definitions/CharacterWatchSummary'
+      totalTime:
+        type: integer
+      score:
+         $ref: '#/definitions/Score'
     required:
       - watches
+      - totalTime
+      - score
