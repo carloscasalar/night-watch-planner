@@ -1,4 +1,4 @@
-# Night Watch Planner v0.0.2
+# Night Watch Planner v0.0.3
 
 Just a Night watch planner optimizer for use in RPGs like _[Pathfinder](http://paizo.com/pathfinder)_.
 
