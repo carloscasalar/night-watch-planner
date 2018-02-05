@@ -7,8 +7,6 @@ import es.carloscasalar.nwp.domain.Watch;
 import es.carloscasalar.nwp.domain.fixtures.CharacterFactory;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.optaplanner.core.api.score.Score;
 
 import java.util.Arrays;
@@ -18,11 +16,9 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
 public class PlanScoreCalculatorTest {
 
     private static final Integer HALF_HOUR = 30;
-    private static final Integer ONE_HOUR = 60;
     private static final Integer TWO_HOURS = 60 * 2;
     private static final Integer FOUR_HOURS = 60 * 4;
     private static final Integer EIGHT_HOURS = 60 * 8;
@@ -272,6 +268,7 @@ public class PlanScoreCalculatorTest {
 
         assertEquals("score should not be feasible by 1 half hours (30 min of excess)", "-1hard", score.toShortString());
     }
+
     @Test
     public void a_plan_with_an_empty_Watch_should_not_be_feasible() {
         Watch emptyWatch = new Watch();

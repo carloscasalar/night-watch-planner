@@ -19,14 +19,14 @@ public class WatchDifficultyWeightComparatorTest {
     private CharacterFactory characterFactory;
     private WatchDifficultyWeightComparator comparator;
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Before
     public void init() {
         characterFactory = new CharacterFactory();
         comparator = new WatchDifficultyWeightComparator();
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void comparisons_between_empty_watches_should_not_fail() {
