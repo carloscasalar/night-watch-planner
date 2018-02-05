@@ -75,5 +75,6 @@ Optimizer follow this rules in order to find the best night watch plan:
     * Total time spent should be less than maximum in specified in plan request.
   * Medium rules (very nice to have):
     * No solo watches.
+    * No oversleeping time.
   * Soft rules (nice to have):
     * No overloaded watches (more than two characters in the same watch).
