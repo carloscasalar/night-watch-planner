@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import logo from './logo.svg';
+import logo from '../public/logo.svg';
 import './App.less';
 
 const App = () => (

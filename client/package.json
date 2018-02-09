@@ -2,8 +2,8 @@
   "name": "night-watch-planner",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development parcel index.html ",
-    "build": "cross-env NODE_ENV=production parcel build index.html --no-minify --public-url /"
+    "start": "cross-env NODE_ENV=development parcel public/index.html ",
+    "build": "cross-env NODE_ENV=production parcel build public/index.html --no-minify --public-url /"
   },
   "dependencies": {
     "autoprefixer": "^7.2.1",
@@ -29,5 +29,8 @@
   "devDependencies": {
     "cross-env": "^5.1.1",
     "less": "^2.7.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   }
 }
