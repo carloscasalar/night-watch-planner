@@ -1,18 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {Component} from 'react';
 import logo from '../public/logo.svg';
 import './App.less';
 
-const App = () => (
-  <div className="App">
-    <img className="App-Logo" src={logo} alt="React Logo" />
-    <h1 className="App-Title">Hello Parcel x React</h1>
-  </div>
-);
+class App extends Component {
+    render() {
+        return (
+            <div className="App">
+                <img className="App-Logo" src={logo} alt="React Logo"/>
+                <h1 className="App-Title">Night Watch Planner</h1>
+            </div>
+        );
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// Hot Module Replacement
-if (module.hot) {
-  module.hot.accept();
+    }
 }
+
+export default App;
