@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
-import logo from '../public/logo.svg';
 import './App.less';
+import Layout from './components/Layout/Layout';
+import PartyBuilder from './containers/PartyBuilder/PartyBuilder';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <img className="App-Logo" src={logo} alt="React Logo"/>
-                <h1 className="App-Title">Night Watch Planner</h1>
+                <Layout >
+                    <PartyBuilder/>
+                </Layout>
             </div>
         );
 
