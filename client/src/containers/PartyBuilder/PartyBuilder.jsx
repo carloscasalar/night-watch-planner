@@ -3,20 +3,26 @@ import './PartyBuilder.less';
 import Party from '../../components/Party/Party';
 import NightWatchConfig from '../../components/NightWatchConfig/NightWatchConfig';
 
-class PartyBuilder extends Component{
+class PartyBuilder extends Component {
     state = {
-        party: [
-            {name: 'Gimli', requiredSleepTime: 480},
-            {name: 'Boromir', requiredSleepTime: 480},
-            {name: 'Legolas', requiredSleepTime: 240}
-        ]
+        party: [],
+        maxTotalTimeSpent: 720
     };
 
-    render(){
+    addTimeToMaxTotalTimeSpentHandler = (timeToAdd) => {
+        this.setState((previousState) => ({
+            maxTotalTimeSpent: previousState.maxTotalTimeSpent + timeToAdd
+        }));
+    };
+
+    render() {
         return (
             <div className="PartyBuilder">
                 <Party characters={this.state.party}/>
-                <NightWatchConfig />
+                <NightWatchConfig
+                    maxTotalTimeSpent={this.state.maxTotalTimeSpent}
+                    addTime={(timeToAdd) => this.addTimeToMaxTotalTimeSpentHandler(timeToAdd)}
+                />
                 <button>Generate Watches</button>
             </div>
         );

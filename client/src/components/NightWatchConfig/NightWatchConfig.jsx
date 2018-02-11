@@ -6,7 +6,7 @@ import TimeControl from '../TimeControl/TimeControl';
 const nightWatchConfig = (props) => (
     <div className="NightWatchConfig">
         Max total time spent in watches:
-        <TimeControl time={720} />
+        <TimeControl time={props.maxTotalTimeSpent} addTime={props.addTime}/>
     </div>
 );
 
