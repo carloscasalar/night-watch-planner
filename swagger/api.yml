@@ -3,7 +3,7 @@ swagger: '2.0'
 info:
   title: Night Watch Planner API
   description: Planner to optimize Night Watchs in RPGs
-  version: "0.0.3"
+  version: "0.1.0-SNAPSHOT"
 host: localhost:3000
 schemes:
   - http
