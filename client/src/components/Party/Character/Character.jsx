@@ -1,15 +1,16 @@
 import React from 'react';
 import './Character.less';
 
+import TimeControl from '../../TimeControl/TimeControl';
+
 const character = (props) => {
-    const hoursToSleep = (props.character.requiredSleepTime / 60);
     return (
         <div className="Character">
             <div className="name">{props.character.name}</div>
-            <div>{hoursToSleep.toFixed(1)} h</div>
+            <TimeControl time={props.character.requiredSleepTime} />
             <div><button>Remove</button></div>
         </div>
     );
-}
+};
 
 export default character;

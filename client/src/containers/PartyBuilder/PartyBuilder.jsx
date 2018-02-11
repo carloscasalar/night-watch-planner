@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './PartyBuilder.less';
 import Party from '../../components/Party/Party';
-import PartyControls from '../../components/PartyControls/PartyControls';
+import NightWatchConfig from '../../components/NightWatchConfig/NightWatchConfig';
 
 class PartyBuilder extends Component{
     state = {
@@ -16,7 +16,8 @@ class PartyBuilder extends Component{
         return (
             <div className="PartyBuilder">
                 <Party characters={this.state.party}/>
-                <PartyControls/>
+                <NightWatchConfig />
+                <button>Generate Watches</button>
             </div>
         );
     }

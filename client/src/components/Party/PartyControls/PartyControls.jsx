@@ -3,8 +3,7 @@ import './PartyControls.less';
 
 const partyControls = (props) => (
     <div className="PartyControls">
-        <button>Add Character</button>
-        <button>Generate Plan</button>
+        <button className="addCharacter" title="Add character">+</button>
     </div>
 );
 
