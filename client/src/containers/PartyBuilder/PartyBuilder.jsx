@@ -9,6 +9,24 @@ class PartyBuilder extends Component {
         maxTotalTimeSpent: 720
     };
 
+    addCharacterHandler = (character) => {
+        this.setState((previousState) => ({
+            party: [...previousState.party, character]
+        }));
+    };
+
+    addSleepTimeToCharacterHandler = (characterName, time) => {
+        this.setState((previousState) => {
+            const party = [...previousState.party];
+            const characterIndex = party.findIndex(({name}) => name === characterName);
+            const character = {...party[characterIndex]};
+
+            character.requiredSleepTime = character.requiredSleepTime + time;
+            party[characterIndex] = character;
+            return {party};
+        });
+    };
+
     addTimeToMaxTotalTimeSpentHandler = (timeToAdd) => {
         this.setState((previousState) => ({
             maxTotalTimeSpent: previousState.maxTotalTimeSpent + timeToAdd
@@ -18,10 +36,14 @@ class PartyBuilder extends Component {
     render() {
         return (
             <div className="PartyBuilder">
-                <Party characters={this.state.party}/>
+                <Party
+                    characters={this.state.party}
+                    addCharacter={this.addCharacterHandler}
+                    addSleepTimeToCharacter={this.addSleepTimeToCharacterHandler}
+                />
                 <NightWatchConfig
                     maxTotalTimeSpent={this.state.maxTotalTimeSpent}
-                    addTime={(timeToAdd) => this.addTimeToMaxTotalTimeSpentHandler(timeToAdd)}
+                    addTime={this.addTimeToMaxTotalTimeSpentHandler}
                 />
                 <button>Generate Watches</button>
             </div>
