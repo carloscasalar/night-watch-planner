@@ -16,7 +16,10 @@ const newCharacter = () => {
 
 const partyControls = (props) => (
     <div className="PartyControls">
-        <button className="addCharacter" title="Add character" onClick={() => props.addCharacter(newCharacter())}>+</button>
+        <button className="addCharacter"
+                title="Add character"
+                onClick={() => props.addCharacter(newCharacter())}
+        >+</button>
     </div>
 );
 

@@ -11,6 +11,7 @@ const party = (props) => (
                 key={character.name}
                 character={character}
                 addSleepTime={props.addSleepTimeToCharacter}
+                updateName={(character, newName) => props.updateName(character, newName)}
             />
         )}
 

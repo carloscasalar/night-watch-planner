@@ -7,7 +7,10 @@ import TimeControl from '../../TimeControl/TimeControl';
 const character = (props) => {
     return (
         <div className="Character">
-            <EditableName nameText={props.character.name} />
+            <EditableName
+                nameText={props.character.name}
+                updateName={(newName) => props.updateName(props.character, newName)}
+            />
             <TimeControl
                 time={props.character.requiredSleepTime}
                 addTime={(time) => props.addSleepTime(props.character.name, time)}

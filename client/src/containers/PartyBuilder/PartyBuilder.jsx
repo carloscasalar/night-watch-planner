@@ -27,6 +27,18 @@ class PartyBuilder extends Component {
         });
     };
 
+    updateNameHandler = ({name: characterName}, newName) => {
+        this.setState((previousState) => {
+            const party = [...previousState.party];
+            const characterIndex = party.findIndex(({name}) => name === characterName);
+            const character = {...party[characterIndex]};
+
+            character.name = newName;
+            party[characterIndex] = character;
+            return {party};
+        });
+    };
+
     addTimeToMaxTotalTimeSpentHandler = (timeToAdd) => {
         this.setState((previousState) => ({
             maxTotalTimeSpent: previousState.maxTotalTimeSpent + timeToAdd
@@ -39,6 +51,7 @@ class PartyBuilder extends Component {
                 <Party
                     characters={this.state.party}
                     addCharacter={this.addCharacterHandler}
+                    updateName={this.updateNameHandler}
                     addSleepTimeToCharacter={this.addSleepTimeToCharacterHandler}
                 />
                 <NightWatchConfig
