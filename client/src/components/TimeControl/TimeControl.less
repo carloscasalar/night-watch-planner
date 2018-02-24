@@ -1,8 +1,9 @@
-.TimeControl {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+@import "../constants";
 
+.TimeControl {
   button{
-    margin-left: 2px;
+    margin-left: 4px;
+    width: @single-character-buttons-width;
+    max-height: @single-character-buttons-height;
   }
 }

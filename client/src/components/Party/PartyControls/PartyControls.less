@@ -1,11 +1,14 @@
+@import "../../constants";
+
 .PartyControls{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: @single-character-buttons-width 1fr;
   /*grid-auto-columns: 1fr 1fr 1fr;*/
 
   grid-gap: 5px;
 
   .addCharacter{
+    max-height: @single-character-buttons-height;
     border-radius: 10px;
     border: 5px black;
     background-color: gray;
