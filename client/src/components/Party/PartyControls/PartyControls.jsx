@@ -1,26 +1,37 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './PartyControls.less';
 
-import {species} from 'fantastical';
+class PartyControls extends Component {
 
-//TODO move this to a character factory
-let num = 0;
-const newCharacter = () => {
-    num++;
-    const characterName = species.human();
-    const place = species.angel('female');
-    const name = `${characterName} ${place}`;
-    const requiredSleepTime = 360;
-    return {name, requiredSleepTime};
-};
+    state = {
+        name: ''
+    };
 
-const partyControls = (props) => (
-    <div className="PartyControls">
-        <button className="addCharacter"
-                title="Add character"
-                onClick={() => props.addCharacter(newCharacter())}
-        >+</button>
-    </div>
-);
+    cleanName = () => this.setState({name: ''});
 
-export default partyControls;
+    setName = (name) => this.setState({name});
+
+    render() {
+        return (
+            <div className="PartyControls">
+                <label htmlFor="newCharacterName">Name:</label>
+                <input id="newCharacterName"
+                       type="text"
+                       value={this.state.name}
+                       onChange={(event) => this.setName(event.target.value)}
+                       autoCapitalize="true"
+                />
+                <button className="addCharacter"
+                        title="Add character"
+                        onClick={() => {
+                            this.props.addCharacter(this.state.name);
+                            this.cleanName();
+                        }}
+                >+
+                </button>
+            </div>
+        );
+    }
+}
+
+export default PartyControls;

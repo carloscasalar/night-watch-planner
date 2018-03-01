@@ -3,15 +3,22 @@ import './PartyBuilder.less';
 import Party from '../../components/Party/Party';
 import NightWatchConfig from '../../components/NightWatchConfig/NightWatchConfig';
 
+const DEFAULT_SLEEP_TIME = 6 * 60;
+
 class PartyBuilder extends Component {
     state = {
         party: [],
         maxTotalTimeSpent: 720
     };
 
-    addCharacterHandler = (character) => {
+    newCharacter = (name) => ({
+        name,
+        requiredSleepTime: DEFAULT_SLEEP_TIME
+    });
+
+    addCharacterHandler = (characterName) => {
         this.setState((previousState) => ({
-            party: [...previousState.party, character]
+            party: [...previousState.party, this.newCharacter(characterName)]
         }));
     };
 

@@ -2,10 +2,13 @@
 
 .PartyControls{
   display: grid;
-  grid-template-columns: @single-character-buttons-width 1fr;
-  /*grid-auto-columns: 1fr 1fr 1fr;*/
+  grid-template-columns: 1fr 3fr @single-character-buttons-width;
 
   grid-gap: 5px;
+
+  label {
+    text-align: left;
+  }
 
   .addCharacter{
     max-height: @single-character-buttons-height;
