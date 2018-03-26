@@ -28,6 +28,13 @@ class PartyBuilder extends Component {
         });
     };
 
+    removeCharacterHandler = (character) => {
+        this.setState((previousState) => {
+            const party = previousState.party.filter(({id}) => id !== character.id);
+            return {party};
+        });
+    };
+
     addSleepTimeToCharacterHandler = (characterName, time) => {
         this.setState((previousState) => {
             const party = [...previousState.party];
@@ -64,6 +71,7 @@ class PartyBuilder extends Component {
                 <Party
                     characters={this.state.party}
                     addCharacter={this.addCharacterHandler}
+                    removeCharacter={this.removeCharacterHandler}
                     updateName={this.updateNameHandler}
                     addSleepTimeToCharacter={this.addSleepTimeToCharacterHandler}
                 />

@@ -23,6 +23,7 @@ const party = (props) => {
                     character={character}
                     addSleepTime={props.addSleepTimeToCharacter}
                     updateName={(character, newName) => props.updateName(character, newName)}
+                    removeCharacter={(character) => props.removeCharacter(character)}
                 />
             )}
 
