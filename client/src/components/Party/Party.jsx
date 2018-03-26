@@ -19,7 +19,7 @@ const party = (props) => {
             {props.characters.length===0? noCharacterMessage : null }
             {props.characters.map(character =>
                 <Character
-                    key={character.name}
+                    key={character.id}
                     character={character}
                     addSleepTime={props.addSleepTimeToCharacter}
                     updateName={(character, newName) => props.updateName(character, newName)}

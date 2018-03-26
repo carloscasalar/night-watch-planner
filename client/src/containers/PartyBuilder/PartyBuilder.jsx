@@ -8,18 +8,24 @@ const DEFAULT_SLEEP_TIME = 6 * 60;
 class PartyBuilder extends Component {
     state = {
         party: [],
-        maxTotalTimeSpent: 720
+        maxTotalTimeSpent: 720,
+        characterCounter: 0
     };
 
-    newCharacter = (name) => ({
+    newCharacter = (name, id) => ({
+        id,
         name,
         requiredSleepTime: DEFAULT_SLEEP_TIME
     });
 
     addCharacterHandler = (characterName) => {
-        this.setState((previousState) => ({
-            party: [...previousState.party, this.newCharacter(characterName)]
-        }));
+        this.setState((previousState) => {
+            const characterCounter = previousState.characterCounter + 1;
+            return {
+                party: [...previousState.party, this.newCharacter(characterName, characterCounter)],
+                characterCounter
+            }
+        });
     };
 
     addSleepTimeToCharacterHandler = (characterName, time) => {
@@ -34,10 +40,10 @@ class PartyBuilder extends Component {
         });
     };
 
-    updateNameHandler = ({name: characterName}, newName) => {
+    updateNameHandler = ({id: characterId}, newName) => {
         this.setState((previousState) => {
             const party = [...previousState.party];
-            const characterIndex = party.findIndex(({name}) => name === characterName);
+            const characterIndex = party.findIndex(({id}) => id === characterId);
             const character = {...party[characterIndex]};
 
             character.name = newName;
