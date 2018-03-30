@@ -30,6 +30,6 @@ const party = (props) => {
             <PartyControls addCharacter={props.addCharacter}/>
         </div>
     );
-}
+};
 
 export default party;
