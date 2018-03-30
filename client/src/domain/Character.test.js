@@ -10,13 +10,13 @@ test('cannot create a character without id', () => {
     expect(() => new Character(characterWithNoId)).toThrow(IdRequiredException);
 });
 
-test('should build be able to build a character providing only an id', () => {
+test('should be able to build a character providing only an id', () => {
     const character = new Character({id: CHARACTER_ID});
 
     expect(character.id).toBe(CHARACTER_ID);
 });
 
-test('constructed character should have the provided name', () => {
+test('new character should have the provided name', () => {
     const id = CHARACTER_ID;
     const name = 'Gimli';
     const character = new Character({id, name});
@@ -24,7 +24,7 @@ test('constructed character should have the provided name', () => {
     expect(character.name).toBe(name);
 });
 
-test('constructed character should have the provided requiredSleepTime', () => {
+test('new character should have the provided requiredSleepTime', () => {
     const id = CHARACTER_ID;
     const requiredSleepTime = EIGHT_HOURS_IN_MINUTES;
     const character = new Character({id, requiredSleepTime});
