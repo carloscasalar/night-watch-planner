@@ -6,7 +6,8 @@ const EIGHT_HOURS_IN_MINUTES = 8 * 60;
 const CHARACTER_ID = 3;
 
 test('cannot create a character without id', () => {
-    expect(() => new Character({name: 'Gandalf', requiredSleepTime: 400})).toThrow(IdRequiredException);
+    const characterWithNoId = {name: 'Gandalf', requiredSleepTime: 400};
+    expect(() => new Character(characterWithNoId)).toThrow(IdRequiredException);
 });
 
 test('should build be able to build a character providing only an id', () => {
