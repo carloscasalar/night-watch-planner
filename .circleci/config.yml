@@ -31,7 +31,7 @@ jobs:
       - restore_cache:
           key: client-dependency-cache-{{ checksum "client/package.json" }}
 
-      - run: cd ~/night-watch-planner/client && npm test
+      - run: cd ~/night-watch-planner/client && npm test:ci
 
   build-and-test-backend:
 
