@@ -1,5 +1,8 @@
+const NO_CHARACTERS = [];
+const EMPTY_PARTY = {characters: NO_CHARACTERS};
+
 export default class Party {
-    constructor({characters = []}){
+    constructor({characters = NO_CHARACTERS} = EMPTY_PARTY){
         this._characters = characters;
     }
 
@@ -8,6 +11,9 @@ export default class Party {
     }
 
     addCharacter = (character) => {
+        if(this._characters.some(({id}) => id === character.id)){
+            return this;
+        }
         const characters = [...this._characters, character];
         return new Party({characters});
     };
