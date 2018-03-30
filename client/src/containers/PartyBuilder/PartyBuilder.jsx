@@ -4,6 +4,7 @@ import Party from '../../components/Party/Party';
 import NightWatchConfig from '../../components/NightWatchConfig/NightWatchConfig';
 
 const DEFAULT_SLEEP_TIME = 6 * 60;
+const MIN_TIME = 0;
 
 class PartyBuilder extends Component {
     state = {
@@ -41,7 +42,7 @@ class PartyBuilder extends Component {
             const characterIndex = party.findIndex(({name}) => name === characterName);
             const character = {...party[characterIndex]};
 
-            character.requiredSleepTime = character.requiredSleepTime + time;
+            character.requiredSleepTime = Math.max(MIN_TIME, character.requiredSleepTime + time);
             party[characterIndex] = character;
             return {party};
         });
@@ -61,7 +62,7 @@ class PartyBuilder extends Component {
 
     addTimeToMaxTotalTimeSpentHandler = (timeToAdd) => {
         this.setState((previousState) => ({
-            maxTotalTimeSpent: previousState.maxTotalTimeSpent + timeToAdd
+            maxTotalTimeSpent: Math.max(MIN_TIME, previousState.maxTotalTimeSpent + timeToAdd)
         }));
     };
 
