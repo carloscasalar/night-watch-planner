@@ -1,9 +1,17 @@
 import Character from './Character';
 import IdRequiredException from './IdRequiredException';
 
-const SIX_HOURS_IN_MINUTES = 60 * 6;
+const TWO_HOURS_IN_MINUTES = 2 * 60;
+const SIX_HOURS_IN_MINUTES = 6 * 60;
 const EIGHT_HOURS_IN_MINUTES = 8 * 60;
+const ZERO_MINUTES = 0;
 const CHARACTER_ID = 3;
+
+const characterThatRequiresSixHoursToSleep = () => {
+    const id = CHARACTER_ID;
+    const name = 'Kitiara';
+    return new Character({id, name, requiredSleepTime: SIX_HOURS_IN_MINUTES});
+};
 
 test('cannot create a character without id', () => {
     const characterWithNoId = {name: 'Gandalf', requiredSleepTime: 400};
@@ -38,16 +46,29 @@ test('by default, a new character should require 6 hours (360 minutes) to sleep'
     expect(character.requiredSleepTime).toBe(SIX_HOURS_IN_MINUTES);
 });
 
-test('copy should return a character that is equal but not the same', () => {
-    const id = CHARACTER_ID;
-    const name = 'Tanis';
-    const requiredSleepTime = EIGHT_HOURS_IN_MINUTES;
+test('copyWithRequiredSleepTimeAdded should return a copy of the character with time added', () => {
+    const originalCharacter = characterThatRequiresSixHoursToSleep();
 
-    const originalCharacter = new Character({id, name, requiredSleepTime});
-    const copy = originalCharacter.copy();
+    const characterWithTwoMoreHoursRequiredToSleep = originalCharacter.withRequiredSleepTimeAdded(TWO_HOURS_IN_MINUTES);
 
-    expect(copy.id).toEqual(originalCharacter.id);
-    expect(copy.name).toEqual(originalCharacter.name);
-    expect(copy.requiredSleepTime).toEqual(originalCharacter.requiredSleepTime);
-    expect(copy).not.toBe(originalCharacter);
+    expect(characterWithTwoMoreHoursRequiredToSleep.requiredSleepTime).toBe(EIGHT_HOURS_IN_MINUTES);
+    expect(originalCharacter).not.toBe(characterWithTwoMoreHoursRequiredToSleep);
+});
+
+test('copyWithRequiredSleepTimeAdded should never fall below 0', () => {
+    const originalCharacter = characterThatRequiresSixHoursToSleep();
+
+    const characterThatDoesNotNeedToSleep = originalCharacter.withRequiredSleepTimeAdded(-EIGHT_HOURS_IN_MINUTES);
+
+    expect(characterThatDoesNotNeedToSleep.requiredSleepTime).toBe(ZERO_MINUTES);
+    expect(originalCharacter).not.toBe(characterThatDoesNotNeedToSleep);
+});
+
+test('copyWithName should return a copy of the character with name changed', () => {
+    const originalCharacter = characterThatRequiresSixHoursToSleep();
+    const otherName = 'Other Name';
+    const changedNameToKronos = originalCharacter.withName(otherName);
+
+    expect(changedNameToKronos.name).toBe(otherName);
+    expect(originalCharacter).not.toBe(changedNameToKronos);
 });

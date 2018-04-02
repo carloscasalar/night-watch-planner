@@ -10,7 +10,7 @@ export default class Party {
         return this._characters;
     }
 
-    addCharacter = (character) => {
+    addCharacter(character) {
         if(this._characters.some(({id}) => id === character.id)){
             return this;
         }
@@ -18,7 +18,7 @@ export default class Party {
         return new Party({characters});
     };
 
-    removeCharacter = (character) => {
+    removeCharacter(character) {
         const characters = this._characters.filter(({id}) => id !== character.id);
         return new Party({characters});
     }

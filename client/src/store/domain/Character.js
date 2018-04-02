@@ -2,6 +2,7 @@ import IdRequiredException from './IdRequiredException';
 
 const NO_ID = null;
 const DEFAULT_NAME = 'No name character';
+const MIN_TIME = 0;
 export const DEFAULT_REQUIRED_SLEEP_MINUTES = 6 * 60;
 
 export default class Character {
@@ -26,5 +27,16 @@ export default class Character {
         return this._requiredSleepTime;
     }
 
-    copy = () => new Character(this);
+    withRequiredSleepTimeAdded(time) {
+        const id = this.id;
+        const name = this.name;
+        const requiredSleepTime = Math.max(MIN_TIME, this.requiredSleepTime + time);
+        return new Character({id, name, requiredSleepTime});
+    };
+
+    withName(name) {
+        const id = this.id;
+        const requiredSleepTime = this.requiredSleepTime;
+        return new Character({id, name, requiredSleepTime});
+    };
 }
