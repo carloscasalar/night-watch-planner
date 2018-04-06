@@ -1,4 +1,4 @@
-import CharacterEntity from '../domain/CharacterEntity';
+import CharacterEntity from '../../domain/CharacterEntity';
 
 const addCharacter = (state, {name}) => {
     const id = state.characterCounter + 1;
