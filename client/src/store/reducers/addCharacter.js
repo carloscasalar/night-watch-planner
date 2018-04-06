@@ -1,8 +1,8 @@
-import Character from '../domain/Character';
+import CharacterEntity from '../domain/CharacterEntity';
 
 const addCharacter = (state, {name}) => {
     const id = state.characterCounter + 1;
-    const character = new Character({id, name});
+    const character = new CharacterEntity({id, name});
 
     return {
         ...state,

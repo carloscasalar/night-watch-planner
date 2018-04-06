@@ -1,7 +1,7 @@
 const NO_CHARACTERS = [];
 const EMPTY_PARTY = {characters: NO_CHARACTERS};
 
-export default class Party {
+export default class PartyEntity {
     constructor({characters = NO_CHARACTERS} = EMPTY_PARTY){
         this._characters = characters;
     }
@@ -15,11 +15,11 @@ export default class Party {
             return this;
         }
         const characters = [...this._characters, character];
-        return new Party({characters});
+        return new PartyEntity({characters});
     };
 
     removeCharacter(character) {
         const characters = this._characters.filter(({id}) => id !== character.id);
-        return new Party({characters});
+        return new PartyEntity({characters});
     }
 }
