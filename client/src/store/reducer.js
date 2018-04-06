@@ -1,4 +1,4 @@
-import * as actionTypes from './actions';
+import * as actionTypes from './actions/actions';
 import addCharacter from './reducers/addCharacter';
 import removeCharacter from './reducers/removeCharacter';
 import addRequiredSleepTimeToCharacter from './reducers/addRequiredSleepTimeToCharacter';
@@ -15,15 +15,15 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type){
-        case actionTypes.ADD_CHARACTER:
+        case actionTypes.CHARACTER_ADD:
             return addCharacter(state, action);
-        case actionTypes.REMOVE_CHARACTER:
+        case actionTypes.CHARACTER_REMOVE:
             return removeCharacter(state, action);
-        case actionTypes.ADD_SLEEP_TIME_TO_CHARACTER:
+        case actionTypes.CHARACTER_SLEEP_TIME_INCREASE:
             return addRequiredSleepTimeToCharacter(state, action);
-        case actionTypes.UPDATE_CHARACTER_NAME:
+        case actionTypes.CHARACTER_NAME_UPDATE:
             return updateCharacterName(state, action);
-        case actionTypes.ADD_TIME_TO_MAX_TOTAL_TIME_SPENT:
+        case actionTypes.MAX_TOTAL_TIME_SPENT_INCREASE:
             return addTimeToMaxTotalTimeSpent(state, action);
         default:
             return state;

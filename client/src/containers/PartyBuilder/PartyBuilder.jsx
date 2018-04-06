@@ -4,7 +4,11 @@ import './PartyBuilder.less';
 import Party from '../../components/Party/Party';
 import NightWatchConfig from '../../components/NightWatchConfig/NightWatchConfig';
 
-import * as actionTypes from '../../store/actions';
+import addCharacterAction from '../../store/actions/addCharacterAction';
+import removeCharacterAction from '../../store/actions/removeCharacterAction';
+import increaseCharacterSleepTimeAction from '../../store/actions/increaseCharacterSleepTimeAction';
+import updateCharacterNameAction from '../../store/actions/updateCharacterNameAction';
+import increaseMaxTotalTimeSpentAction from '../../store/actions/increaseMaxTotalTimeSpentAction';
 
 class PartyBuilder extends Component {
     render() {
@@ -30,28 +34,12 @@ class PartyBuilder extends Component {
 const mapStateToProps = state => ({...state});
 
 const mapDispatchToProps = dispatch => ({
-    onCharacterAdded: (name) => dispatch({
-        type: actionTypes.ADD_CHARACTER,
-        name
-    }),
-    onRemoveCharacter: (character) => dispatch({
-        type: actionTypes.REMOVE_CHARACTER,
-        character
-    }),
-    onSleepTimeToCharacterAdded: (characterName, time) => dispatch({
-        type: actionTypes.ADD_SLEEP_TIME_TO_CHARACTER,
-        characterName,
-        time
-    }),
-    onCharacterNameUpdated: (character, newName) => dispatch({
-        type: actionTypes.UPDATE_CHARACTER_NAME,
-        character,
-        newName
-    }),
-    onMaxTotalTimeSpentAdded: (time) => dispatch({
-        type: actionTypes.ADD_TIME_TO_MAX_TOTAL_TIME_SPENT,
-        time
-    })
+    onCharacterAdded: (name) => dispatch(addCharacterAction(name)),
+    onRemoveCharacter: (character) => dispatch(removeCharacterAction(character)),
+    onSleepTimeToCharacterAdded: (characterName, time) =>
+        dispatch(increaseCharacterSleepTimeAction(characterName, time)),
+    onCharacterNameUpdated: (character, newName) => dispatch(updateCharacterNameAction(character, newName)),
+    onMaxTotalTimeSpentAdded: (time) => dispatch(increaseMaxTotalTimeSpentAction(time))
 });
 
 const connectToStore = connect(mapStateToProps, mapDispatchToProps);
