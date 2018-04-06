@@ -1,9 +1,9 @@
 import * as actionTypes from './actions/actions';
 import addCharacter from './reducers/addCharacter';
 import removeCharacter from './reducers/removeCharacter';
-import addRequiredSleepTimeToCharacter from './reducers/addRequiredSleepTimeToCharacter';
+import increaseCharacterRequiredSleepTime from './reducers/increaseCharacterRequiredSleepTime';
 import updateCharacterName from './reducers/updateCharacterName';
-import addTimeToMaxTotalTimeSpent from "./reducers/addTimeToMaxTotalTimeSpent";
+import increaseMaxTotalTimeSpent from "./reducers/increaseMaxTotalTimeSpent";
 
 const TWELVE_HOURS_IN_MINUTES = 60 * 12;
 
@@ -20,11 +20,11 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CHARACTER_REMOVE:
             return removeCharacter(state, action);
         case actionTypes.CHARACTER_SLEEP_TIME_INCREASE:
-            return addRequiredSleepTimeToCharacter(state, action);
+            return increaseCharacterRequiredSleepTime(state, action);
         case actionTypes.CHARACTER_NAME_UPDATE:
             return updateCharacterName(state, action);
         case actionTypes.MAX_TOTAL_TIME_SPENT_INCREASE:
-            return addTimeToMaxTotalTimeSpent(state, action);
+            return increaseMaxTotalTimeSpent(state, action);
         default:
             return state;
     }

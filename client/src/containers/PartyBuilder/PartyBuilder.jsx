@@ -17,13 +17,13 @@ class PartyBuilder extends Component {
                 <Party
                     characters={this.props.party}
                     addCharacter={this.props.onCharacterAdded}
-                    removeCharacter={this.props.onRemoveCharacter}
+                    removeCharacter={this.props.onCharacterRemoved}
                     updateName={this.props.onCharacterNameUpdated}
-                    addSleepTimeToCharacter={this.props.onSleepTimeToCharacterAdded}
+                    addSleepTimeToCharacter={this.props.onCharacterSleepTimeIncreased}
                 />
                 <NightWatchConfig
                     maxTotalTimeSpent={this.props.maxTotalTimeSpent}
-                    addTime={this.props.onMaxTotalTimeSpentAdded}
+                    addTime={this.props.onMaxTotalTimeSpentIncreased}
                 />
                 <button>Generate Watches</button>
             </div>
@@ -35,11 +35,11 @@ const mapStateToProps = state => ({...state});
 
 const mapDispatchToProps = dispatch => ({
     onCharacterAdded: (name) => dispatch(addCharacterAction(name)),
-    onRemoveCharacter: (character) => dispatch(removeCharacterAction(character)),
-    onSleepTimeToCharacterAdded: (characterName, time) =>
+    onCharacterRemoved: (character) => dispatch(removeCharacterAction(character)),
+    onCharacterSleepTimeIncreased: (characterName, time) =>
         dispatch(increaseCharacterSleepTimeAction(characterName, time)),
     onCharacterNameUpdated: (character, newName) => dispatch(updateCharacterNameAction(character, newName)),
-    onMaxTotalTimeSpentAdded: (time) => dispatch(increaseMaxTotalTimeSpentAction(time))
+    onMaxTotalTimeSpentIncreased: (time) => dispatch(increaseMaxTotalTimeSpentAction(time))
 });
 
 const connectToStore = connect(mapStateToProps, mapDispatchToProps);

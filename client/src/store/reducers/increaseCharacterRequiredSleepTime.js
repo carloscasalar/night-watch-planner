@@ -1,4 +1,4 @@
-const addRequiredSleepTimeToCharacter = (state, {characterName, time}) => {
+const increaseCharacterRequiredSleepTime = (state, {characterName, time}) => {
     const party = [...state.party];
     const characterIndex = party.findIndex(({name}) => name === characterName);
     if(!characterIndex && characterIndex !==0){
@@ -12,5 +12,5 @@ const addRequiredSleepTimeToCharacter = (state, {characterName, time}) => {
     };
 };
 
-export default addRequiredSleepTimeToCharacter;
+export default increaseCharacterRequiredSleepTime;
 
