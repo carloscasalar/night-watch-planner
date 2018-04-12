@@ -2,16 +2,13 @@ import CharacterEntity from './CharacterEntity';
 import CharacterNotFoundException from './CharacterNotFoundException';
 
 const NO_CHARACTERS = [];
-const INITIAL_CHARACTER_COUNTER = 0;
 const EMPTY_PARTY = {
-    characterCounter: INITIAL_CHARACTER_COUNTER,
     characters: NO_CHARACTERS
 };
 
 export default class PartyEntity {
-    constructor({characters = NO_CHARACTERS, characterCounter = INITIAL_CHARACTER_COUNTER} = EMPTY_PARTY) {
+    constructor({characters = NO_CHARACTERS} = EMPTY_PARTY) {
         this.characters = characters;
-        this.characterCounter = characterCounter;
     }
 
     get isEmpty(){
@@ -55,7 +52,6 @@ export default class PartyEntity {
     }
 
     nextCharacterId() {
-        this.characterCounter = this.characterCounter + 1;
-        return this.characterCounter;
+        return this.characters.reduce((maxId, {id}) => Math.max(maxId, id), 0) + 1;
     }
 }
