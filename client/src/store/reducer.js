@@ -3,18 +3,18 @@ import addCharacter from './reducers/addCharacter';
 import removeCharacter from './reducers/removeCharacter';
 import increaseCharacterRequiredSleepTime from './reducers/increaseCharacterRequiredSleepTime';
 import updateCharacterName from './reducers/updateCharacterName';
-import increaseMaxTotalTimeSpent from "./reducers/increaseMaxTotalTimeSpent";
+import increaseMaxTotalTimeSpent from './reducers/increaseMaxTotalTimeSpent';
+import PartyEntity from '../domain/PartyEntity';
 
 const TWELVE_HOURS_IN_MINUTES = 60 * 12;
 
 const initialState = {
-    party: [],
-    maxTotalTimeSpent: TWELVE_HOURS_IN_MINUTES,
-    characterCounter: 0
+    party: new PartyEntity(),
+    maxTotalTimeSpent: TWELVE_HOURS_IN_MINUTES
 };
 
 const reducer = (state = initialState, action) => {
-    switch (action.type){
+    switch (action.type) {
         case actionTypes.CHARACTER_ADD:
             return addCharacter(state, action);
         case actionTypes.CHARACTER_REMOVE:

@@ -15,7 +15,7 @@ class PartyBuilder extends Component {
         return (
             <div className="PartyBuilder">
                 <Party
-                    characters={this.props.party}
+                    party={this.props.party}
                     addCharacter={this.props.onCharacterAdded}
                     removeCharacter={this.props.onCharacterRemoved}
                     updateName={this.props.onCharacterNameUpdated}

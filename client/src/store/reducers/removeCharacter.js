@@ -1,10 +1,12 @@
-const removeCharacter = (state, {character}) => {
-    const party = state.party.filter(({id}) => id !== character.id);
+import PartyRepository from '../../ports/PartyRepository';
+import RemoveCharacterFromParty from '../../usecases/RemoveCharacterFromParty';
 
-    return {
-        ...state,
-        party
-    };
+const removeCharacter = (state, {character}) => {
+    const partyRepository = new PartyRepository(state);
+    const removeCharacterUseCase = new RemoveCharacterFromParty(partyRepository);
+    removeCharacterUseCase.execute(character);
+
+    return partyRepository.state;
 };
 
 export default removeCharacter;

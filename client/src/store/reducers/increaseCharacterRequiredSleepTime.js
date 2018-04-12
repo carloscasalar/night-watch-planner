@@ -1,15 +1,12 @@
-const increaseCharacterRequiredSleepTime = (state, {characterName, time}) => {
-    const party = [...state.party];
-    const characterIndex = party.findIndex(({name}) => name === characterName);
-    if(!characterIndex && characterIndex !==0){
-        return state;
-    }
+import PartyRepository from '../../ports/PartyRepository';
+import IncreaseCharacterRequiredSleepTime from '../../usecases/IncreaseCharacterRequiredSleepTime';
 
-    party[characterIndex] = party[characterIndex].withRequiredSleepTimeAdded(time);
-    return {
-        ...state,
-        party
-    };
+const increaseCharacterRequiredSleepTime = (state, {characterName, time}) => {
+    const partyRepository = new PartyRepository(state);
+    const increaseCharacterRequiredSleepTimeUseCase = new IncreaseCharacterRequiredSleepTime(partyRepository);
+    increaseCharacterRequiredSleepTimeUseCase.execute(characterName,time);
+
+    return partyRepository.state;
 };
 
 export default increaseCharacterRequiredSleepTime;

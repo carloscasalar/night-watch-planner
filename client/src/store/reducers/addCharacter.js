@@ -1,14 +1,13 @@
-import CharacterEntity from '../../domain/CharacterEntity';
+import AddCharacterToParty from '../../usecases/AddCharacterToParty';
+import PartyRepository from '../../ports/PartyRepository';
 
 const addCharacter = (state, {name}) => {
-    const id = state.characterCounter + 1;
-    const character = new CharacterEntity({id, name});
 
-    return {
-        ...state,
-        party: [...state.party, character],
-        characterCounter: id
-    };
+    const partyRepository = new PartyRepository(state);
+    const addCharacterUseCase = new AddCharacterToParty(partyRepository);
+    addCharacterUseCase.execute(name);
+
+    return partyRepository.state;
 };
 
 export default addCharacter;

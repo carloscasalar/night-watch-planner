@@ -1,15 +1,12 @@
-const updateCharacterName = (state, {character: {id: characterId}, newName}) => {
-    const party = [...state.party];
-    const characterIndex = party.findIndex(({id}) => id === characterId);
-    if (!characterIndex && characterIndex !== 0) {
-        return state;
-    }
+import PartyRepository from '../../ports/PartyRepository';
+import UpdateCharacterName from '../../usecases/UpdateCharacterName';
 
-    party[characterIndex] = party[characterIndex].withName(newName);
-    return {
-        ...state,
-        party
-    };
+const updateCharacterName = (state, {character: {id: characterId}, newName}) => {
+    const partyRepository = new PartyRepository(state);
+    const updateNameUseCase = new UpdateCharacterName(partyRepository);
+    updateNameUseCase.execute(characterId, newName);
+
+    return partyRepository.state;
 };
 
 export default updateCharacterName;

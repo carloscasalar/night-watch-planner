@@ -16,8 +16,8 @@ const party = (props) => {
     return (
         <div className="Party">
             <PartyHeader />
-            {props.characters.length===0? noCharacterMessage : null }
-            {props.characters.map(character =>
+            {props.party.isEmpty? noCharacterMessage : null }
+            {props.party.characters.map(character =>
                 <Character
                     key={character.id}
                     character={character}
