@@ -25,6 +25,7 @@ export default class CharacterEntity {
 
     updateName(name) {
         this.name = name;
+        return this;
     }
 
     increaseRequiredSleepTime(time) {

@@ -12,6 +12,8 @@ export default class UpdateCharacterName {
             .findCharacterById(characterId)
             .updateName(name);
 
-        return party.updateCharacter(character);
+        party.updateCharacter(character);
+
+        this.partyRepository.save(party);
     }
 }

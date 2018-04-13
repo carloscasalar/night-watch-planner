@@ -25,8 +25,7 @@ export default class PartyEntity {
 
     copy() {
         const characters = this.characters.map(character => character.copy());
-        const characterCounter = this.characterCounter;
-        return new PartyEntity({characters, characterCounter});
+        return new PartyEntity({characters});
     }
 
     addCharacterWith(name) {
