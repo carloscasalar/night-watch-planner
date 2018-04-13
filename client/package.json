@@ -5,7 +5,8 @@
     "start": "cross-env NODE_ENV=development parcel public/index.html ",
     "build": "cross-env NODE_ENV=production parcel build public/index.html --no-minify --public-url /",
     "test": "jest --watch --coverage",
-    "test:ci": "jest --verbose --coverage"
+    "test:ci": "jest --verbose --coverage",
+    "lint": "eslint \"src/**/*.js\" \"src/**/*.jsx\""
   },
   "dependencies": {
     "autoprefixer": "^7.2.1",
@@ -31,10 +32,21 @@
     }
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
     "babel-preset-stage-1": "^6.24.1",
     "cross-env": "^5.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
     "jest": "^22.4.3",
     "less": "^2.7.3"
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "root": true
   },
   "engines": {
     "node": ">=8.0.0"
