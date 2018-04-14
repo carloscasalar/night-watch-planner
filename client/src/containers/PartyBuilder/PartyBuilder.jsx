@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './PartyBuilder.less';
 import Party from '../../components/Party/Party';
 import NightWatchConfig from '../../components/NightWatchConfig/NightWatchConfig';
@@ -11,35 +11,36 @@ import updateCharacterNameAction from '../../store/actions/updateCharacterNameAc
 import increaseMaxTotalTimeSpentAction from '../../store/actions/increaseMaxTotalTimeSpentAction';
 
 class PartyBuilder extends Component {
-    render() {
-        return (
-            <div className="PartyBuilder">
-                <Party
-                    party={this.props.party}
-                    addCharacter={this.props.onCharacterAdded}
-                    removeCharacter={this.props.onCharacterRemoved}
-                    updateName={this.props.onCharacterNameUpdated}
-                    addSleepTimeToCharacter={this.props.onCharacterSleepTimeIncreased}
-                />
-                <NightWatchConfig
-                    maxTotalTimeSpent={this.props.maxTotalTimeSpent}
-                    addTime={this.props.onMaxTotalTimeSpentIncreased}
-                />
-                <button>Generate Watches</button>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="PartyBuilder">
+        <Party
+          party={this.props.party}
+          addCharacter={this.props.onCharacterAdded}
+          removeCharacter={this.props.onCharacterRemoved}
+          updateName={this.props.onCharacterNameUpdated}
+          addSleepTimeToCharacter={this.props.onCharacterSleepTimeIncreased}
+        />
+        <NightWatchConfig
+          maxTotalTimeSpent={this.props.maxTotalTimeSpent}
+          addTime={this.props.onMaxTotalTimeSpentIncreased}
+        />
+        <button>Generate Watches</button>
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = state => ({...state});
+const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-    onCharacterAdded: (name) => dispatch(addCharacterAction(name)),
-    onCharacterRemoved: (character) => dispatch(removeCharacterAction(character)),
-    onCharacterSleepTimeIncreased: (characterName, time) =>
-        dispatch(increaseCharacterSleepTimeAction(characterName, time)),
-    onCharacterNameUpdated: (character, newName) => dispatch(updateCharacterNameAction(character, newName)),
-    onMaxTotalTimeSpentIncreased: (time) => dispatch(increaseMaxTotalTimeSpentAction(time))
+  onCharacterAdded: name => dispatch(addCharacterAction(name)),
+  onCharacterRemoved: character => dispatch(removeCharacterAction(character)),
+  onCharacterSleepTimeIncreased: (characterName, time) =>
+    dispatch(increaseCharacterSleepTimeAction(characterName, time)),
+  onCharacterNameUpdated: (character, newName) =>
+    dispatch(updateCharacterNameAction(character, newName)),
+  onMaxTotalTimeSpentIncreased: time => dispatch(increaseMaxTotalTimeSpentAction(time)),
 });
 
 const connectToStore = connect(mapStateToProps, mapDispatchToProps);
