@@ -46,6 +46,9 @@
   "eslintConfig": {
     "extends": "airbnb",
     "parser": "babel-eslint",
+    "env": {
+      "jest": true
+    },
     "root": true
   },
   "engines": {
