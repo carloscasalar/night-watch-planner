@@ -1,8 +1,8 @@
-import {CHARACTER_REMOVE} from './actions';
+import { CHARACTER_REMOVE } from './actions';
 
-const removeCharacterAction = (character) => ({
-    type: CHARACTER_REMOVE,
-    character
+const removeCharacterAction = character => ({
+  type: CHARACTER_REMOVE,
+  character,
 });
 
 export default removeCharacterAction;
