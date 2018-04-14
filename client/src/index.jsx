@@ -9,13 +9,12 @@ import reducer from './store/reducer';
 
 const store = createStore(reducer);
 
-ReactDOM.render(<Provider store={ store } ><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store} ><App /></Provider>, document.getElementById('root'));
 
 // Hot Module Replacement
 // Enable Webpack hot module replacement for reducers
 if (module.hot) {
-    module.hot.accept('./store/reducer', () => {
-        const nextRootReducer = require('./store/reducer');
-        store.replaceReducer(nextRootReducer);
-    });
+  module.hot.accept('./store/reducer', () => {
+    store.replaceReducer(reducer);
+  });
 }
