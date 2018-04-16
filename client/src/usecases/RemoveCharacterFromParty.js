@@ -6,7 +6,6 @@ export default class RemoveCharacterFromParty {
     execute = (character) => {
       const party = this.partyRepository
         .getParty()
-        .copy()
         .removeCharacter(character);
 
       this.partyRepository.save(party);

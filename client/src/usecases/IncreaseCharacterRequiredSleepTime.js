@@ -5,8 +5,7 @@ export default class IncreaseCharacterRequiredSleepTime {
 
   execute(characterName, timeIncrement) {
     const party = this.partyRepository
-      .getParty()
-      .copy();
+      .getParty();
 
     const character = party
       .findCharacterByName(characterName)

@@ -6,7 +6,6 @@ export default class AddCharacterToParty {
     execute = (name) => {
       const party = this.partyRepository
         .getParty()
-        .copy()
         .addCharacterWith(name);
 
       this.partyRepository.save(party);

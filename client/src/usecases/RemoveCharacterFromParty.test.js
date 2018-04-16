@@ -41,13 +41,3 @@ test('remove a character should persist a party without that character', () => {
   const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
   expect(savedParty).toHaveProperty(['characters', 0, 'name'], GIMLI.name);
 });
-
-test('remove a character should not mutate original party', () => {
-  const partyRepository = partyRepositoryStub(partyWithGandalfAndGimli);
-
-  const removeCharacterFromParty = new RemoveCharacterFromParty(partyRepository);
-  removeCharacterFromParty.execute(GANDALF);
-
-  const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
-  expect(savedParty).not.toBe(partyWithGandalfAndGimli);
-});

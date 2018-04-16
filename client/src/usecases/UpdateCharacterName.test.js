@@ -43,23 +43,3 @@ test('should update character name in a party with several characters', () => {
   const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
   expect(savedParty).toHaveProperty(['characters', SECOND_CHARACTER_INDEX, 'name'], GIMLI_SON_OF_GLOIN_NAME);
 });
-
-test('should not mutate original party', () => {
-  const partyRepository = partyRepositoryStub(partyWithGandalfAndGimli);
-
-  const updateCharacterName = new UpdateCharacterName(partyRepository);
-  updateCharacterName.execute(GIMLI.id, GIMLI_SON_OF_GLOIN_NAME);
-
-  const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
-  expect(savedParty).not.toBe(partyWithGandalfAndGimli);
-});
-
-test('should not mutate character in original party', () => {
-  const { name: nameBeforeUpdate } = partyWithGimli.characters[FIRST_CHARACTER_INDEX];
-  const partyRepository = partyRepositoryStub(partyWithGimli);
-
-  const updateCharacterName = new UpdateCharacterName(partyRepository);
-  updateCharacterName.execute(GIMLI.id, GIMLI_SON_OF_GLOIN_NAME);
-
-  expect(nameBeforeUpdate).toEqual(GIMLI.name);
-});

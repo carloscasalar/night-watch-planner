@@ -60,16 +60,3 @@ test('second character added should have id 2', () => {
   const addedCharacter = savedParty.characters[SECOND_CHARACTER_INDEX];
   expect(addedCharacter.id).toBe(EXPECTED_SECOND_CHARACTER_ID);
 });
-
-test('should not mutate existing party', () => {
-  const characters = [GANDALF.copy()];
-  const initialParty = new PartyEntity({ characters });
-
-  const partyRepository = partyRepositoryStub(initialParty);
-
-  const addCharacterToParty = new AddCharacterToParty(partyRepository);
-  addCharacterToParty.execute(GIMLI.name);
-
-  const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
-  expect(savedParty).not.toBe(initialParty);
-});

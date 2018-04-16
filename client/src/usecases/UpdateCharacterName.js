@@ -4,9 +4,7 @@ export default class UpdateCharacterName {
   }
 
     execute = (characterId, name) => {
-      const party = this.partyRepository
-        .getParty()
-        .copy();
+      const party = this.partyRepository.getParty();
 
       const character = party
         .findCharacterById(characterId)

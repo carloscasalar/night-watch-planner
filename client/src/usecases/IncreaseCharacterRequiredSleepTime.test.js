@@ -50,23 +50,3 @@ test('should increase character required sleep time in a party with several char
     GIMLI_REGULAR_SLEEP_TIME_PLUS_ONE_HOUR,
   );
 });
-
-test('should not mutate original party', () => {
-  const partyRepository = partyRepositoryStub(partyWithGandalfAndGimli);
-
-  const increaseRequiredSleepTime = new IncreaseCharacterRequiredSleepTime(partyRepository);
-  increaseRequiredSleepTime.execute(GIMLI.name, ONE_HOUR_IN_MINUTES);
-
-  const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
-  expect(savedParty).not.toBe(partyWithGandalfAndGimli);
-});
-
-test('should not mutate character in original party', () => {
-  const { requiredSleepTime: requiredSleepTimeBeforeUpdate } = partyWithGimli.characters[FIRST_CHARACTER_INDEX];
-  const partyRepository = partyRepositoryStub(partyWithGimli);
-
-  const increaseRequiredSleepTime = new IncreaseCharacterRequiredSleepTime(partyRepository);
-  increaseRequiredSleepTime.execute(GIMLI.name, ONE_HOUR_IN_MINUTES);
-
-  expect(requiredSleepTimeBeforeUpdate).toEqual(GIMLI.requiredSleepTime);
-});
