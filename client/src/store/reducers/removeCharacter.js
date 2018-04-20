@@ -1,4 +1,4 @@
-import PartyRepository from '../../ports/PartyRepository';
+import PartyRepository from '../../ports/party/PartyRepository';
 import RemoveCharacterFromParty from '../../usecases/party/RemoveCharacterFromParty';
 
 const removeCharacter = (state, { characterId }) => {

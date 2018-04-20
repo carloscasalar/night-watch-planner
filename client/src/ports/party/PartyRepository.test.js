@@ -1,6 +1,6 @@
 import PartyRepository from './PartyRepository';
-import { GANDALF, GIMLI } from '../domain/stub/characters';
-import PartyEntity from '../domain/PartyEntity';
+import { GANDALF, GIMLI } from '../../domain/stub/characters';
+import PartyEntity from '../../domain/PartyEntity';
 
 test('getParty should return a correct party object', () => {
   const state = {

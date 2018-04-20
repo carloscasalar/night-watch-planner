@@ -1,4 +1,4 @@
-import CharacterEntity from '../domain/CharacterEntity';
+import CharacterEntity from '../../domain/CharacterEntity';
 
 export const toCharacterEntity = ({ id, name, requiredSleepTime }) =>
   new CharacterEntity({ id, name, requiredSleepTime });

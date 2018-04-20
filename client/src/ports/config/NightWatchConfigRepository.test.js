@@ -1,5 +1,5 @@
 import NightWatchConfigRepository from './NightWatchConfigRepository';
-import NightWatchConfigEntity from '../domain/NightWatchConfigEntity';
+import NightWatchConfigEntity from '../../domain/NightWatchConfigEntity';
 
 const ONE_HOUR_IN_MINUTES = 60;
 
