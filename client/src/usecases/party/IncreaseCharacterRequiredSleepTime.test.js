@@ -1,8 +1,8 @@
 import IncreaseCharacterRequiredSleepTime from './IncreaseCharacterRequiredSleepTime';
-import PartyEntity from '../domain/PartyEntity';
-import { GANDALF, GIMLI } from '../domain/stub/characters';
-import { firstParameterOfFirstCallTo, numberOfCallsTo } from '../jest/utils';
-import { partyRepositoryStub } from './stub/partyRepository';
+import PartyEntity from '../../domain/PartyEntity';
+import { GANDALF, GIMLI } from '../../domain/stub/characters';
+import { firstParameterOfFirstCallTo, numberOfCallsTo } from '../../jest/utils';
+import { partyRepositoryStub } from '../stub/partyRepository';
 
 const FIRST_CHARACTER_INDEX = 0;
 const SECOND_CHARACTER_INDEX = 1;

@@ -1,8 +1,8 @@
-import PartyEntity from '../domain/PartyEntity';
+import PartyEntity from '../../domain/PartyEntity';
 import RemoveCharacterFromParty from './RemoveCharacterFromParty';
-import { GANDALF, GIMLI } from '../domain/stub/characters';
-import { partyRepositoryStub } from './stub/partyRepository';
-import { firstParameterOfFirstCallTo, numberOfCallsTo } from '../jest/utils';
+import { GANDALF, GIMLI } from '../../domain/stub/characters';
+import { partyRepositoryStub } from '../stub/partyRepository';
+import { firstParameterOfFirstCallTo, numberOfCallsTo } from '../../jest/utils';
 
 let emptyParty;
 let partyWithGimli;

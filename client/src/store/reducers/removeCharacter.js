@@ -1,5 +1,5 @@
 import PartyRepository from '../../ports/PartyRepository';
-import RemoveCharacterFromParty from '../../usecases/RemoveCharacterFromParty';
+import RemoveCharacterFromParty from '../../usecases/party/RemoveCharacterFromParty';
 
 const removeCharacter = (state, { characterId }) => {
   const partyRepository = new PartyRepository(state);

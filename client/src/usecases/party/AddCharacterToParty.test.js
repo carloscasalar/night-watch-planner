@@ -1,8 +1,8 @@
-import PartyEntity from '../domain/PartyEntity';
+import PartyEntity from '../../domain/PartyEntity';
 import AddCharacterToParty from './AddCharacterToParty';
-import { GANDALF, GIMLI } from '../domain/stub/characters';
-import { partyRepositoryStub } from './stub/partyRepository';
-import { firstParameterOfFirstCallTo, numberOfCallsTo } from '../jest/utils';
+import { GANDALF, GIMLI } from '../../domain/stub/characters';
+import { partyRepositoryStub } from '../stub/partyRepository';
+import { firstParameterOfFirstCallTo, numberOfCallsTo } from '../../jest/utils';
 
 const EXPECTED_FIRST_CHARACTER_ID = 1;
 const EXPECTED_SECOND_CHARACTER_ID = 2;

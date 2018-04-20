@@ -1,4 +1,4 @@
-import AddCharacterToParty from '../../usecases/AddCharacterToParty';
+import AddCharacterToParty from '../../usecases/party/AddCharacterToParty';
 import PartyRepository from '../../ports/PartyRepository';
 
 const addCharacter = (state, { name }) => {
