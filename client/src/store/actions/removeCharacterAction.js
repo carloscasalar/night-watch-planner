@@ -1,8 +1,8 @@
 import { CHARACTER_REMOVE } from './actions';
 
-const removeCharacterAction = character => ({
+const removeCharacterAction = characterId => ({
   type: CHARACTER_REMOVE,
-  character,
+  characterId,
 });
 
 export default removeCharacterAction;

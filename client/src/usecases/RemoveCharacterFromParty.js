@@ -3,10 +3,10 @@ export default class RemoveCharacterFromParty {
     this.partyRepository = PartyRepository;
   }
 
-    execute = (character) => {
+    execute = (characterId) => {
       const party = this.partyRepository
         .getParty()
-        .removeCharacter(character);
+        .removeCharacter(characterId);
 
       this.partyRepository.save(party);
     };

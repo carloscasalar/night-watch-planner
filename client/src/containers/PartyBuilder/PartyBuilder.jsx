@@ -35,7 +35,7 @@ const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
   onCharacterAdded: name => dispatch(addCharacterAction(name)),
-  onCharacterRemoved: character => dispatch(removeCharacterAction(character)),
+  onCharacterRemoved: characterId => dispatch(removeCharacterAction(characterId)),
   onCharacterSleepTimeIncreased: (characterId, time) =>
     dispatch(increaseCharacterSleepTimeAction(characterId, time)),
   onCharacterNameUpdated: (character, newName) =>

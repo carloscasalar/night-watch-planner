@@ -1,10 +1,10 @@
 import PartyRepository from '../../ports/PartyRepository';
 import RemoveCharacterFromParty from '../../usecases/RemoveCharacterFromParty';
 
-const removeCharacter = (state, { character }) => {
+const removeCharacter = (state, { characterId }) => {
   const partyRepository = new PartyRepository(state);
   const removeCharacterUseCase = new RemoveCharacterFromParty(partyRepository);
-  removeCharacterUseCase.execute(character);
+  removeCharacterUseCase.execute(characterId);
 
   return partyRepository.state;
 };

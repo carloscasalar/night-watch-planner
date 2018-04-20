@@ -14,7 +14,7 @@ const character = props => (
       time={props.character.requiredSleepTime}
       addTime={time => props.addSleepTime(props.character.id, time)}
     />
-    <div><button onClick={() => props.removeCharacter(props.character)}>Remove</button></div>
+    <div><button onClick={() => props.removeCharacter(props.character.id)}>Remove</button></div>
   </div>
 );
 

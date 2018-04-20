@@ -17,7 +17,7 @@ test('remove character should save', () => {
   const partyRepository = partyRepositoryStub(partyWithGimli);
 
   const removeCharacterFromParty = new RemoveCharacterFromParty(partyRepository);
-  removeCharacterFromParty.execute(GIMLI);
+  removeCharacterFromParty.execute(GIMLI.id);
 
   expect(numberOfCallsTo(partyRepository.save)).toBe(1);
 });
@@ -26,7 +26,7 @@ test('remove last character should persist an empty party', () => {
   const partyRepository = partyRepositoryStub(partyWithGimli);
 
   const removeCharacterFromParty = new RemoveCharacterFromParty(partyRepository);
-  removeCharacterFromParty.execute(GIMLI);
+  removeCharacterFromParty.execute(GIMLI.id);
 
   const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
   expect(savedParty).toMatchObject(emptyParty);
@@ -36,7 +36,7 @@ test('remove a character should persist a party without that character', () => {
   const partyRepository = partyRepositoryStub(partyWithGandalfAndGimli);
 
   const removeCharacterFromParty = new RemoveCharacterFromParty(partyRepository);
-  removeCharacterFromParty.execute(GANDALF);
+  removeCharacterFromParty.execute(GANDALF.id);
 
   const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
   expect(savedParty).toHaveProperty(['characters', 0, 'name'], GIMLI.name);
