@@ -23,11 +23,6 @@ export default class PartyEntity {
     return this.characters.find(({ name }) => name === characterName);
   }
 
-  copy() {
-    const characters = this.characters.map(character => character.copy());
-    return new PartyEntity({ characters });
-  }
-
   addCharacterWith(name) {
     const id = this.nextCharacterId();
     const character = new CharacterEntity({ id, name });
