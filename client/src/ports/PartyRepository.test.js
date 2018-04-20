@@ -77,6 +77,6 @@ test('save should preserve other state attributes different than party', () => {
   const party = new PartyEntity();
   partyRepository.save(party);
 
-  expect(state).toHaveProperty('otherAttr', 'A');
-  expect(state).toHaveProperty('anotherAttr', 'B');
+  expect(partyRepository.state).toHaveProperty('otherAttr', 'A');
+  expect(partyRepository.state).toHaveProperty('anotherAttr', 'B');
 });

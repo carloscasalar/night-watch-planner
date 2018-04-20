@@ -7,7 +7,7 @@ export default class NightWatchConfigEntity {
     this.maxTotalTimeSpent = maxTotalTimeSpent;
   }
 
-  increaseMaxTotalTimeSpent(time = 0) {
+  increaseMaxTotalTimeSpent(time) {
     this.maxTotalTimeSpent = this.maxTotalTimeSpent + time;
 
     return this;

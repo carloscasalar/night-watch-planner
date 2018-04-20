@@ -4,15 +4,15 @@ import removeCharacter from './reducers/removeCharacter';
 import increaseCharacterRequiredSleepTime from './reducers/increaseCharacterRequiredSleepTime';
 import updateCharacterName from './reducers/updateCharacterName';
 import increaseMaxTotalTimeSpent from './reducers/increaseMaxTotalTimeSpent';
+import { DEFAULT_MAX_TIME_SPENT } from '../domain/NightWatchConfigEntity';
 
-const TWELVE_HOURS_IN_MINUTES = 60 * 12;
 const characters = [];
 const initialState = {
   party: {
     characters,
     isEmpty: true,
   },
-  maxTotalTimeSpent: TWELVE_HOURS_IN_MINUTES,
+  maxTotalTimeSpent: DEFAULT_MAX_TIME_SPENT,
 };
 
 const reducer = (state = initialState, action) => {
