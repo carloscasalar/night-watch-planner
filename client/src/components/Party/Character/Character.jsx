@@ -12,7 +12,7 @@ const character = props => (
     />
     <TimeControl
       time={props.character.requiredSleepTime}
-      addTime={time => props.addSleepTime(props.character.name, time)}
+      addTime={time => props.addSleepTime(props.character.id, time)}
     />
     <div><button onClick={() => props.removeCharacter(props.character)}>Remove</button></div>
   </div>

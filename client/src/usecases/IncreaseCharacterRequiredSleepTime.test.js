@@ -20,7 +20,7 @@ test('increase character required sleep time should persist party', () => {
   const partyRepository = partyRepositoryStub(partyWithGimli);
 
   const increaseRequiredSleepTime = new IncreaseCharacterRequiredSleepTime(partyRepository);
-  increaseRequiredSleepTime.execute(GIMLI.name, ONE_HOUR_IN_MINUTES);
+  increaseRequiredSleepTime.execute(GIMLI.id, ONE_HOUR_IN_MINUTES);
 
   expect(numberOfCallsTo(partyRepository.save)).toBe(1);
 });
@@ -29,7 +29,7 @@ test('should increase character required sleep time in a party of one character'
   const partyRepository = partyRepositoryStub(partyWithGimli);
 
   const increaseRequiredSleepTime = new IncreaseCharacterRequiredSleepTime(partyRepository);
-  increaseRequiredSleepTime.execute(GIMLI.name, ONE_HOUR_IN_MINUTES);
+  increaseRequiredSleepTime.execute(GIMLI.id, ONE_HOUR_IN_MINUTES);
 
   const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
   expect(savedParty).toHaveProperty(
@@ -42,7 +42,7 @@ test('should increase character required sleep time in a party with several char
   const partyRepository = partyRepositoryStub(partyWithGandalfAndGimli);
 
   const increaseRequiredSleepTime = new IncreaseCharacterRequiredSleepTime(partyRepository);
-  increaseRequiredSleepTime.execute(GIMLI.name, ONE_HOUR_IN_MINUTES);
+  increaseRequiredSleepTime.execute(GIMLI.id, ONE_HOUR_IN_MINUTES);
 
   const savedParty = firstParameterOfFirstCallTo(partyRepository.save);
   expect(savedParty).toHaveProperty(

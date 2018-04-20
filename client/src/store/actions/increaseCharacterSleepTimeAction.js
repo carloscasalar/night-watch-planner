@@ -1,8 +1,8 @@
 import { CHARACTER_SLEEP_TIME_INCREASE } from './actions';
 
-const increaseCharacterSleepTimeAction = (characterName, time) => ({
+const increaseCharacterSleepTimeAction = (characterId, time) => ({
   type: CHARACTER_SLEEP_TIME_INCREASE,
-  characterName,
+  characterId,
   time,
 });
 

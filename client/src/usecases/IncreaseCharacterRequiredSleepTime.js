@@ -3,15 +3,13 @@ export default class IncreaseCharacterRequiredSleepTime {
     this.partyRepository = PartyRepository;
   }
 
-  execute(characterName, timeIncrement) {
+  execute(characterId, timeIncrement) {
     const party = this.partyRepository
       .getParty();
 
-    const character = party
-      .findCharacterByName(characterName)
+    party
+      .findCharacterById(characterId)
       .increaseRequiredSleepTime(timeIncrement);
-
-    party.updateCharacter(character);
 
     this.partyRepository.save(party);
   }
