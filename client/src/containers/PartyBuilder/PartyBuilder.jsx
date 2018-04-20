@@ -38,8 +38,8 @@ const mapDispatchToProps = dispatch => ({
   onCharacterRemoved: characterId => dispatch(removeCharacterAction(characterId)),
   onCharacterSleepTimeIncreased: (characterId, time) =>
     dispatch(increaseCharacterSleepTimeAction(characterId, time)),
-  onCharacterNameUpdated: (character, newName) =>
-    dispatch(updateCharacterNameAction(character, newName)),
+  onCharacterNameUpdated: (characterId, newName) =>
+    dispatch(updateCharacterNameAction(characterId, newName)),
   onMaxTotalTimeSpentIncreased: time => dispatch(increaseMaxTotalTimeSpentAction(time)),
 });
 

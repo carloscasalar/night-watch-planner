@@ -21,8 +21,8 @@ const party = (props) => {
           key={character.id}
           character={character}
           addSleepTime={props.addSleepTimeToCharacter}
-          updateName={(character, newName) => props.updateName(character, newName)}
-          removeCharacter={character => props.removeCharacter(character)}
+          updateName={(characterId, newName) => props.updateName(characterId, newName)}
+          removeCharacter={characterId => props.removeCharacter(characterId)}
         />))}
 
       <PartyControls addCharacter={props.addCharacter} />

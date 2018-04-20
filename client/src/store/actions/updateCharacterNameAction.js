@@ -1,8 +1,8 @@
 import { CHARACTER_NAME_UPDATE } from './actions';
 
-const updateCharacterNameAction = (character, newName) => ({
+const updateCharacterNameAction = (characterId, newName) => ({
   type: CHARACTER_NAME_UPDATE,
-  character,
+  characterId,
   newName,
 });
 

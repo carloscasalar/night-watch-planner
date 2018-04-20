@@ -8,7 +8,7 @@ const character = props => (
   <div className="Character">
     <EditableName
       nameText={props.character.name}
-      updateName={newName => props.updateName(props.character, newName)}
+      updateName={newName => props.updateName(props.character.id, newName)}
     />
     <TimeControl
       time={props.character.requiredSleepTime}
