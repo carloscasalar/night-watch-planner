@@ -3,7 +3,8 @@ import IncreaseCharacterRequiredSleepTime from '../../usecases/party/IncreaseCha
 
 const increaseCharacterRequiredSleepTime = (state, { characterId, time }) => {
   const partyRepository = new PartyRepository(state);
-  const increaseCharacterRequiredSleepTimeUseCase = new IncreaseCharacterRequiredSleepTime(partyRepository);
+  const increaseCharacterRequiredSleepTimeUseCase =
+    new IncreaseCharacterRequiredSleepTime(partyRepository);
   increaseCharacterRequiredSleepTimeUseCase.execute(characterId, time);
 
   return partyRepository.state;
