@@ -14,16 +14,18 @@ const party = (props) => {
 
   return (
     <div className="Party">
-      <PartyHeader />
-      {props.party.isEmpty ? noCharacterMessage : null }
-      {props.party.characters.map(character =>
-        (<Character
-          key={character.id}
-          character={character}
-          addSleepTime={props.addSleepTimeToCharacter}
-          updateName={(characterId, newName) => props.updateName(characterId, newName)}
-          removeCharacter={characterId => props.removeCharacter(characterId)}
-        />))}
+      <div className="members">
+        <PartyHeader />
+        {props.party.isEmpty ? noCharacterMessage : null }
+        {props.party.characters.map(character =>
+          (<Character
+            key={character.id}
+            character={character}
+            addSleepTime={props.addSleepTimeToCharacter}
+            updateName={(characterId, newName) => props.updateName(characterId, newName)}
+            removeCharacter={characterId => props.removeCharacter(characterId)}
+          />))}
+      </div>
 
       <PartyControls addCharacter={props.addCharacter} />
     </div>

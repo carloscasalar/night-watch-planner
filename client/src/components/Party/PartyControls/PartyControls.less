@@ -2,23 +2,51 @@
 
 .PartyControls{
   display: grid;
-  grid-template-columns: 1fr 3fr @single-character-buttons-width;
+  justify-items: start;
+  grid-template-columns: 1fr @single-character-buttons-width;
 
   grid-gap: 5px;
 
   label {
-    text-align: left;
+    width: 90%;
+    font-weight: bold;
+    justify-items: start;
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+
+    .name {
+      width: 100%;
+    }
+  }
+
+  .errorContainer{
+    width: 90%;
+    display: grid;
+    justify-items: start;
+    grid-template-columns: 1fr 7fr;
+    grid-template-areas: ". error";
+
+    .error {
+      grid-area: error;
+      font-weight: lighter;
+      font-size: smaller;
+      color: red;
+    }
   }
 
   .addCharacter{
     max-height: @single-character-buttons-height;
-    border-radius: 10px;
-    border: 5px black;
     background-color: gray;
     color: black;
+    border-radius: 10px;
+    border: 5px black;
     font-size: large;
 
-    &:hover{
+    &:disabled {
+      opacity: 0.3;
+    }
+
+    &:enabled:hover{
       background-color: black;
       color: white;
     }

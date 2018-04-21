@@ -1,16 +1,21 @@
 @import "../constants";
 
 .Party{
-  width: 100%;
-  display: grid;
 
-  grid-auto-rows: 1fr;
-  grid-gap: 5px;
+  .members{
+    width: 100%;
+    margin-bottom: 20px;
 
-  grid-template-rows:
-    1fr
-    repeat(auto-fill, 1fr)
-    @single-character-buttons-height;
+    display: grid;
+
+    grid-auto-rows: 1fr;
+    grid-gap: 5px;
+
+    grid-template-rows:
+      1fr
+      repeat(auto-fill, 1fr)
+      @single-character-buttons-height;
+  }
 
   .noCharacterMessage {
     font-style: italic;
