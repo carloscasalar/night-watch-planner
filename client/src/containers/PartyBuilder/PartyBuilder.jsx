@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './PartyBuilder.less';
 import Party from '../../components/Party/Party';
@@ -10,26 +10,22 @@ import increaseCharacterSleepTimeAction from '../../store/actions/increaseCharac
 import updateCharacterNameAction from '../../store/actions/updateCharacterNameAction';
 import increaseMaxTotalTimeSpentAction from '../../store/actions/increaseMaxTotalTimeSpentAction';
 
-class PartyBuilder extends Component {
-  render() {
-    return (
-      <div className="PartyBuilder">
-        <Party
-          party={this.props.party}
-          addCharacter={this.props.onCharacterAdded}
-          removeCharacter={this.props.onCharacterRemoved}
-          updateName={this.props.onCharacterNameUpdated}
-          addSleepTimeToCharacter={this.props.onCharacterSleepTimeIncreased}
-        />
-        <NightWatchConfig
-          maxTotalTimeSpent={this.props.maxTotalTimeSpent}
-          addTime={this.props.onMaxTotalTimeSpentIncreased}
-        />
-        <button>Generate Watches</button>
-      </div>
-    );
-  }
-}
+const partyBuilder = props => (
+  <div className="PartyBuilder">
+    <Party
+      party={props.party}
+      addCharacter={props.onCharacterAdded}
+      removeCharacter={props.onCharacterRemoved}
+      updateName={props.onCharacterNameUpdated}
+      addSleepTimeToCharacter={props.onCharacterSleepTimeIncreased}
+    />
+    <NightWatchConfig
+      maxTotalTimeSpent={props.maxTotalTimeSpent}
+      addTime={props.onMaxTotalTimeSpentIncreased}
+    />
+    <button>Generate Watches</button>
+  </div>
+);
 
 const mapStateToProps = state => ({ ...state });
 
@@ -45,4 +41,4 @@ const mapDispatchToProps = dispatch => ({
 
 const connectToStore = connect(mapStateToProps, mapDispatchToProps);
 
-export default connectToStore(PartyBuilder);
+export default connectToStore(partyBuilder);
