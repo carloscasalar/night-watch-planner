@@ -6,6 +6,9 @@ import Character from './Character/Character';
 import PartyControls from './PartyControls/PartyControls';
 
 const party = (props) => {
+  const { party: { characters, isEmpty, names: forbiddenNames } } = props;
+  const { addSleepTimeToCharacter, addCharacter } = props;
+
   const noCharacterMessage = (
     <div className="noCharacterMessage">
             Push the add button (+) to add a character
@@ -16,18 +19,18 @@ const party = (props) => {
     <div className="Party">
       <div className="members">
         <PartyHeader />
-        {props.party.isEmpty ? noCharacterMessage : null }
-        {props.party.characters.map(character =>
+        {isEmpty ? noCharacterMessage : null }
+        {characters.map(character =>
           (<Character
             key={character.id}
             character={character}
-            addSleepTime={props.addSleepTimeToCharacter}
+            addSleepTime={addSleepTimeToCharacter}
             updateName={(characterId, newName) => props.updateName(characterId, newName)}
             removeCharacter={characterId => props.removeCharacter(characterId)}
           />))}
       </div>
 
-      <PartyControls addCharacter={props.addCharacter} />
+      <PartyControls forbiddenNames={forbiddenNames} addCharacter={addCharacter} />
     </div>
   );
 };

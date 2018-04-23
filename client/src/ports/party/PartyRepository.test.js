@@ -50,6 +50,7 @@ test('save should return a state with a plain Object party attribute', () => {
       },
     ],
     isEmpty: false,
+    names: [GIMLI.name, GANDALF.name],
   };
 
   partyRepository.save(domainParty);

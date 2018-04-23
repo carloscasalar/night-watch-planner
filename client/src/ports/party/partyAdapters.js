@@ -9,4 +9,5 @@ export const toPartyEntity = ({ characters: plainCharacters }) => {
 export const toPlainParty = domainParty => ({
   characters: domainParty.characters.map(toPlainCharacter),
   isEmpty: domainParty.isEmpty,
+  names: domainParty.characters.map(({ name }) => name),
 });

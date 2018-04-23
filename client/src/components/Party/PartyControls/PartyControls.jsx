@@ -1,37 +1,35 @@
 import React, { Component } from 'react';
 import './PartyControls.less';
 
+const DUPLICATED_NAME = 'There is already a character with this name.';
+const NO_ERROR = '';
+const NO_NAME = '';
+
 class PartyControls extends Component {
   state = {
-    name: '',
-    errors: [],
+    name: NO_NAME,
+    errors: NO_ERROR,
   };
 
   setName = (name) => {
-    let errors = [];
-    if (!this.isValid(name)) {
-      errors = ['Name too large'];
-    }
+    const errors = this.nameErrors(name);
     this.setState({ name, errors });
   };
 
-  cleanName = () => this.setState({
-    name: '',
-    errors: [],
-  });
+  nameErrors = (name) => {
+    const { forbiddenNames } = this.props;
+    return forbiddenNames.includes(name) ? DUPLICATED_NAME : NO_ERROR;
+  };
 
-  isValid = name => (name && name.length < 5);
+  cleanName = () => this.setState({
+    name: NO_NAME,
+    errors: NO_ERROR,
+  });
 
   render() {
     const { addCharacter } = this.props;
 
     const { errors } = this.state;
-
-    const errorContainer = (
-      <div className="errorContainer">
-        {errors.map(error => (<span key={error} className="error">{error}</span>))}
-      </div>
-    );
 
     return (
       <div className="PartyControls">
@@ -47,14 +45,16 @@ class PartyControls extends Component {
         <button
           className="addCharacter"
           title="Add character"
-          disabled={errors.length > 0}
+          disabled={errors !== NO_ERROR || this.state.name === NO_NAME}
           onClick={() => {
             addCharacter(this.state.name);
             this.cleanName();
           }}
         >+
         </button>
-        {errorContainer}
+        <div className="errorContainer">
+          <span className="error">{errors}</span>
+        </div>
       </div>
     );
   }

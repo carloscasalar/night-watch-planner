@@ -11,6 +11,7 @@ const initialState = {
   party: {
     characters,
     isEmpty: true,
+    names: [],
   },
   maxTotalTimeSpent: DEFAULT_MAX_TIME_SPENT,
 };
