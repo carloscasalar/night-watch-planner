@@ -8,12 +8,10 @@ const NO_NAME = '';
 class PartyControls extends Component {
   state = {
     name: NO_NAME,
-    errors: NO_ERROR,
   };
 
   setName = (name) => {
-    const errors = this.nameErrors(name);
-    this.setState({ name, errors });
+    this.setState({ name });
   };
 
   nameErrors = (name) => {
@@ -23,13 +21,13 @@ class PartyControls extends Component {
 
   cleanName = () => this.setState({
     name: NO_NAME,
-    errors: NO_ERROR,
   });
 
   render() {
     const { addCharacter } = this.props;
+    const { name } = this.state;
 
-    const { errors } = this.state;
+    const errors = this.nameErrors(name);
 
     return (
       <div className="PartyControls">
@@ -38,16 +36,16 @@ class PartyControls extends Component {
             id="newCharacterName"
             type="text"
             className="name"
-            value={this.state.name}
-            onChange={event => this.setName(event.target.value)}
+            value={name}
+            onChange={({ target: { value } }) => this.setName(value)}
           />
         </label>
         <button
           className="addCharacter"
           title="Add character"
-          disabled={errors !== NO_ERROR || this.state.name === NO_NAME}
+          disabled={errors !== NO_ERROR || name === NO_NAME}
           onClick={() => {
-            addCharacter(this.state.name);
+            addCharacter(name);
             this.cleanName();
           }}
         >+
