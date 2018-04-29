@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
 import './EditableName.less';
+import { NO_ERROR, nameError } from '../../validators/nameValidators';
 
 class EditableName extends Component {
     state = {
       edit: false,
-      name: this.props.nameText,
+      name: this.props.name,
+      error: NO_ERROR,
     };
 
-    changeNameHandler = event => this.setState({
-      name: event.target.value,
+    nameError = name => nameError(this.props.forbiddenNames, name);
+
+    changeNameHandler = ({ target: { value: name } }) => this.setState({
+      name,
+      error: this.nameError(name),
     });
 
-    switchEditHandler = (event) => {
+    discardChangesState = () => ({
+      name: this.props.name,
+      error: NO_ERROR,
+    });
+
+    switchEditHandler = () => {
       this.setState((previousState) => {
         const edit = !previousState.edit;
+        let newState = { edit };
         if (!edit) {
-          this.props.updateName(previousState.name);
+          if (this.state.error === NO_ERROR) {
+            this.props.updateName(previousState.name);
+          } else {
+            newState = { edit, ...this.discardChangesState()};
+          }
         }
 
-        return { edit };
+        return newState;
       });
     };
 
@@ -41,7 +56,11 @@ class EditableName extends Component {
               onBlur={this.switchEditHandler}
               onKeyPressCapture={this.submitNameHandler}
             />
-                    : <span onClick={this.switchEditHandler}>{this.props.nameText}</span>}
+            : <button className="textButton" onClick={this.switchEditHandler}>{this.props.name}</button>}
+
+          <div className="errorContainer">
+            <span className="error">{this.state.error}</span>
+          </div>
         </div>
       );
     }

@@ -8,13 +8,10 @@
 
     display: grid;
 
-    grid-auto-rows: 1fr;
     grid-gap: 5px;
 
     grid-template-rows:
-      1fr
-      repeat(auto-fill, 1fr)
-      @single-character-buttons-height;
+      repeat(auto-fill, 2em);
   }
 
   .noCharacterMessage {

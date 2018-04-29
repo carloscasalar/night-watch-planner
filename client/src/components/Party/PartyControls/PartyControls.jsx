@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './PartyControls.less';
+import { NO_ERROR, nameError } from '../validators/nameValidators';
 
-const DUPLICATED_NAME = 'There is already a character with this name.';
-const NO_ERROR = '';
 const NO_NAME = '';
 
 class PartyControls extends Component {
@@ -14,10 +13,7 @@ class PartyControls extends Component {
     this.setState({ name });
   };
 
-  nameErrors = (name) => {
-    const { forbiddenNames } = this.props;
-    return forbiddenNames.includes(name) ? DUPLICATED_NAME : NO_ERROR;
-  };
+  nameErrors = name => nameError(this.props.forbiddenNames, name);
 
   cleanName = () => this.setState({
     name: NO_NAME,

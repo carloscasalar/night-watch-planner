@@ -7,7 +7,8 @@ import TimeControl from '../../TimeControl/TimeControl';
 const character = props => (
   <div className="Character">
     <EditableName
-      nameText={props.character.name}
+      name={props.character.name}
+      forbiddenNames={props.forbiddenNames}
       updateName={newName => props.updateName(props.character.id, newName)}
     />
     <TimeControl
