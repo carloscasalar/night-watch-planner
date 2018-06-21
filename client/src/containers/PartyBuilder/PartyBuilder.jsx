@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './PartyBuilder.less';
 import Party from '../../components/Party/Party';
@@ -26,6 +27,16 @@ const partyBuilder = props => (
     <button>Generate Watches</button>
   </div>
 );
+
+partyBuilder.propTypes = {
+  party: PropTypes.object.isRequired,
+  maxTotalTimeSpent: PropTypes.number.isRequired,
+  onCharacterAdded: PropTypes.func.isRequired,
+  onCharacterRemoved: PropTypes.func.isRequired,
+  onCharacterNameUpdated: PropTypes.func.isRequired,
+  onCharacterSleepTimeIncreased: PropTypes.func.isRequired,
+  onMaxTotalTimeSpentIncreased: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({ ...state });
 
