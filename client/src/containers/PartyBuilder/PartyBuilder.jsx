@@ -10,6 +10,7 @@ import removeCharacterAction from '../../store/actions/removeCharacterAction';
 import increaseCharacterSleepTimeAction from '../../store/actions/increaseCharacterSleepTimeAction';
 import updateCharacterNameAction from '../../store/actions/updateCharacterNameAction';
 import increaseMaxTotalTimeSpentAction from '../../store/actions/increaseMaxTotalTimeSpentAction';
+import { partyType } from '../../store/propTypes';
 
 const partyBuilder = props => (
   <div className="PartyBuilder">
@@ -29,7 +30,7 @@ const partyBuilder = props => (
 );
 
 partyBuilder.propTypes = {
-  party: PropTypes.object.isRequired,
+  party: partyType.isRequired,
   maxTotalTimeSpent: PropTypes.number.isRequired,
   onCharacterAdded: PropTypes.func.isRequired,
   onCharacterRemoved: PropTypes.func.isRequired,
