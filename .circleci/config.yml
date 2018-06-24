@@ -33,6 +33,20 @@ jobs:
 
       - run: cd ~/night-watch-planner/client && npm run test:ci
 
+  linter-client:
+    working_directory: ~/night-watch-planner
+
+    docker:
+      - image: circleci/node:8
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: client-dependency-cache-{{ checksum "client/package.json" }}
+
+      - run: cd ~/night-watch-planner/client && npm run lint
+
   build-and-test-backend:
 
     working_directory: ~/night-watch-planner
@@ -68,6 +82,9 @@ workflows:
     jobs:
       - build-and-test-backend
       - install-client
+      - linter-client:
+          requires:
+            - install-client
       - test-client:
           requires:
             - install-client
