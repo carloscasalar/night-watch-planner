@@ -1,5 +1,6 @@
 {
   "name": "night-watch-planner",
+  "description": "Night watch planner for rpgs",
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development parcel public/index.html ",
@@ -55,5 +56,10 @@
   },
   "engines": {
     "node": ">=8.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:carloscasalar/night-watch-planner.git"
+  },
+  "private": true
 }
