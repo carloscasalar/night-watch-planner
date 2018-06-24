@@ -5,7 +5,7 @@ import NightWatchConfigEntity from '../../domain/NightWatchConfigEntity';
 
 const TEN_HOURS_IN_MINUTES = 10 * 60;
 const ELEVEN_HOURS_IN_MINUTES = 11 * 60;
-const MINUS_ELEVEN_HOURS_IN_MINUTES = - ELEVEN_HOURS_IN_MINUTES;
+const MINUS_ELEVEN_HOURS_IN_MINUTES = -ELEVEN_HOURS_IN_MINUTES;
 const ONE_HOUR_IN_MINUTES = 60;
 const ZERO_HOURS = 0;
 
