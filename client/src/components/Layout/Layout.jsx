@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Layout.less';
 
 const layout = props => (
@@ -6,5 +7,9 @@ const layout = props => (
     {props.children}
   </main>
 );
+
+layout.propTypes = {
+  children: PropTypes.shape({}).isRequired,
+};
 
 export default layout;

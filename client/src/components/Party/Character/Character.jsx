@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { characterType, forbiddenNamesType } from '../../../store/propTypes';
 import './Character.less';
 
 import EditableName from './EditableName/EditableName';
@@ -18,5 +20,13 @@ const character = props => (
     <div><button onClick={() => props.removeCharacter(props.character.id)}>Remove</button></div>
   </div>
 );
+
+character.propTypes = {
+  character: characterType.isRequired,
+  forbiddenNames: forbiddenNamesType.isRequired,
+  updateName: PropTypes.func.isRequired,
+  addSleepTime: PropTypes.func.isRequired,
+  removeCharacter: PropTypes.func.isRequired,
+};
 
 export default character;

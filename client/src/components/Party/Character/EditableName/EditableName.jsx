@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { forbiddenNamesType } from '../../../../store/propTypes';
 import './EditableName.less';
 import { NO_ERROR, nameError } from '../../validators/nameValidators';
 
 class EditableName extends Component {
+    static propTypes = {
+      name: PropTypes.string.isRequired,
+      forbiddenNames: forbiddenNamesType.isRequired,
+      updateName: PropTypes.func.isRequired,
+    };
+
     state = {
       edit: false,
       name: this.props.name,
@@ -29,7 +37,7 @@ class EditableName extends Component {
           if (this.state.error === NO_ERROR) {
             this.props.updateName(previousState.name);
           } else {
-            newState = { edit, ...this.discardChangesState()};
+            newState = { edit, ...this.discardChangesState() };
           }
         }
 
@@ -52,6 +60,7 @@ class EditableName extends Component {
               value={this.state.name}
               onChange={this.changeNameHandler}
               autoCapitalize="true"
+              // eslint-disable-next-line
               autoFocus="true"
               onBlur={this.switchEditHandler}
               onKeyPressCapture={this.submitNameHandler}

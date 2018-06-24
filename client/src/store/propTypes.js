@@ -11,3 +11,5 @@ export const partyType = PropTypes.shape({
   isEmpty: PropTypes.bool.isRequired,
   names: PropTypes.arrayOf(PropTypes.string).isRequired,
 });
+
+export const forbiddenNamesType = PropTypes.arrayOf(PropTypes.string);

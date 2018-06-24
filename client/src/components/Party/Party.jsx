@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { partyType } from '../../store/propTypes';
 import './Party.less';
 
 import PartyHeader from './PartyHeader/PartyHeader';
@@ -36,6 +38,12 @@ const party = (props) => {
       <PartyControls forbiddenNames={forbiddenNames} addCharacter={addCharacter} />
     </div>
   );
+};
+
+party.propTypes = {
+  party: partyType.isRequired,
+  addSleepTimeToCharacter: PropTypes.func.isRequired,
+  addCharacter: PropTypes.func.isRequired,
 };
 
 export default party;

@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { forbiddenNamesType } from '../../../store/propTypes';
 import './PartyControls.less';
 import { NO_ERROR, nameError } from '../validators/nameValidators';
 
 const NO_NAME = '';
 
 class PartyControls extends Component {
+  static propTypes = {
+    addCharacter: PropTypes.func.isRequired,
+    forbiddenNames: forbiddenNamesType.isRequired,
+  };
+
   state = {
     name: NO_NAME,
   };
@@ -18,6 +25,7 @@ class PartyControls extends Component {
   cleanName = () => this.setState({
     name: NO_NAME,
   });
+
 
   render() {
     const { addCharacter } = this.props;
