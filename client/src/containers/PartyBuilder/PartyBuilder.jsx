@@ -11,6 +11,7 @@ import increaseCharacterSleepTimeAction from '../../store/actions/increaseCharac
 import updateCharacterNameAction from '../../store/actions/updateCharacterNameAction';
 import increaseMaxTotalTimeSpentAction from '../../store/actions/increaseMaxTotalTimeSpentAction';
 import { partyType } from '../../store/propTypes';
+import requestNightWatchPlan from '../../store/actions/requestNightWatchPlan';
 
 const partyBuilder = props => (
   <div className="PartyBuilder">
@@ -25,7 +26,12 @@ const partyBuilder = props => (
       maxTotalTimeSpent={props.maxTotalTimeSpent}
       addTime={props.onMaxTotalTimeSpentIncreased}
     />
-    <button>Generate Watches</button>
+    <button onClick={() => props.onRequestNightWatchPlan({
+      maxTotalTimeSpent: props.maxTotalTimeSpent,
+      characters: props.party.characters,
+    })}
+    >Generate Watches
+    </button>
   </div>
 );
 
@@ -37,6 +43,7 @@ partyBuilder.propTypes = {
   onCharacterNameUpdated: PropTypes.func.isRequired,
   onCharacterSleepTimeIncreased: PropTypes.func.isRequired,
   onMaxTotalTimeSpentIncreased: PropTypes.func.isRequired,
+  onRequestNightWatchPlan: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ ...state });
@@ -49,6 +56,7 @@ const mapDispatchToProps = dispatch => ({
   onCharacterNameUpdated: (characterId, newName) =>
     dispatch(updateCharacterNameAction(characterId, newName)),
   onMaxTotalTimeSpentIncreased: time => dispatch(increaseMaxTotalTimeSpentAction(time)),
+  onRequestNightWatchPlan: planRequest => dispatch(requestNightWatchPlan(planRequest)),
 });
 
 const connectToStore = connect(mapStateToProps, mapDispatchToProps);
