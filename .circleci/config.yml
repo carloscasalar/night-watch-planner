@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           key: client-dependency-cache-{{ checksum "client/package.json" }}
 
-      - run: cd ~/night-watch-planner/client && npm install
+      - run: cd ~/night-watch-planner/client && npm install --no-save
 
       - save_cache:
           paths:
