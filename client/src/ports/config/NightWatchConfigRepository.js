@@ -6,20 +6,15 @@ export default class NightWatchConfigRepository {
   }
 
   getNightWatchConfig() {
-    return toNightWatchConfigEntity(this.state.config);
+    return toNightWatchConfigEntity(this.state);
   }
 
   save(nightWatchConfigEntity) {
     const { maxTotalTimeSpent } = toPlainNightWatchConfigEntity(nightWatchConfigEntity);
 
-    const config = {
-      ...this.state.config,
-      maxTotalTimeSpent,
-    };
-
     this.state = {
       ...this.state,
-      config,
+      maxTotalTimeSpent,
     };
   }
 }

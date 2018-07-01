@@ -4,20 +4,18 @@ import PartyEntity from '../../domain/PartyEntity';
 
 test('getParty should return a correct party object', () => {
   const state = {
-    party: {
-      characters: [
-        {
-          id: GIMLI.id,
-          name: GIMLI.name,
-          requiredSleepTime: GIMLI.requiredSleepTime,
-        },
-        {
-          id: GANDALF.id,
-          name: GANDALF.name,
-          requiredSleepTime: GANDALF.requiredSleepTime,
-        },
-      ],
-    },
+    characters: [
+      {
+        id: GIMLI.id,
+        name: GIMLI.name,
+        requiredSleepTime: GIMLI.requiredSleepTime,
+      },
+      {
+        id: GANDALF.id,
+        name: GANDALF.name,
+        requiredSleepTime: GANDALF.requiredSleepTime,
+      },
+    ],
   };
 
   const expectedParty = new PartyEntity({ characters: [GIMLI, GANDALF] });
@@ -54,8 +52,7 @@ test('save should return a state with a plain Object party attribute', () => {
   };
 
   partyRepository.save(domainParty);
-  expect(partyRepository.state).toHaveProperty('party');
-  expect(partyRepository.state.party).toMatchObject(expectedPartySate);
+  expect(partyRepository.state).toMatchObject(expectedPartySate);
 });
 
 test('save should not mutate state', () => {

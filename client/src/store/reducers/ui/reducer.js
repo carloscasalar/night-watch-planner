@@ -3,9 +3,7 @@ import switchOnLoadingPlan from './switchOnLoadingPlan';
 import switchOffLoadingPlan from './switchOffLoadingPlan';
 
 export const initialState = () => ({
-  ui: {
-    waitingForPlan: false,
-  },
+  waitingForPlan: false,
 });
 
 export const uiReducer = (state = initialState(), action) => {

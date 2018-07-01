@@ -11,11 +11,9 @@ import updateCharacterName from './updateCharacterName';
 
 const characters = [];
 export const initialState = () => ({
-  party: {
-    characters,
-    isEmpty: true,
-    names: [],
-  },
+  characters,
+  isEmpty: true,
+  names: [],
 });
 
 export const partyReducer = (state = initialState(), action) => {

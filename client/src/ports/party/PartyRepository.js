@@ -6,14 +6,14 @@ export default class PartyRepository {
   }
 
   getParty() {
-    return toPartyEntity(this.state.party);
+    return toPartyEntity(this.state);
   }
 
   save(partyEntity) {
     const party = toPlainParty(partyEntity);
     this.state = {
       ...this.state,
-      party,
+      ...party,
     };
   }
 }
