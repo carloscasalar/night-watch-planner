@@ -1,6 +1,6 @@
 const fetchNightWatchPlanFailed = (state, { error }) => {
   console.error('processing nightWatchPlan ERROR from backend:', error);
-  return {...state};
+  return { ...state };
 };
 
 export default fetchNightWatchPlanFailed;

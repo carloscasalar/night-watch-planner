@@ -1,6 +1,6 @@
-const addNightWatchPlan = (state, {nightWatchPlan}) =>{
+const addNightWatchPlan = (state, { nightWatchPlan }) => {
   console.log('processing nightWatchPlan from backend:', nightWatchPlan);
-  return {...state};
+  return { ...state };
 };
 
 export default addNightWatchPlan;
