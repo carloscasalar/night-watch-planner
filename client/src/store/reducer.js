@@ -1,4 +1,5 @@
 import * as actionTypes from './actions/actions';
+import {uiReducer} from "./reducers/ui/reducer";
 import addCharacter from './reducers/addCharacter';
 import removeCharacter from './reducers/removeCharacter';
 import increaseCharacterRequiredSleepTime from './reducers/increaseCharacterRequiredSleepTime';
@@ -38,7 +39,7 @@ const reducer = (state = initialState(), action) => {
     case actionTypes.FETCH_NIGHT_WATCH_PLAN_FAILED:
       return fetchNightWatchPlanFailed(state, action);
     default:
-      return state;
+      return uiReducer(state, action);
   }
 };
 
