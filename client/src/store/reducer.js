@@ -1,13 +1,14 @@
 import * as actionTypes from './actions/actions';
-import {uiReducer} from "./reducers/ui/reducer";
+import { uiReducer } from './reducers/ui/reducer';
 import addCharacter from './reducers/addCharacter';
 import removeCharacter from './reducers/removeCharacter';
-import increaseCharacterRequiredSleepTime from './reducers/increaseCharacterRequiredSleepTime';
+import increaseCharacterRequiredSleepTime from './reducers/config/increaseCharacterRequiredSleepTime';
 import updateCharacterName from './reducers/updateCharacterName';
-import increaseMaxTotalTimeSpent from './reducers/increaseMaxTotalTimeSpent';
 import addNightWatchPlan from './reducers/addNightWatchPlan';
 import fetchNightWatchPlanFailed from './reducers/fetchNightWatchPlanFailed';
 import { DEFAULT_MAX_TIME_SPENT } from '../domain/NightWatchConfigEntity';
+import { MAX_TOTAL_TIME_SPENT_INCREASE } from './actions/config/actions';
+import { configReducer } from './reducers/config/reducer';
 
 const characters = [];
 export const initialState = () => ({
@@ -16,7 +17,9 @@ export const initialState = () => ({
     isEmpty: true,
     names: [],
   },
-  maxTotalTimeSpent: DEFAULT_MAX_TIME_SPENT,
+  config: {
+    maxTotalTimeSpent: DEFAULT_MAX_TIME_SPENT,
+  },
   ui: {
     waitingForPlan: false,
   },
@@ -32,8 +35,8 @@ const reducer = (state = initialState(), action) => {
       return increaseCharacterRequiredSleepTime(state, action);
     case actionTypes.CHARACTER_NAME_UPDATE:
       return updateCharacterName(state, action);
-    case actionTypes.MAX_TOTAL_TIME_SPENT_INCREASE:
-      return increaseMaxTotalTimeSpent(state, action);
+    case MAX_TOTAL_TIME_SPENT_INCREASE:
+      return configReducer(state, action);
     case actionTypes.ADD_NIGHT_WATCH_PLAN:
       return addNightWatchPlan(state, action);
     case actionTypes.FETCH_NIGHT_WATCH_PLAN_FAILED:

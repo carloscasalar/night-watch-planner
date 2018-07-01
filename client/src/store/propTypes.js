@@ -18,4 +18,8 @@ export const uiType = PropTypes.shape({
   waitingForPlan: PropTypes.bool.isRequired,
 });
 
+export const configType = PropTypes.shape({
+  maxTotalTimeSpent: PropTypes.number.isRequired,
+});
+
 export const forbiddenNamesType = PropTypes.arrayOf(PropTypes.string);

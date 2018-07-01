@@ -10,8 +10,8 @@ import addCharacterAction from '../../store/actions/addCharacterAction';
 import removeCharacterAction from '../../store/actions/removeCharacterAction';
 import increaseCharacterSleepTimeAction from '../../store/actions/increaseCharacterSleepTimeAction';
 import updateCharacterNameAction from '../../store/actions/updateCharacterNameAction';
-import increaseMaxTotalTimeSpentAction from '../../store/actions/increaseMaxTotalTimeSpentAction';
-import { partyType, uiType } from '../../store/propTypes';
+import increaseMaxTotalTimeSpentAction from '../../store/actions/config/increaseMaxTotalTimeSpentAction';
+import { configType, partyType, uiType } from '../../store/propTypes';
 import requestNightWatchPlan from '../../store/actions/requestNightWatchPlan';
 
 const partyBuilder = props => (
@@ -24,12 +24,12 @@ const partyBuilder = props => (
       addSleepTimeToCharacter={props.onCharacterSleepTimeIncreased}
     />
     <NightWatchConfig
-      maxTotalTimeSpent={props.maxTotalTimeSpent}
+      maxTotalTimeSpent={props.config.maxTotalTimeSpent}
       addTime={props.onMaxTotalTimeSpentIncreased}
     />
     <RequestPlanButton
       characters={props.party.characters}
-      maxTotalTimeSpent={props.maxTotalTimeSpent}
+      maxTotalTimeSpent={props.config.maxTotalTimeSpent}
       waitingForPlan={props.ui.waitingForPlan}
       onRequestNightWatchPlan={props.onRequestNightWatchPlan}
     />
@@ -38,7 +38,7 @@ const partyBuilder = props => (
 
 partyBuilder.propTypes = {
   party: partyType.isRequired,
-  maxTotalTimeSpent: PropTypes.number.isRequired,
+  config: configType.isRequired,
   ui: uiType.isRequired,
   onCharacterAdded: PropTypes.func.isRequired,
   onCharacterRemoved: PropTypes.func.isRequired,

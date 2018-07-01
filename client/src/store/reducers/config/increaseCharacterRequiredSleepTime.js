@@ -1,5 +1,5 @@
-import PartyRepository from '../../ports/party/PartyRepository';
-import IncreaseCharacterRequiredSleepTime from '../../usecases/party/IncreaseCharacterRequiredSleepTime';
+import PartyRepository from '../../../ports/party/PartyRepository';
+import IncreaseCharacterRequiredSleepTime from '../../../usecases/party/IncreaseCharacterRequiredSleepTime';
 
 const increaseCharacterRequiredSleepTime = (state, { characterId, time }) => {
   const partyRepository = new PartyRepository(state);

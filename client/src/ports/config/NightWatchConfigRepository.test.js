@@ -5,7 +5,9 @@ const ONE_HOUR_IN_MINUTES = 60;
 
 test('getNightWatchConfig should return the night watch config', () => {
   const state = {
-    maxTotalTimeSpent: ONE_HOUR_IN_MINUTES,
+    config: {
+      maxTotalTimeSpent: ONE_HOUR_IN_MINUTES,
+    },
   };
 
   const repository = new NightWatchConfigRepository(state);
@@ -24,11 +26,13 @@ test('save should persist a state with night watch config attributes', () => {
   });
 
   repository.save(domainConfig);
-  expect(repository.state).toHaveProperty('maxTotalTimeSpent', ONE_HOUR_IN_MINUTES);
+  expect(repository.state.config).toHaveProperty('maxTotalTimeSpent', ONE_HOUR_IN_MINUTES);
 });
 
 test('should not mutate state', () => {
-  const initialState = {};
+  const initialState = {
+    config: {},
+  };
   const configRepository = new NightWatchConfigRepository(initialState);
   expect(configRepository.state).toBe(configRepository.state);
 
