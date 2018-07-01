@@ -6,10 +6,10 @@ import Party from '../../components/Party/Party';
 import NightWatchConfig from '../../components/NightWatchConfig/NightWatchConfig';
 import RequestPlanButton from '../../components/RequestPlanButton/RequestPlanButton';
 
-import addCharacterAction from '../../store/actions/addCharacterAction';
-import removeCharacterAction from '../../store/actions/removeCharacterAction';
-import increaseCharacterSleepTimeAction from '../../store/actions/increaseCharacterSleepTimeAction';
-import updateCharacterNameAction from '../../store/actions/updateCharacterNameAction';
+import addCharacterAction from '../../store/actions/party/addCharacterAction';
+import removeCharacterAction from '../../store/actions/party/removeCharacterAction';
+import increaseCharacterSleepTimeAction from '../../store/actions/party/increaseCharacterSleepTimeAction';
+import updateCharacterNameAction from '../../store/actions/party/updateCharacterNameAction';
 import increaseMaxTotalTimeSpentAction from '../../store/actions/config/increaseMaxTotalTimeSpentAction';
 import { configType, partyType, uiType } from '../../store/propTypes';
 import requestNightWatchPlan from '../../store/actions/requestNightWatchPlan';
