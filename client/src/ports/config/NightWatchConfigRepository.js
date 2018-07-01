@@ -1,5 +1,4 @@
 import { toNightWatchConfigEntity, toPlainNightWatchConfigEntity } from './nightWatchConfigAdapters';
-import { getConfig } from '../../store/reducers/config/selectors';
 
 export default class NightWatchConfigRepository {
   constructor(state) {
@@ -7,14 +6,14 @@ export default class NightWatchConfigRepository {
   }
 
   getNightWatchConfig() {
-    return toNightWatchConfigEntity(getConfig(this.state));
+    return toNightWatchConfigEntity(this.state.config);
   }
 
   save(nightWatchConfigEntity) {
     const { maxTotalTimeSpent } = toPlainNightWatchConfigEntity(nightWatchConfigEntity);
 
     const config = {
-      ...getConfig(this.state),
+      ...this.state.config,
       maxTotalTimeSpent,
     };
 
