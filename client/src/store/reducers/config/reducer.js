@@ -1,6 +1,6 @@
 import { DEFAULT_MAX_TIME_SPENT } from '../../../domain/NightWatchConfigEntity';
 import { MAX_TOTAL_TIME_SPENT_INCREASE } from '../../actions/config/actions';
-import increaseMaxTotalTimeSpent from '../increaseMaxTotalTimeSpent';
+import increaseMaxTotalTimeSpent from '../party/increaseMaxTotalTimeSpent';
 
 export const initialState = () => ({
   maxTotalTimeSpent: DEFAULT_MAX_TIME_SPENT,

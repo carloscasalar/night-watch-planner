@@ -1,5 +1,5 @@
-import PartyRepository from '../../ports/party/PartyRepository';
-import UpdateCharacterName from '../../usecases/party/UpdateCharacterName';
+import PartyRepository from '../../../ports/party/PartyRepository';
+import UpdateCharacterName from '../../../usecases/party/UpdateCharacterName';
 
 const updateCharacterName = (state, { characterId, newName }) => {
   const partyRepository = new PartyRepository(state);

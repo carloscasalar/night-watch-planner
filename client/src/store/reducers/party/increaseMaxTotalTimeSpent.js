@@ -1,5 +1,5 @@
-import NightWatchConfigRepository from '../../ports/config/NightWatchConfigRepository';
-import IncreaseMaxTotalTimeSpent from '../../usecases/config/IncreaseMaxTotalTimeSpent';
+import NightWatchConfigRepository from '../../../ports/config/NightWatchConfigRepository';
+import IncreaseMaxTotalTimeSpent from '../../../usecases/config/IncreaseMaxTotalTimeSpent';
 
 const increaseMaxTotalTimeSpent = (state, { time }) => {
   const nightWatchConfigRepository = new NightWatchConfigRepository(state);

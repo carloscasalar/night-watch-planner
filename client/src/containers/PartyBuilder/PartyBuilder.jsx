@@ -12,7 +12,7 @@ import increaseCharacterSleepTimeAction from '../../store/actions/party/increase
 import updateCharacterNameAction from '../../store/actions/party/updateCharacterNameAction';
 import increaseMaxTotalTimeSpentAction from '../../store/actions/config/increaseMaxTotalTimeSpentAction';
 import { configType, partyType, uiType } from '../../store/propTypes';
-import requestNightWatchPlan from '../../store/actions/requestNightWatchPlan';
+import requestNightWatchPlan from '../../store/actions/plans/requestNightWatchPlan';
 
 const partyBuilder = props => (
   <div className="PartyBuilder">

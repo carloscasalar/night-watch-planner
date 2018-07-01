@@ -4,10 +4,10 @@ import {
   CHARACTER_REMOVE,
   CHARACTER_SLEEP_TIME_INCREASE,
 } from '../../actions/party/actions';
-import addCharacter from '../addCharacter';
+import addCharacter from './addCharacter';
 import increaseCharacterRequiredSleepTime from '../config/increaseCharacterRequiredSleepTime';
-import removeCharacter from '../removeCharacter';
-import updateCharacterName from '../updateCharacterName';
+import removeCharacter from './removeCharacter';
+import updateCharacterName from './updateCharacterName';
 
 const characters = [];
 export const initialState = () => ({
