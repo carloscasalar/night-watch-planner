@@ -9,16 +9,16 @@ import fetchNightWatchPlanFailed from './reducers/fetchNightWatchPlanFailed';
 import { DEFAULT_MAX_TIME_SPENT } from '../domain/NightWatchConfigEntity';
 
 const characters = [];
-const initialState = {
+export const initialState = () => ({
   party: {
     characters,
     isEmpty: true,
     names: [],
   },
   maxTotalTimeSpent: DEFAULT_MAX_TIME_SPENT,
-};
+});
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState(), action) => {
   switch (action.type) {
     case actionTypes.CHARACTER_ADD:
       return addCharacter(state, action);
