@@ -6,10 +6,16 @@ export const characterType = PropTypes.shape({
   requiredSleepTime: PropTypes.number.isRequired,
 });
 
+export const charactersType = PropTypes.arrayOf(characterType);
+
 export const partyType = PropTypes.shape({
-  characters: PropTypes.arrayOf(characterType).isRequired,
+  characters: charactersType.isRequired,
   isEmpty: PropTypes.bool.isRequired,
   names: PropTypes.arrayOf(PropTypes.string).isRequired,
+});
+
+export const uiType = PropTypes.shape({
+  waitingForPlan: PropTypes.bool.isRequired,
 });
 
 export const forbiddenNamesType = PropTypes.arrayOf(PropTypes.string);

@@ -16,6 +16,9 @@ export const initialState = () => ({
     names: [],
   },
   maxTotalTimeSpent: DEFAULT_MAX_TIME_SPENT,
+  ui: {
+    waitingForPlan: false,
+  },
 });
 
 const reducer = (state = initialState(), action) => {

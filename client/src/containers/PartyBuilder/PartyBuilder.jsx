@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import './PartyBuilder.less';
 import Party from '../../components/Party/Party';
 import NightWatchConfig from '../../components/NightWatchConfig/NightWatchConfig';
+import RequestPlanButton from '../../components/RequestPlanButton/RequestPlanButton';
 
 import addCharacterAction from '../../store/actions/addCharacterAction';
 import removeCharacterAction from '../../store/actions/removeCharacterAction';
 import increaseCharacterSleepTimeAction from '../../store/actions/increaseCharacterSleepTimeAction';
 import updateCharacterNameAction from '../../store/actions/updateCharacterNameAction';
 import increaseMaxTotalTimeSpentAction from '../../store/actions/increaseMaxTotalTimeSpentAction';
-import { partyType } from '../../store/propTypes';
+import { partyType, uiType } from '../../store/propTypes';
 import requestNightWatchPlan from '../../store/actions/requestNightWatchPlan';
 
 const partyBuilder = props => (
@@ -26,18 +27,19 @@ const partyBuilder = props => (
       maxTotalTimeSpent={props.maxTotalTimeSpent}
       addTime={props.onMaxTotalTimeSpentIncreased}
     />
-    <button onClick={() => props.onRequestNightWatchPlan({
-      maxTotalTimeSpent: props.maxTotalTimeSpent,
-      characters: props.party.characters,
-    })}
-    >Generate Watches
-    </button>
+    <RequestPlanButton
+      characters={props.party.characters}
+      maxTotalTimeSpent={props.maxTotalTimeSpent}
+      waitingForPlan={props.ui.waitingForPlan}
+      onRequestNightWatchPlan={props.onRequestNightWatchPlan}
+    />
   </div>
 );
 
 partyBuilder.propTypes = {
   party: partyType.isRequired,
   maxTotalTimeSpent: PropTypes.number.isRequired,
+  ui: uiType.isRequired,
   onCharacterAdded: PropTypes.func.isRequired,
   onCharacterRemoved: PropTypes.func.isRequired,
   onCharacterNameUpdated: PropTypes.func.isRequired,
