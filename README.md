@@ -34,7 +34,7 @@ Sample Plan Request with this body:
 }
 ```
 
-curl command to test the endpoing:
+curl command to test the endpoin:
 ```
 curl --request POST \
   --url http://localhost:3000/v1/optimize \
