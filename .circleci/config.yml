@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10.16
 
     steps:
       - checkout
@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           key: client-dependency-cache-{{ checksum "client/package.json" }}
 
-      - run: cd ~/night-watch-planner/client && npm install --no-save
+      - run: cd ~/night-watch-planner/client && npm ci
 
       - save_cache:
           paths:
@@ -23,7 +23,7 @@ jobs:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10.16
 
     steps:
       - checkout
@@ -37,7 +37,7 @@ jobs:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10.16
 
     steps:
       - checkout
