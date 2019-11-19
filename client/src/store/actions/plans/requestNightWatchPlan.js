@@ -1,6 +1,6 @@
 import axios from 'axios';
 import addNightWatchPlanAction from './addNightWatchPlanAction';
-import fetchNightWatchPlanFailedAction from '../party/fetchNightWatchPlanFailedAction';
+import fetchNightWatchPlanFailedAction from './fetchNightWatchPlanFailedAction';
 import switchOffLoadingPlanAction from '../ui/switchOffLoadingPlanAction';
 import switchOnLoadingPlanAction from '../ui/switchOnLoadingPlanAction';
 
