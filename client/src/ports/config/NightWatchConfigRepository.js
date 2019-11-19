@@ -1,4 +1,4 @@
-import { toNightWatchConfigEntity, toPlainNightWatchConfigEntity } from './nightWatchConfigAdapters';
+import { toNightWatchConfigEntity, toPlainNightWatchConfigEntity } from './nightWatchConfigMappers';
 
 export default class NightWatchConfigRepository {
   constructor(state) {

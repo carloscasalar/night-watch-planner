@@ -1,4 +1,4 @@
-import { toCharacterEntity, toPlainCharacter } from './characterAdapters';
+import { toCharacterEntity, toPlainCharacter } from './characterMappers';
 import PartyEntity from '../../domain/PartyEntity';
 
 export const toPartyEntity = ({ characters: plainCharacters }) => {
