@@ -6,7 +6,7 @@
     "start": "cross-env NODE_ENV=development parcel public/index.html ",
     "build": "cross-env NODE_ENV=production parcel build public/index.html --no-minify --public-url /",
     "test": "jest --watch --coverage",
-    "test:ci": "jest --verbose --coverage",
+    "test:ci": "jest --verbose",
     "lint": "eslint \"src/**/*.js\" \"src/**/*.jsx\""
   },
   "dependencies": {
