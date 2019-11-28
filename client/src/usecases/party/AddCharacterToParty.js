@@ -3,11 +3,11 @@ export default class AddCharacterToParty {
     this.partyRepository = PartyRepository;
   }
 
-    execute = (name) => {
-      const party = this.partyRepository
-        .getParty()
-        .addCharacterWith(name);
+  execute = (name) => {
+    const party = this.partyRepository
+      .getParty()
+      .addCharacterWith(name);
 
-      this.partyRepository.save(party);
-    }
+    this.partyRepository.save(party);
+  }
 }

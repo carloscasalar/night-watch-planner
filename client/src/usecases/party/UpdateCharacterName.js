@@ -3,15 +3,15 @@ export default class UpdateCharacterName {
     this.partyRepository = PartyRepository;
   }
 
-    execute = (characterId, name) => {
-      const party = this.partyRepository.getParty();
+  execute = (characterId, name) => {
+    const party = this.partyRepository.getParty();
 
-      const character = party
-        .findCharacterById(characterId)
-        .updateName(name);
+    const character = party
+      .findCharacterById(characterId)
+      .updateName(name);
 
-      party.updateCharacter(character);
+    party.updateCharacter(character);
 
-      this.partyRepository.save(party);
-    }
+    this.partyRepository.save(party);
+  }
 }
