@@ -1,4 +1,4 @@
-import { toPartyEntity, toPlainParty } from './partyAdapters';
+import { toPartyEntity, toPlainParty } from './partyMappers';
 
 export default class PartyRepository {
   constructor(state) {
