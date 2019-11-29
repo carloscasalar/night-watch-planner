@@ -9,7 +9,7 @@ const layout = props => (
 );
 
 layout.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default layout;

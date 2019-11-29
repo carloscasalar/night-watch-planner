@@ -23,3 +23,26 @@ export const configType = PropTypes.shape({
 });
 
 export const forbiddenNamesType = PropTypes.arrayOf(PropTypes.string);
+
+export const watchType = PropTypes.shape({
+  sleepingCharacters: PropTypes.arrayOf(PropTypes.string),
+  watchfulCharacters: PropTypes.arrayOf(PropTypes.string),
+  length: PropTypes.number,
+});
+
+export const scoreType = PropTypes.shape({
+  hardScore: PropTypes.number,
+  mediumScore: PropTypes.number,
+  softScore: PropTypes.number,
+  feasible: PropTypes.bool,
+});
+
+export const planType = PropTypes.shape({
+  watches: PropTypes.arrayOf(watchType),
+  score: scoreType,
+  time: PropTypes.number,
+});
+
+export const plansType = PropTypes.shape({
+  plans: planType,
+});
