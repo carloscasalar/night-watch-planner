@@ -74,7 +74,7 @@ jobs:
           path: optimizer/target/surefire-reports
 
       - store_artifacts:
-          path: optimizer/target/omptimizer-0.1.0-SNAPSHOT.jar
+          path: optimizer/target/omptimizer-0.1.0.jar
 
 workflows:
   version: 2
