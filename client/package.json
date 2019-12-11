@@ -1,0 +1,67 @@
+{
+  "name": "night-watch-planner",
+  "description": "Night watch planner for rpgs",
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development parcel public/index.html ",
+    "build": "cross-env NODE_ENV=production parcel build public/index.html --no-minify --public-url /",
+    "test": "jest --watch --coverage",
+    "test:ci": "jest --verbose",
+    "lint": "eslint \"src/**/*.js\" \"src/**/*.jsx\""
+  },
+  "dependencies": {
+    "autoprefixer": "^7.2.1",
+    "axios": "^0.18.0",
+    "babel-preset-react-app": "^3.1.0",
+    "parcel-bundler": "latest",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.3.0"
+  },
+  "postcss": {
+    "modules": false,
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          ">1%",
+          "last 4 versions",
+          "Firefox ESR",
+          "not ie < 9"
+        ],
+        "flexbox": "no-2009"
+      }
+    }
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "babel-preset-stage-1": "^6.24.1",
+    "cross-env": "^5.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.4.3",
+    "less": "^2.7.3"
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+      "jest": true,
+      "browser": true
+    },
+    "root": true
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:carloscasalar/night-watch-planner.git"
+  },
+  "private": true
+}

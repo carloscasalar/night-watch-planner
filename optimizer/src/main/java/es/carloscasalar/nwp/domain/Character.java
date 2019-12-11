@@ -41,7 +41,7 @@ public class Character {
 
     public int overSleepTime(int totalTimeSleeping) {
         int excess = totalTimeSleeping - requiredSleepTime;
-        return excess > 0 ? excess : 0;
+        return Math.max(excess, 0);
     }
 
     public boolean needsToSleep() {

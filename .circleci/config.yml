@@ -1,6 +1,53 @@
 version: 2
 jobs:
-  build:
+  install-client:
+    working_directory: ~/night-watch-planner
+
+    docker:
+      - image: circleci/node:10.16
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: client-dependency-cache-{{ checksum "client/package.json" }}
+
+      - run: cd ~/night-watch-planner/client && npm ci
+
+      - save_cache:
+          paths:
+            - ~/night-watch-planner/client/node_modules
+          key: client-dependency-cache-{{ checksum "client/package.json" }}
+
+  test-client:
+    working_directory: ~/night-watch-planner
+
+    docker:
+      - image: circleci/node:10.16
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: client-dependency-cache-{{ checksum "client/package.json" }}
+
+      - run: cd ~/night-watch-planner/client && npm run test:ci
+
+  linter-client:
+    working_directory: ~/night-watch-planner
+
+    docker:
+      - image: circleci/node:10.16
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: client-dependency-cache-{{ checksum "client/package.json" }}
+
+      - run: cd ~/night-watch-planner/client && npm run lint
+
+  build-and-test-backend:
 
     working_directory: ~/night-watch-planner
 
@@ -27,4 +74,17 @@ jobs:
           path: optimizer/target/surefire-reports
 
       - store_artifacts:
-          path: optimizer/target/omptimizer-0.0.3-SNAPSHOT.jar
+          path: optimizer/target/omptimizer-0.1.0.jar
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build-and-test-backend
+      - install-client
+      - linter-client:
+          requires:
+            - install-client
+      - test-client:
+          requires:
+            - install-client

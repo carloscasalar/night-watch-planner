@@ -1,4 +1,4 @@
-# Night Watch Planner v0.0.3
+# Night Watch Planner v0.1.0 [![CircleCI](https://circleci.com/gh/carloscasalar/night-watch-planner/tree/master.svg?style=svg)](https://circleci.com/gh/carloscasalar/night-watch-planner/tree/master)
 
 Just a Night watch planner optimizer for use in RPGs like _[Pathfinder](http://paizo.com/pathfinder)_.
 
@@ -7,7 +7,6 @@ Just a Night watch planner optimizer for use in RPGs like _[Pathfinder](http://p
 Sample Plan Request with this body:
 ```json
 {
-	"lengthOfWatch": 60,
 	"maxTotalTimeSpent": 720,
 	"party": [
 		{
@@ -40,7 +39,6 @@ curl --request POST \
   --url http://localhost:3000/v1/optimize \
   --header 'content-type: application/json' \
   --data '{
-	"lengthOfWatch": 60,
 	"maxTotalTimeSpent": 720,
 	"party": [
 		{

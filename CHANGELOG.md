@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## V0.1.0 2019-12-11
+
+### Add
+* Web client to build a party and request for a night watch plan.
+
 ## v0.0.3 2018-02-05
 
 ### Modified
