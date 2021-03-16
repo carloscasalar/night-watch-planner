@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { ui } from '../ui/reducer';
 
 const rootReducer = combineReducers({
-    ui,
+  ui,
 });
 export type RootState = StateType<typeof rootReducer>;
 
