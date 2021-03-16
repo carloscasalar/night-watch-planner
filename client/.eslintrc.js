@@ -1,14 +1,12 @@
 module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-  plugins: [
-    "@typescript-eslint",
-    "jest"
-  ],
+  plugins: ['@typescript-eslint', 'jest'],
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:jest/recommended",
-    "plugin:prettier/recommended"
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jest/recommended',
+    'prettier',
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
@@ -18,8 +16,21 @@ module.exports = {
     },
   },
   rules: {
-    // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
+    semi: ['error', 'always'],
+    'no-extra-semi': ['error'],
+    'class-methods-use-this': ['off'],
+    'comma-dangle': ['error', 'always-multiline'],
+    'eol-last': ['error', 'always'],
+    'quote-props': ['error', 'as-needed'],
+    'key-spacing': [
+      'error',
+      {
+        afterColon: true,
+        mode: 'minimum',
+      },
+    ],
   },
   settings: {
     react: {
