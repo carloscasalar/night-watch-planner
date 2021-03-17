@@ -1,7 +1,7 @@
 import { StateType } from 'typesafe-actions';
 import { combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { ui } from '../ui/reducer';
+import { ui } from '../../features/ui/reducer';
 
 const rootReducer = combineReducers({
   ui,
