@@ -1,9 +1,13 @@
 import { createReducer } from 'typesafe-actions';
 
+const TWELVE_HOURS_IN_MINUTES = 12 * 60;
+
 export interface PlanState {
-  waitingForPlan: boolean;
+  isLoading: boolean;
+  maxTotalTimeSpent: number;
 }
 
 export const plan = createReducer<PlanState>({
-  waitingForPlan: false,
+  isLoading: false,
+  maxTotalTimeSpent: TWELVE_HOURS_IN_MINUTES,
 });
