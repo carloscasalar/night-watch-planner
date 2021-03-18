@@ -5,3 +5,8 @@ export interface Character {
   name: string;
   requiredSleepTime: number;
 }
+
+export interface FormattedCharacter {
+  name: string;
+  requiredSleepTime: string;
+}

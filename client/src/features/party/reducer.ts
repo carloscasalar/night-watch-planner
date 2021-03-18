@@ -7,6 +7,27 @@ export interface PartyState {
 }
 
 export const party = createReducer<PartyState>({
-  characters: {},
-  order: [],
+  characters: {
+    gandalf: {
+      id: 'gandalf',
+      name: 'Gandalf',
+      requiredSleepTime: 5 * 60,
+    },
+    legolas: {
+      id: 'legolas',
+      name: 'Legolas',
+      requiredSleepTime: 4 * 60,
+    },
+    boromir: {
+      id: 'boromir',
+      name: 'Boromir',
+      requiredSleepTime: 6 * 60,
+    },
+    frodo: {
+      id: 'frodo',
+      name: 'Frodo',
+      requiredSleepTime: 6 * 60,
+    },
+  },
+  order: ['gandalf', 'legolas', 'frodo', 'boromir'],
 });
