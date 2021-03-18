@@ -1,9 +1,9 @@
 import { createReducer } from 'typesafe-actions';
 
-export interface UiState {
+export interface PlanState {
   waitingForPlan: boolean;
 }
 
-export const ui = createReducer<UiState>({
+export const plan = createReducer<PlanState>({
   waitingForPlan: false,
 });

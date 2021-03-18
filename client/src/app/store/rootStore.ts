@@ -1,10 +1,10 @@
 import { StateType } from 'typesafe-actions';
 import { combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { ui } from '../ui/reducer';
+import { plan } from '../../features/plan/reducer';
 
 const rootReducer = combineReducers({
-  ui,
+  plan,
 });
 export type RootState = StateType<typeof rootReducer>;
 
