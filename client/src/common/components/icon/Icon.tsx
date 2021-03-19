@@ -5,20 +5,17 @@ import { useGetIconAttributes } from './useGetIconAttributes';
 export interface IconProps {
   name: IconName;
   foregroundColor?: string;
-  backgroundColor?: string;
   className?: string;
 }
 
 export const Icon: FC<IconProps> = ({
   name,
   foregroundColor = 'white',
-  backgroundColor = 'currentColor',
   className,
 }) => {
   const { viewBox, stroke, markup } = useGetIconAttributes(
     name,
     foregroundColor,
-    backgroundColor,
   );
   return (
     <svg
