@@ -15,10 +15,10 @@ export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
   );
   return (
     character && (
-      <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+      <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg shadow-lg">
         <Icon
           name="barbarian"
-          className="w-16 h-16 flex-shrink-0 rounded-full mr-4 bg-grey-300"
+          className="w-12 h-12 rounded-full mr-4 bg-grey-300"
         />
         <div className="flex-grow">
           <h2 className="text-gray-900 title-font font-medium">
