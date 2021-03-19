@@ -10,9 +10,11 @@ export const PartyTable: FC = () => {
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap -m-2">
           <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            {characterIds.map((id) => (
-              <CharacterCard characterId={id} />
-            ))}
+            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+              {characterIds.map((id) => (
+                <CharacterCard characterId={id} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
