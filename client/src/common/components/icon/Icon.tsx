@@ -12,7 +12,7 @@ export interface IconProps {
 export const Icon: FC<IconProps> = ({
   name,
   foregroundColor = 'white',
-  backgroundColor = 'black',
+  backgroundColor = 'currentColor',
   className,
 }) => {
   const { viewBox, stroke, markup } = useGetIconAttributes(
