@@ -7,7 +7,7 @@ export const Header: FC = () => (
       <div className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
         <Icon
           name="campfire"
-          className="w-10 h-10 text-white p-2 bg-green-500 rounded-full"
+          className="w-10 h-10 text-white bg-green-500 rounded-full text-green-300"
         />
         <span className="ml-3 text-xl">Night Watch Planner</span>
       </div>
