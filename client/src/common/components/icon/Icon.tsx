@@ -1,13 +1,25 @@
 import { FC } from 'react';
-import { iconAttributes, IconName } from './iconAttributes';
+import { IconName } from './iconAttributes';
+import { useGetIconAttributes } from './useGetIconAttributes';
 
 export interface IconProps {
   name: IconName;
+  foregroundColor?: string;
+  backgroundColor?: string;
   className?: string;
 }
 
-export const Icon: FC<IconProps> = ({ name, className }) => {
-  const { viewBox, stroke, paths } = iconAttributes[name];
+export const Icon: FC<IconProps> = ({
+  name,
+  foregroundColor = 'white',
+  backgroundColor = 'black',
+  className,
+}) => {
+  const { viewBox, stroke, markup } = useGetIconAttributes(
+    name,
+    foregroundColor,
+    backgroundColor,
+  );
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +28,7 @@ export const Icon: FC<IconProps> = ({ name, className }) => {
       stroke={stroke}
       className={className}
     >
-      {paths}
+      {markup}
     </svg>
   );
 };
