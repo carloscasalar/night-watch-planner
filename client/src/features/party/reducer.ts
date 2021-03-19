@@ -16,7 +16,7 @@ export const party = createReducer<PartyState>({
     legolas: {
       id: 'legolas',
       name: 'Legolas',
-      requiredSleepTime: 4 * 60,
+      requiredSleepTime: 4 * 60 + 30,
     },
     boromir: {
       id: 'boromir',
