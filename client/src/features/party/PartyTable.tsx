@@ -7,16 +7,10 @@ export const PartyTable: FC = () => {
   const characterIds = useSelector(getCharacterIds);
   return (
     <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-wrap -m-2">
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              {characterIds.map((id) => (
-                <CharacterCard characterId={id} />
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className="container px-5 py-24 mx-auto grid grid-cols-3 gap-3">
+        {characterIds.map((id) => (
+          <CharacterCard characterId={id} />
+        ))}
       </div>
     </section>
   );
