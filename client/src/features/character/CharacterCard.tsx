@@ -18,7 +18,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
       <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg shadow-lg">
         <Icon
           name="barbarian"
-          className="w-12 h-12 rounded-full mr-4 bg-grey-300"
+          className="w-12 h-12 rounded-full mr-4 bg-grey-300 text-black"
         />
         <div className="flex-grow">
           <h2 className="text-gray-900 title-font font-medium">
