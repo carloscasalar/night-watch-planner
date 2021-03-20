@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { CharacterCard } from '../character/CharacterCard';
 import { getCharacterIds } from './getCharacterIds';
+import { AddCharacterButton } from '../character/AddCharacterButton';
 
 export const PartyTable: FC = () => {
   const characterIds = useSelector(getCharacterIds);
@@ -11,6 +12,7 @@ export const PartyTable: FC = () => {
         {characterIds.map((id) => (
           <CharacterCard characterId={id} />
         ))}
+        <AddCharacterButton />
       </div>
     </section>
   );
