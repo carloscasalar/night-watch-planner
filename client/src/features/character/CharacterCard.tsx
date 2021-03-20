@@ -15,18 +15,18 @@ export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
   );
   return (
     character && (
-      <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg shadow-lg">
+      <div className="flex items-center border-gray-200 border p-4 rounded-lg shadow-lg">
         <Icon
           name="barbarian"
-          className="w-12 h-12 rounded-full mr-4 text-black"
+          className="w-24 h-24 rounded-full mr-4 text-black"
         />
         <div className="flex-grow">
-          <h2 className="text-gray-900 title-font font-medium">
+          <h2 className="text-gray-900 title-font font-medium text-2xl">
             {character?.name}
           </h2>
-          <p className="text-gray-500 flex items-center">
-            <Icon name="sand-clock" className="w-4 h-4 inline-block" />
-            {character?.requiredSleepTime}
+          <p className="text-gray-500 flex items-center space-x-4 text-grey-700 text-lg">
+            <Icon name="sleep-time" className="w-12 h-12 inline-block" />
+            <span className="pt-3">{character?.requiredSleepTime}</span>
           </p>
         </div>
       </div>
