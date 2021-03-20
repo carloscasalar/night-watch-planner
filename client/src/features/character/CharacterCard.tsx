@@ -24,7 +24,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
           <h2 className="text-gray-900 title-font font-medium text-2xl">
             {character?.name}
           </h2>
-          <p className="text-gray-500 flex items-center space-x-4 text-grey-700 text-lg">
+          <p className="flex items-center space-x-4 text-gray-700 text-lg">
             <Icon name="sleep-time" className="w-12 h-12 inline-block" />
             <span className="pt-3">{character?.requiredSleepTime}</span>
           </p>
