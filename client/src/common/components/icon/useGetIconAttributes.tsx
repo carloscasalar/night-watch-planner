@@ -11,7 +11,7 @@ export const useGetIconAttributes = (
   iconName: IconName,
   foregroundColor: string,
 ): ComputedIconAttributes => {
-  const { viewBox, stroke, getMarkup } = iconAttributes[iconName];
+  const { getMarkup, ...otherProps } = iconAttributes[iconName];
   const markup = useMemo(
     () =>
       getMarkup({
@@ -19,5 +19,5 @@ export const useGetIconAttributes = (
       }),
     [getMarkup, foregroundColor],
   );
-  return { viewBox, stroke, markup };
+  return { ...otherProps, markup };
 };

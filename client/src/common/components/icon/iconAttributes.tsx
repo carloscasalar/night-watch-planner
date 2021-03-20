@@ -8,14 +8,27 @@ type GetMarkupFn = (opts: MarkupOpts) => ReactElement[];
 
 export interface Attributes {
   viewBox: string;
-  stroke: string;
+  stroke?: string;
+  fill?: string;
   getMarkup: GetMarkupFn;
 }
 
 const attributes = {
+  add: {
+    viewBox: '0 0 20 20',
+    fill: 'currentColor',
+    getMarkup: () => [
+      <path
+        fillRule="evenodd"
+        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+        clipRule="evenodd"
+      />,
+    ],
+  },
   'add-character': {
     viewBox: '0 0 24 24',
     stroke: 'currentColor',
+    fill: 'none',
     getMarkup: ({ foregroundColor }: MarkupOpts) => [
       <path
         strokeLinecap="round"
@@ -29,6 +42,7 @@ const attributes = {
   barbarian: {
     viewBox: '0 0 512 512',
     stroke: 'currentColor',
+    fill: 'none',
     getMarkup: ({ foregroundColor }: MarkupOpts) => [
       <path d="M0 0h512v512H0z" fill="currentColor" fillOpacity="1"></path>,
       <g transform="translate(0,0)">
@@ -42,6 +56,7 @@ const attributes = {
   campfire: {
     viewBox: '0 0 512 512',
     stroke: 'currentColor',
+    fill: 'none',
     getMarkup: ({ foregroundColor }: MarkupOpts) => [
       <rect
         height="512"
@@ -63,6 +78,7 @@ const attributes = {
   'elf-ear': {
     viewBox: '0 0 512 512',
     stroke: 'currentColor',
+    fill: 'none',
     getMarkup: ({ foregroundColor }: MarkupOpts) => [
       <path d="M0 0h512v512H0z" fill={foregroundColor} fillOpacity="1"></path>,
       <g transform="translate(0,0)">
@@ -74,9 +90,34 @@ const attributes = {
       </g>,
     ],
   },
+  minus: {
+    viewBox: '0 0 20 20',
+    fill: 'currentColor',
+    getMarkup: () => [
+      <path
+        fillRule="evenodd"
+        d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+        clipRule="evenodd"
+      />,
+    ],
+  },
+  party: {
+    viewBox: '0 0 24 24',
+    stroke: 'currentColor',
+    fill: 'none',
+    getMarkup: () => [
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+      />,
+    ],
+  },
   rogue: {
     viewBox: '0 0 512 512',
     stroke: 'currentColor',
+    fill: 'none',
     getMarkup: ({ foregroundColor }: MarkupOpts) => [
       <path d="M0 0h512v512H0z" fill={foregroundColor} fillOpacity="1"></path>,
       <g transform="translate(0,0)">
@@ -91,6 +132,7 @@ const attributes = {
   'sand-clock': {
     viewBox: '0 0 512 512',
     stroke: 'currentColor',
+    fill: 'none',
     getMarkup: () => [
       <g transform="translate(0,0)">
         <path
@@ -104,6 +146,7 @@ const attributes = {
   'sleep-time': {
     viewBox: '0 0 512 512',
     stroke: 'currentColor',
+    fill: 'none',
     getMarkup: ({ foregroundColor }: MarkupOpts) => [
       <g transform="translate(0,0)">
         <path
@@ -135,6 +178,46 @@ const attributes = {
             fill="currentColor"
             fillOpacity="1"
             d="M164 59v16H92V59zm-10 25c0 16-10 40-26 40s-26-24-26-40zm-26 48c16 0 26 24 26 40h-52c0-16 10-40 26-40zm36 49v16H92v-16z"
+          ></path>
+        </g>
+      </g>,
+    ],
+  },
+  watchtower: {
+    viewBox: '0 0 512 512',
+    stroke: 'currentColor',
+    fill: 'none',
+    getMarkup: ({ foregroundColor }: MarkupOpts) => [
+      <g transform="translate(0,0)">
+        <path
+          d="M256 32l-96 48h23v71h-32v50h30.945L155.36 440.244l-.653.477.522.72-4.175 37.566-.994 8.945 17.89 1.99.995-8.946L171.61 457h168.78l2.665 23.994.994 8.945 17.89-1.99-.995-8.944-4.174-37.567.523-.72-.654-.476L330.054 201H361v-50h-32V80h23l-96-48zm-48 64h32v48h-32V96zm64 0h32v48h-32V96zm-103 73h14v14h-14v-14zm32 0h14v14h-14v-14zm32 0h14v14h-14v-14zm32 0h14v14h-14v-14zm32 0h14v14h-14v-14zm32 0h14v14h-14v-14zm-113.328 32h80.656L256 236.848 215.672 201zm-16.65 9.283L240.33 247h-45.385l4.08-36.717zm113.955 0l4.08 36.717h-45.385l41.305-36.717zM192.945 265h31.383l-34.822 30.953 3.44-30.953zm58.477 0h9.156l51.75 46H199.672l51.75-46zm36.25 0h31.383l3.44 30.953L287.67 265zm-83.994 64h104.644L256 367.053 203.678 329zm-18.8 8.586L236.323 375h-55.6l4.157-37.414zm142.243 0L331.278 375h-55.6l51.444-37.414zM178.724 393h41.6l-45.26 32.914 3.66-32.914zm72.205 0h10.144l63.25 46H187.678l63.25-46zm40.75 0h41.6l3.658 32.914L291.678 393z"
+          fill="currentColor"
+          fillOpacity="1"
+        ></path>
+      </g>,
+      <g transform="translate(256,256)">
+        <g>
+          <circle
+            cx="128"
+            cy="128"
+            r="128"
+            fill={foregroundColor}
+            fillOpacity="1"
+          ></circle>
+          <circle
+            stroke="currentColor"
+            stroke-opacity="1"
+            fill={foregroundColor}
+            fillOpacity="1"
+            stroke-width="18"
+            cx="128"
+            cy="128"
+            r="101"
+          ></circle>
+          <path
+            fill="currentColor"
+            fillOpacity="1"
+            d="M128 55a73 73 0 0 0-38.64 11.113A64 64 0 0 1 105.5 64a64 64 0 0 1 64 64 64 64 0 0 1-64 64 64 64 0 0 1-16.09-2.137A73 73 0 0 0 128 201a73 73 0 0 0 73-73 73 73 0 0 0-73-73z"
           ></path>
         </g>
       </g>,

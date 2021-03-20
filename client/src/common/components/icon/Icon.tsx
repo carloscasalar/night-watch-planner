@@ -13,17 +13,12 @@ export const Icon: FC<IconProps> = ({
   foregroundColor = 'white',
   className,
 }) => {
-  const { viewBox, stroke, markup } = useGetIconAttributes(
-    name,
-    foregroundColor,
-  );
+  const { markup, ...otherProps } = useGetIconAttributes(name, foregroundColor);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox={viewBox}
-      stroke={stroke}
       className={className}
+      {...otherProps}
     >
       {markup}
     </svg>
