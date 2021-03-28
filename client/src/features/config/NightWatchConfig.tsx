@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Icon } from '../../common/components/icon/Icon';
 
-export const PlanConfiguration: FC = () => {
+export const NightWatchConfig: FC = () => {
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-5 mx-auto">
