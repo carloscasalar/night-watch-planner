@@ -23,6 +23,7 @@
     "declaration": false
   },
   "include": [
-    "src"
+    "src",
+    "external.d.ts"
   ]
 }
