@@ -12,7 +12,7 @@ export const PartyTable: FC = () => {
         <div className="flex flex-wrap content-start items-center">
           <h1 className="text-3xl py-5 font-bold title-font">Characters</h1>
         </div>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
           {characterIds.map((id) => (
             <CharacterCard characterId={id} />
           ))}
