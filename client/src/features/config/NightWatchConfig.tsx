@@ -16,26 +16,28 @@ export const NightWatchConfig: FC = () => {
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-5 mx-auto">
-        <div className="flex flex-wrap content-start items-center">
-          <h1 className="text-3xl py-5 font-bold title-font">
-            Plan Configuration
-          </h1>
-        </div>
-        <div className="flex flex-wrap content-start items-center space-x-2 text-gray-700 text-lg">
-          <Icon name="sand-clock" className="w-5 h-5 inline-block" />
-          <span>Max time spent:</span>
-          <span>{maxTimeSpent}</span>
-          <div onClick={increaseTime}>
-            <Icon
-              name="add"
-              className="w-5 h-5 text-gray-500 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
-            />
-          </div>
-          <div onClick={decreaseTime}>
-            <Icon
-              name="minus"
-              className="w-5 h-5 text-gray-300 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
-            />
+        <h1 className="text-3xl py-5 font-bold title-font">
+          Plan Configuration
+        </h1>
+        <h2 className="title-font font-medium text-xl px-3">Max time spent</h2>
+        <div className="flex">
+          <Icon name="sand-clock" className="w-16 h-16" />
+          <div className="flex flex-col">
+            <span className="text-xl">{maxTimeSpent}</span>
+            <div className="flex">
+              <div className="p-1" onClick={increaseTime}>
+                <Icon
+                  name="add"
+                  className="w-8 h-8 text-gray-500 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
+                />
+              </div>
+              <div className="p-1" onClick={decreaseTime}>
+                <Icon
+                  name="minus"
+                  className="w-8 h-8 text-gray-300 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
