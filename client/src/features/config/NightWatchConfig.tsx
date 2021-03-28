@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Icon } from '../../common/components/icon/Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormattedMaxTotalTimeSpent } from './getFormattedMaxTotalTimeSpent';
 import { increaseCharacterRequiredSleepTime } from './increaseMaxTotalTimeSpentAction';
+import { TimeCounter } from '../../common/components/timeCounter/TimeCounter';
 
 const MINUTES_INCREMENT = 30;
 
@@ -19,27 +19,14 @@ export const NightWatchConfig: FC = () => {
         <h1 className="text-3xl py-5 font-bold title-font">
           Plan Configuration
         </h1>
-        <h2 className="title-font font-medium text-xl px-3">Max time spent</h2>
-        <div className="flex">
-          <Icon name="sand-clock" className="w-16 h-16" />
-          <div className="flex flex-col">
-            <span className="text-xl">{maxTimeSpent}</span>
-            <div className="flex">
-              <div className="p-1" onClick={increaseTime}>
-                <Icon
-                  name="add"
-                  className="w-8 h-8 text-gray-500 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
-                />
-              </div>
-              <div className="p-1" onClick={decreaseTime}>
-                <Icon
-                  name="minus"
-                  className="w-8 h-8 text-gray-300 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <TimeCounter
+          icon="sand-clock"
+          size="big"
+          label="Max time spent"
+          value={maxTimeSpent}
+          increase={increaseTime}
+          decrease={decreaseTime}
+        />
       </div>
     </section>
   );
