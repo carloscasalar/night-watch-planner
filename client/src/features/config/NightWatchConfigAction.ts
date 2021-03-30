@@ -1,8 +1,8 @@
 import { ActionType } from 'typesafe-actions';
-import { increaseCharacterRequiredSleepTime } from './increaseMaxTotalTimeSpentAction';
+import { increaseMaxTotalTimeSpentTime } from './increaseMaxTotalTimeSpentAction';
 
 const ActionCreators = {
-  increaseCharacterRequiredSleepTime,
+  increaseCharacterRequiredSleepTime: increaseMaxTotalTimeSpentTime,
 };
 
 export type NightWatchConfigAction = ActionType<typeof ActionCreators>;
