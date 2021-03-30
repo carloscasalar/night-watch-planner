@@ -1,3 +1,5 @@
+import { Character } from '../features/character/schema';
+
 const DEFAULT_NAME = 'No name character';
 const MIN_TIME = 0;
 
@@ -48,11 +50,11 @@ export class CharacterEntity {
     return this._requiredSleepTime;
   }
 
-  toJSON = () => ({
+  toJSON = (): Character => ({
     id: this._id,
     name: this._name,
     requiredSleepTime: this._requiredSleepTime,
   });
 
-  copy = () => new CharacterEntity(this.toJSON());
+  copy = (): CharacterEntity => new CharacterEntity(this.toJSON());
 }

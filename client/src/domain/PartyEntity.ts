@@ -12,19 +12,19 @@ export interface PartyEntityOps {
 }
 
 export class PartyEntity {
-  private characters: CharacterEntity[];
+  private characterList: CharacterEntity[];
   constructor({
     characters = NO_CHARACTERS,
   }: Partial<PartyEntityOps> = EMPTY_PARTY) {
-    this.characters = characters;
+    this.characterList = characters;
   }
 
   get isEmpty(): boolean {
-    return this.characters.length === 0;
+    return this.characterList.length === 0;
   }
 
   findCharacterById(characterId: CharacterId): CharacterEntity {
-    const character = this.characters.find(({ id }) => id === characterId);
+    const character = this.characterList.find(({ id }) => id === characterId);
     if (!character) {
       throw new CharacterNotFoundException();
     }
@@ -35,22 +35,38 @@ export class PartyEntity {
   addCharacterWith(name: string): PartyEntity {
     const id = this.newCharacterId();
     const character = new CharacterEntity({ id, name });
-    this.characters.push(character);
+    this.characterList.push(character);
     return this;
   }
 
   updateCharacter(character: CharacterEntity): PartyEntity {
-    const characterIndex = this.characters.findIndex(
+    const characterIndex = this.characterList.findIndex(
       ({ id }) => id === character.id,
     );
 
-    this.characters[characterIndex] = character;
+    this.characterList[characterIndex] = character;
     return this;
   }
 
   removeCharacter(characterId: CharacterId): PartyEntity {
-    this.characters = this.characters.filter(({ id }) => id !== characterId);
+    this.characterList = this.characterList.filter(
+      ({ id }) => id !== characterId,
+    );
     return this;
+  }
+
+  increaseCharacterSleepTime(
+    characterId: CharacterId,
+    timeIncrement: number,
+  ): PartyEntity {
+    const character = this.findCharacterById(characterId);
+    character.increaseRequiredSleepTime(timeIncrement);
+
+    return this;
+  }
+
+  get characters(): CharacterEntity[] {
+    return [...this.characterList];
   }
 
   private newCharacterId(): string {
