@@ -5,10 +5,10 @@ export class IncreaseMaxTotalTimeSpent {
     private readonly nightWatchConfigRepository: NightWatchConfigRepository,
   ) {}
 
-  execute(timeIncrease: number): void {
+  execute(minutes: number): void {
     const config = this.nightWatchConfigRepository
       .getNightWatchConfig()
-      .increaseMaxTotalTimeSpent(timeIncrease);
+      .increaseMaxTotalTimeSpent(minutes);
 
     this.nightWatchConfigRepository.save(config);
   }

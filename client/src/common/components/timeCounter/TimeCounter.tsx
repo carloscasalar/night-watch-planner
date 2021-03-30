@@ -52,18 +52,18 @@ export const TimeCounter: FC<TimeCounterProps> = ({
         <div className="flex flex-col">
           <span className={styles[size].value}>{value}</span>
           <div className="flex">
-            <div className="p-1" onClick={increase}>
+            <button className="p-1" onClick={increase}>
               <Icon
                 name="add"
                 className={`${styles[size].controlIcon} text-gray-500 rounded-full shadow-lg hover:shadow-2xl cursor-pointer`}
               />
-            </div>
-            <div className="p-1" onClick={decrease}>
+            </button>
+            <button className="p-1" onClick={decrease}>
               <Icon
                 name="minus"
                 className={`${styles[size].controlIcon} text-gray-300 rounded-full shadow-lg hover:shadow-2xl cursor-pointer`}
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>
