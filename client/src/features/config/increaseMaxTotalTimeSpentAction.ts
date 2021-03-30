@@ -1,5 +1,5 @@
 import { createAction } from 'typesafe-actions';
 
-export const increaseCharacterRequiredSleepTime = createAction(
-  'INCREASE_CHARACTER_REQUIRED_SLEEP_TIME',
+export const increaseMaxTotalTimeSpentTime = createAction(
+  'INCREASE_MAX_TOTAL_TIME_SPENT',
 )<number>();
