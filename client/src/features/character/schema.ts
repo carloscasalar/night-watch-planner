@@ -1,7 +1,5 @@
-export type CharacterId = string;
-
 export interface Character {
-  id: CharacterId;
+  id: string;
   name: string;
   requiredSleepTime: number;
 }

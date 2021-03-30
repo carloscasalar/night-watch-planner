@@ -1,5 +1,5 @@
 import { createReducer, RootAction } from 'typesafe-actions';
-import { increaseMaxTotalTimeSpentTime } from './increaseMaxTotalTimeSpentAction';
+import { increaseMaxTotalTimeSpentTimeAction } from './increaseMaxTotalTimeSpentAction';
 import { NightWatchConfigStateRepository } from './NightWatchConfigStateRepository';
 import { IncreaseMaxTotalTimeSpent } from '../../usecases/IncreaseMaxTotalTimeSpent';
 
@@ -12,7 +12,7 @@ export interface NightWatchConfigState {
 export const config = createReducer<NightWatchConfigState, RootAction>({
   maxTotalTimeSpent: TWELVE_HOURS_IN_MINUTES,
 }).handleAction(
-  increaseMaxTotalTimeSpentTime,
+  increaseMaxTotalTimeSpentTimeAction,
   (state, { payload: timeIncrement }) => {
     const repository = new NightWatchConfigStateRepository(state);
     const useCase = new IncreaseMaxTotalTimeSpent(repository);
