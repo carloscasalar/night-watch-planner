@@ -1,18 +1,37 @@
-import { CharacterId } from './schema';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getFormattedCharacter } from './getFormattedCharacter';
 import { RootState } from '../../app/store/rootStore';
 import { Icon } from '../../common/components/icon/Icon';
+import { increaseCharacterSleepTimeAction } from './increaseCharacterSleepTimeAction';
+import { TimeCounter } from '../../common/components/timeCounter/TimeCounter';
+
+const MINUTES_INCREMENT = 30;
 
 export interface CharacterCardProps {
-  characterId: CharacterId;
+  characterId: string;
 }
 
 export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
+  const dispatch = useDispatch();
   const character = useSelector((state: RootState) =>
     getFormattedCharacter(state, characterId),
   );
+
+  const increaseSleepTime = () =>
+    dispatch(
+      increaseCharacterSleepTimeAction({
+        characterId,
+        minutes: MINUTES_INCREMENT,
+      }),
+    );
+  const decreaseSleepTime = () =>
+    dispatch(
+      increaseCharacterSleepTimeAction({
+        characterId,
+        minutes: -MINUTES_INCREMENT,
+      }),
+    );
   return (
     character && (
       <div className="flex items-center border-gray-200 border p-4 rounded-lg shadow-lg">
@@ -25,8 +44,14 @@ export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
             {character?.name}
           </h2>
           <p className="flex items-center space-x-4 text-gray-700 text-lg">
-            <Icon name="sleep-time" className="w-12 h-12 inline-block" />
-            <span className="pt-3">{character?.requiredSleepTime}</span>
+            <TimeCounter
+              icon="sleep-time"
+              size="small"
+              label="Sleep time"
+              value={character?.requiredSleepTime}
+              increase={increaseSleepTime}
+              decrease={decreaseSleepTime}
+            />
           </p>
         </div>
       </div>

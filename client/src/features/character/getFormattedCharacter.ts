@@ -1,10 +1,9 @@
 import { createSelector } from 'reselect';
-import { Character, CharacterId, FormattedCharacter } from './schema';
+import { Character, FormattedCharacter } from './schema';
 import { getCharacters } from '../party/getCharacters';
 import { toHourMinutes } from '../../common/format/toHourMinutes';
 
-const getId = (_status: unknown, id: CharacterId | undefined): CharacterId =>
-  id || '';
+const getId = (_status: unknown, id: string | undefined): string => id || '';
 
 const toFormattedCharacter = (character: Character): FormattedCharacter => ({
   name: character.name,
@@ -13,6 +12,6 @@ const toFormattedCharacter = (character: Character): FormattedCharacter => ({
 
 export const getFormattedCharacter = createSelector(
   [getCharacters, getId],
-  (characters: Record<CharacterId, Character>, id: CharacterId) =>
+  (characters: Record<string, Character>, id: string) =>
     characters[id] ? toFormattedCharacter(characters[id]) : null,
 );

@@ -1,12 +1,12 @@
-import { createReducer } from 'typesafe-actions';
-import { Character, CharacterId } from '../character/schema';
+import { createReducer, RootAction } from 'typesafe-actions';
+import { Character } from '../character/schema';
 
 export interface PartyState {
-  characters: Record<CharacterId, Character>;
-  order: CharacterId[];
+  characters: Record<string, Character>;
+  order: string[];
 }
 
-export const party = createReducer<PartyState>({
+export const party = createReducer<PartyState, RootAction>({
   characters: {
     gandalf: {
       id: 'gandalf',
