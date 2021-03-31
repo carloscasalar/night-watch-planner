@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormattedMaxTotalTimeSpent } from './getFormattedMaxTotalTimeSpent';
 import { increaseMaxTotalTimeSpentTimeAction } from './increaseMaxTotalTimeSpentAction';
-import { TimeCounter } from '../../common/components/timeCounter/TimeCounter';
+import { CounterControl } from '../../common/components/counterControl/CounterControl';
 
 const MINUTES_INCREMENT = 30;
 
@@ -19,7 +19,7 @@ export const NightWatchConfig: FC = () => {
         <h1 className="text-3xl py-5 font-bold title-font">
           Plan Configuration
         </h1>
-        <TimeCounter
+        <CounterControl
           icon="sand-clock"
           size="big"
           label="Max time spent"

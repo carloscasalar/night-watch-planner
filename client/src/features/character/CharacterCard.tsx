@@ -4,7 +4,7 @@ import { getFormattedCharacter } from './getFormattedCharacter';
 import { RootState } from '../../app/store/rootStore';
 import { Icon } from '../../common/components/icon/Icon';
 import { increaseCharacterSleepTimeAction } from './increaseCharacterSleepTimeAction';
-import { TimeCounter } from '../../common/components/timeCounter/TimeCounter';
+import { CounterControl } from '../../common/components/counterControl/CounterControl';
 
 const MINUTES_INCREMENT = 30;
 
@@ -44,7 +44,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
             {character?.name}
           </h2>
           <p className="flex items-center space-x-4 text-gray-700 text-lg">
-            <TimeCounter
+            <CounterControl
               icon="sleep-time"
               size="small"
               label="Sleep time"
