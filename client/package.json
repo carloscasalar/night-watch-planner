@@ -29,7 +29,9 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "tsc:check": "tsc --noEmit",
-    "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -46,6 +48,13 @@
   "devDependencies": {
     "@carloscasalar/eslint-config-react-ts": "1.0.0",
     "@carloscasalar/ts-config": "^1.0.0",
+    "@storybook/addon-actions": "^6.2.1",
+    "@storybook/addon-essentials": "^6.2.1",
+    "@storybook/addon-knobs": "^6.2.1",
+    "@storybook/addon-links": "^6.2.1",
+    "@storybook/node-logger": "^6.2.1",
+    "@storybook/preset-create-react-app": "^3.1.7",
+    "@storybook/react": "^6.2.1",
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "@types/react-redux": "^7.1.16",
     "@types/redux": "^3.6.0",
@@ -61,5 +70,8 @@
     "prettier": "^2.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "yarn": "1.22.10"
+  },
+  "resolutions": {
+    "babel-loader": "8.1.0"
   }
 }
