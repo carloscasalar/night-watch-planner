@@ -3,6 +3,7 @@ import { PartyState } from './reducer';
 import { PartyEntity } from '../../domain/PartyEntity';
 import { Character } from '../character/schema';
 import { CharacterEntity } from '../../domain/CharacterEntity';
+import { toEntityById } from '../../common/mappers/toEntityById';
 
 export class PartyStateRepository implements PartyRepository {
   private _state: PartyState;
@@ -26,15 +27,11 @@ export class PartyStateRepository implements PartyRepository {
   }
 
   save(partyEntity: PartyEntity): void {
-    const characterList = partyEntity.characters;
-    const order = characterList.map((c) => c.id as string);
-    const characters: Record<string, Character> = characterList.reduce(
-      (byId, character) => ({
-        ...byId,
-        [character.id]: { ...character.toJSON() },
-      }),
-      {},
+    const characterList: Character[] = partyEntity.characters.map((character) =>
+      character.serialize(),
     );
+    const order: string[] = characterList.map((c) => c.id);
+    const characters = toEntityById<string, Character>(characterList);
 
     this._state = {
       ...this._state,

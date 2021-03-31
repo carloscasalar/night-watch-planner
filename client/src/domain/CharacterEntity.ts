@@ -1,23 +1,17 @@
-const DEFAULT_NAME = 'No name character';
 const MIN_TIME = 0;
 
 export type CharacterId = string;
 export interface CharacterEntityAttributes {
   id: CharacterId;
-  name?: string;
-  requiredSleepTime?: number;
+  name: string;
+  requiredSleepTime: number;
 }
-export const DEFAULT_REQUIRED_SLEEP_MINUTES = 6 * 60;
 
 export class CharacterEntity implements CharacterEntityAttributes {
   private readonly _id: CharacterId;
   private _name: string;
   private _requiredSleepTime: number;
-  constructor({
-    id,
-    name = DEFAULT_NAME,
-    requiredSleepTime = DEFAULT_REQUIRED_SLEEP_MINUTES,
-  }: CharacterEntityAttributes) {
+  constructor({ id, name, requiredSleepTime }: CharacterEntityAttributes) {
     this._id = id;
     this._name = name;
     this._requiredSleepTime = requiredSleepTime;
@@ -48,7 +42,10 @@ export class CharacterEntity implements CharacterEntityAttributes {
     return this._requiredSleepTime;
   }
 
-  toJSON = (): CharacterEntityAttributes => this;
+  serialize(): CharacterEntityAttributes {
+    const { id, name, requiredSleepTime } = this;
+    return { id, name, requiredSleepTime };
+  }
 
   copy = (): CharacterEntity => new CharacterEntity(this);
 }
