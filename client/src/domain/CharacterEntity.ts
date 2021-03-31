@@ -1,17 +1,15 @@
-import { Character } from '../features/character/schema';
-
 const DEFAULT_NAME = 'No name character';
 const MIN_TIME = 0;
 
 export type CharacterId = string;
-export interface CharacterEntityOpts {
+export interface CharacterEntityAttributes {
   id: CharacterId;
   name?: string;
   requiredSleepTime?: number;
 }
 export const DEFAULT_REQUIRED_SLEEP_MINUTES = 6 * 60;
 
-export class CharacterEntity {
+export class CharacterEntity implements CharacterEntityAttributes {
   private readonly _id: CharacterId;
   private _name: string;
   private _requiredSleepTime: number;
@@ -19,7 +17,7 @@ export class CharacterEntity {
     id,
     name = DEFAULT_NAME,
     requiredSleepTime = DEFAULT_REQUIRED_SLEEP_MINUTES,
-  }: CharacterEntityOpts) {
+  }: CharacterEntityAttributes) {
     this._id = id;
     this._name = name;
     this._requiredSleepTime = requiredSleepTime;
@@ -50,11 +48,7 @@ export class CharacterEntity {
     return this._requiredSleepTime;
   }
 
-  toJSON = (): Character => ({
-    id: this._id,
-    name: this._name,
-    requiredSleepTime: this._requiredSleepTime,
-  });
+  toJSON = (): CharacterEntityAttributes => this;
 
-  copy = (): CharacterEntity => new CharacterEntity(this.toJSON());
+  copy = (): CharacterEntity => new CharacterEntity(this);
 }
