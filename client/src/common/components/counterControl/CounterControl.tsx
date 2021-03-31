@@ -4,7 +4,7 @@ import { IconName } from '../icon/iconAttributes';
 
 export type Size = 'small' | 'medium' | 'big';
 
-export interface TimeCounterProps {
+export interface CounterControlProps {
   icon: IconName;
   size: Size;
   label: string;
@@ -34,7 +34,7 @@ const styles = {
   },
 };
 
-export const TimeCounter: FC<TimeCounterProps> = ({
+export const CounterControl: FC<CounterControlProps> = ({
   icon,
   size = 'small',
   increase,
