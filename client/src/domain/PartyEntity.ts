@@ -1,30 +1,37 @@
 import { uuid } from 'uuidv4';
 import { CharacterEntity, CharacterId } from './CharacterEntity';
 import { CharacterNotFoundException } from './CharacterNotFoundException';
+import { toEntityById } from '../common/mappers/toEntityById';
 
-const NO_CHARACTERS: CharacterEntity[] = [];
-const EMPTY_PARTY = {
-  characters: NO_CHARACTERS,
-};
+const DEFAULT_REQUIRED_SLEEP_MINUTES = 6 * 60;
+
+type CharactersByID = Record<CharacterId, CharacterEntity>;
 
 export interface PartyEntityOps {
   characters: CharacterEntity[];
 }
 
 export class PartyEntity {
-  private characterList: CharacterEntity[];
-  constructor({
-    characters = NO_CHARACTERS,
-  }: Partial<PartyEntityOps> = EMPTY_PARTY) {
-    this.characterList = characters;
+  private charactersById: CharactersByID;
+  private characterOrder: CharacterId[];
+  constructor({ characters }: PartyEntityOps) {
+    if (!characters) {
+      this.charactersById = {};
+      this.characterOrder = [];
+      return;
+    }
+    this.charactersById = toEntityById<CharacterId, CharacterEntity>(
+      characters,
+    );
+    this.characterOrder = characters.map(({ id }) => id);
   }
 
   get isEmpty(): boolean {
-    return this.characterList.length === 0;
+    return this.characterOrder.length === 0;
   }
 
   findCharacterById(characterId: CharacterId): CharacterEntity {
-    const character = this.characterList.find(({ id }) => id === characterId);
+    const character = this.charactersById[characterId];
     if (!character) {
       throw new CharacterNotFoundException();
     }
@@ -34,23 +41,29 @@ export class PartyEntity {
 
   addCharacterWith(name: string): PartyEntity {
     const id = this.newCharacterId();
-    const character = new CharacterEntity({ id, name });
-    this.characterList.push(character);
+    this.charactersById[id] = new CharacterEntity({
+      id,
+      name,
+      requiredSleepTime: DEFAULT_REQUIRED_SLEEP_MINUTES,
+    });
+    this.characterOrder = [...this.characterOrder, id];
     return this;
   }
 
   updateCharacter(character: CharacterEntity): PartyEntity {
-    const characterIndex = this.characterList.findIndex(
-      ({ id }) => id === character.id,
-    );
-
-    this.characterList[characterIndex] = character;
+    this.charactersById[character.id] = character;
     return this;
   }
 
   removeCharacter(characterId: CharacterId): PartyEntity {
-    this.characterList = this.characterList.filter(
-      ({ id }) => id !== characterId,
+    const {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      [characterId]: characterToRemove,
+      ...charactersById
+    } = this.charactersById;
+    this.charactersById = charactersById;
+    this.characterOrder = this.characterOrder.filter(
+      (id) => id !== characterId,
     );
     return this;
   }
@@ -66,7 +79,7 @@ export class PartyEntity {
   }
 
   get characters(): CharacterEntity[] {
-    return [...this.characterList];
+    return this.characterOrder.map((id) => this.charactersById[id]);
   }
 
   private newCharacterId(): string {
