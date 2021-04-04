@@ -1,22 +1,36 @@
 import { Story, Meta } from '@storybook/react';
 
-import { CounterControl } from './CounterControl';
+import { CounterControl, CounterControlProps } from './CounterControl';
 import { action } from '@storybook/addon-actions';
-import { text, withKnobs } from '@storybook/addon-knobs';
 
 export default {
   title: 'Common/CounterControl',
   component: CounterControl,
-  decorators: [withKnobs],
+  // argTypes: {
+  //   icon: { control: {type:} },
+  //   size: { control: {type: }}
+  // },
 } as Meta;
 
-export const Big: Story = () => (
+export const CounterControlStory: Story<CounterControlProps> = ({
+  icon,
+  size,
+  label,
+  value,
+}) => (
   <CounterControl
-    icon="sand-clock"
-    size="big"
-    label={text('label', 'The label')}
-    value={text('value', '1h, 30min')}
+    icon={icon}
+    size={size}
+    label={label}
+    value={value}
     increase={action('increase pushed')}
     decrease={action('decrease pushed')}
   />
 );
+
+CounterControlStory.args = {
+  label: 'The label',
+  value: '1h, 30min',
+  size: 'big',
+  icon: 'sand-clock',
+};
