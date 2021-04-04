@@ -15,12 +15,12 @@ export interface CounterControlProps {
 
 const styles = {
   small: {
-    title: 'font-bold text-sm',
+    title: 'font-bold text-sm px-1',
     icon: 'w-12 h-12',
     value: 'text-base px-1',
   },
   medium: {
-    title: 'text-xl px-2',
+    title: 'font-bold text-xl px-1',
     icon: 'w-14 h-14',
     value: 'text-lg',
   },
