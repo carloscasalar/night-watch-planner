@@ -15,22 +15,19 @@ export interface CounterControlProps {
 
 const styles = {
   small: {
-    title: 'text-l px-1',
+    title: 'font-bold text-sm',
     icon: 'w-12 h-12',
-    value: 'text-base',
-    controlIcon: 'w-8 h-8',
+    value: 'text-base px-1',
   },
   medium: {
     title: 'text-xl px-2',
     icon: 'w-14 h-14',
     value: 'text-lg',
-    controlIcon: 'w-8 h-8',
   },
   big: {
-    title: 'text-xl px-3',
+    title: 'font-medium text-xl px-3',
     icon: 'w-16 h-16',
     value: 'text-xl',
-    controlIcon: 'w-8 h-8',
   },
 };
 
@@ -44,9 +41,7 @@ export const CounterControl: FC<CounterControlProps> = ({
 }) => {
   return (
     <div>
-      <h2 className={`title-font font-medium ${styles[size].title}`}>
-        {label}
-      </h2>
+      <h2 className={`title-font ${styles[size].title}`}>{label}</h2>
       <div className="flex">
         <Icon name={icon} className={styles[size].icon} />
         <div className="flex flex-col">
@@ -55,13 +50,13 @@ export const CounterControl: FC<CounterControlProps> = ({
             <button className="p-1" onClick={increase}>
               <Icon
                 name="add"
-                className={`${styles[size].controlIcon} text-gray-500 rounded-full shadow-lg hover:shadow-2xl cursor-pointer`}
+                className="w-6 h-6 text-gray-500 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
               />
             </button>
             <button className="p-1" onClick={decrease}>
               <Icon
                 name="minus"
-                className={`${styles[size].controlIcon} text-gray-300 rounded-full shadow-lg hover:shadow-2xl cursor-pointer`}
+                className="w-6 h-6 text-gray-300 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
               />
             </button>
           </div>

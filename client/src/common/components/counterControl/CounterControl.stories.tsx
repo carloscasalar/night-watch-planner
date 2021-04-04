@@ -6,10 +6,6 @@ import { action } from '@storybook/addon-actions';
 export default {
   title: 'Common/CounterControl',
   component: CounterControl,
-  // argTypes: {
-  //   icon: { control: {type:} },
-  //   size: { control: {type: }}
-  // },
 } as Meta;
 
 export const CounterControlStory: Story<CounterControlProps> = ({
