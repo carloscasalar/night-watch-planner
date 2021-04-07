@@ -20,6 +20,7 @@ export const Icons: Story<IconStoriesProps> = ({
       <div
         className="flex flex-col rounded shadow-md"
         style={{ color: `${textColor}` }}
+        key={iconName}
       >
         <Icon
           name={iconName as IconName}
