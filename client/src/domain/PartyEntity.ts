@@ -78,6 +78,13 @@ export class PartyEntity {
     return this;
   }
 
+  updateCharacterName(characterId: CharacterId, name: string): PartyEntity {
+    const character = this.findCharacterById(characterId);
+    character.updateName(name);
+
+    return this;
+  }
+
   get characters(): CharacterEntity[] {
     return this.characterOrder.map((id) => this.charactersById[id]);
   }
