@@ -3,6 +3,8 @@ import { Character } from '../character/schema';
 import { increaseCharacterSleepTimeAction } from '../character/increaseCharacterSleepTimeAction';
 import { PartyStateRepository } from './PartyStateRepository';
 import { IncreaseCharacterSleepTime } from '../../usecases/IncreaseCharacterSleepTime';
+import { updateCharacterNameAction } from '../character/updateCharacterNameAction';
+import { UpdateCharacterName } from '../../usecases/UpdateCharacterName';
 
 export interface PartyState {
   characters: Record<string, Character>;
@@ -33,14 +35,26 @@ export const party = createReducer<PartyState, RootAction>({
     },
   },
   order: ['gandalf', 'legolas', 'frodo', 'boromir'],
-}).handleAction(
-  increaseCharacterSleepTimeAction,
-  (state, { payload: { characterId, minutes } }) => {
-    const repository = new PartyStateRepository(state);
-    const useCase = new IncreaseCharacterSleepTime(repository);
+})
+  .handleAction(
+    increaseCharacterSleepTimeAction,
+    (state, { payload: { characterId, minutes } }) => {
+      const repository = new PartyStateRepository(state);
+      const useCase = new IncreaseCharacterSleepTime(repository);
 
-    useCase.execute(characterId, minutes);
+      useCase.execute(characterId, minutes);
 
-    return repository.state;
-  },
-);
+      return repository.state;
+    },
+  )
+  .handleAction(
+    updateCharacterNameAction,
+    (state, { payload: { characterId, name } }) => {
+      const repository = new PartyStateRepository(state);
+      const useCase = new UpdateCharacterName(repository);
+
+      useCase.execute(characterId, name);
+
+      return repository.state;
+    },
+  );

@@ -47,13 +47,13 @@ export const CounterControl: FC<CounterControlProps> = ({
         <div className="flex flex-col">
           <span className={styles[size].value}>{value}</span>
           <div className="flex">
-            <button className="p-1" onClick={increase}>
+            <button className="p-1 focus:outline-none" onClick={increase}>
               <Icon
                 name="add"
                 className="w-6 h-6 text-gray-500 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"
               />
             </button>
-            <button className="p-1" onClick={decrease}>
+            <button className="p-1 focus:outline-none" onClick={decrease}>
               <Icon
                 name="minus"
                 className="w-6 h-6 text-gray-300 rounded-full shadow-lg hover:shadow-2xl cursor-pointer"

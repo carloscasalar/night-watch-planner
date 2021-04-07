@@ -1,8 +1,10 @@
 import { increaseCharacterSleepTimeAction } from './increaseCharacterSleepTimeAction';
 import { ActionType } from 'typesafe-actions';
+import { updateCharacterNameAction } from './updateCharacterNameAction';
 
 const ActionCreators = {
-  increaseCharacterSleepTime: increaseCharacterSleepTimeAction,
+  increaseCharacterSleepTimeAction,
+  updateCharacterNameAction,
 };
 
 export type CharacterAction = ActionType<typeof ActionCreators>;
