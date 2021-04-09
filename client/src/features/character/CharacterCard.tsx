@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormattedCharacter } from './getFormattedCharacter';
 import { RootState } from '../../app/store/rootStore';
@@ -6,7 +6,7 @@ import { Icon } from '../../common/components/icon/Icon';
 import { increaseCharacterSleepTimeAction } from './increaseCharacterSleepTimeAction';
 import { CounterControl } from '../../common/components/counterControl/CounterControl';
 import { updateCharacterNameAction } from './updateCharacterNameAction';
-import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
+import { EditableText } from '../../common/components/editableText/EditableText';
 
 const MINUTES_INCREMENT = 30;
 
@@ -36,21 +36,13 @@ export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
       }),
     );
 
-  const domParser = useMemo(() => new DOMParser(), []);
-
-  const handleCharacterNameChange = ({
-    target: { value },
-  }: ContentEditableEvent) => {
-    const doc = domParser.parseFromString(value, 'text/html');
-    const name = doc.body.textContent || '';
-
+  const handleCharacterNameChange = (name: string) =>
     dispatch(
       updateCharacterNameAction({
         characterId,
         name,
       }),
     );
-  };
 
   return (
     character && (
@@ -60,9 +52,9 @@ export const CharacterCard: FC<CharacterCardProps> = ({ characterId }) => {
           className="w-16 h-16 rounded-full mr-4 text-black"
         />
         <div className="flex-grow">
-          <ContentEditable
-            html={character?.name}
-            tagName="h2"
+          <EditableText
+            value={character?.name}
+            as="h2"
             className="text-gray-900 title-font font-medium text-xl cursor-text"
             onChange={handleCharacterNameChange}
           />
