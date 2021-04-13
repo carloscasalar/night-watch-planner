@@ -6,5 +6,5 @@ export interface IncreaseCharacterSleepTimePayload {
 }
 
 export const increaseCharacterSleepTimeAction = createAction(
-  'INCREASE_CHARACTER_REQUIRED_SLEEP_TIME',
+  'CHARACTER/INCREASE_CHARACTER_REQUIRED_SLEEP_TIME',
 )<IncreaseCharacterSleepTimePayload>();

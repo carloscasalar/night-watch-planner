@@ -6,5 +6,5 @@ export interface UpdateCharacterNameActionPayload {
 }
 
 export const updateCharacterNameAction = createAction(
-  'UPDATE_CHARACTER_NAME',
+  'CHARACTER/UPDATE_CHARACTER_NAME',
 )<UpdateCharacterNameActionPayload>();
