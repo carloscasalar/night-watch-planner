@@ -5,6 +5,8 @@ import { PartyStateRepository } from './PartyStateRepository';
 import { IncreaseCharacterSleepTime } from '../../usecases/IncreaseCharacterSleepTime';
 import { updateCharacterNameAction } from '../character/updateCharacterNameAction';
 import { UpdateCharacterName } from '../../usecases/UpdateCharacterName';
+import { addCharacterAction } from '../character/addCharacterAction';
+import { AddCharacterWithName } from '../../usecases/AddCharacterWithName';
 
 export interface PartyState {
   characters: Record<string, Character>;
@@ -36,6 +38,14 @@ export const party = createReducer<PartyState, RootAction>({
   },
   order: ['gandalf', 'legolas', 'frodo', 'boromir'],
 })
+  .handleAction(addCharacterAction, (state, { payload: { name } }) => {
+    const repository = new PartyStateRepository(state);
+    const useCase = new AddCharacterWithName(repository);
+
+    useCase.execute(name);
+
+    return repository.state;
+  })
   .handleAction(
     increaseCharacterSleepTimeAction,
     (state, { payload: { characterId, minutes } }) => {
