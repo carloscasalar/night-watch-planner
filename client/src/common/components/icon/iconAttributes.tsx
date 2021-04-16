@@ -42,15 +42,24 @@ const attributes = {
     ],
   },
   remove: {
-    viewBox: '0 0 20 20',
+    viewBox: '0 0 512 512',
     fill: 'currentColor',
-    getMarkup: () => [
-      <path
+    getMarkup: ({ foregroundColor }: MarkupOpts) => [
+      <circle
         key="1"
-        fillRule="evenodd"
-        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-        clipRule="evenodd"
+        cx="256"
+        cy="256"
+        r="256"
+        fill={foregroundColor}
+        fillOpacity="0"
       />,
+      <g key="2" transform="translate(0,0)">
+        <path
+          d="M199 103v50h-78v30h270v-30h-78v-50H199zm18 18h78v32h-78v-32zm-79.002 80l30.106 286h175.794l30.104-286H137.998zm62.338 13.38l.64 8.98 16 224 .643 8.976-17.956 1.283-.64-8.98-16-224-.643-8.976 17.956-1.283zm111.328 0l17.955 1.284-.643 8.977-16 224-.64 8.98-17.956-1.284.643-8.977 16-224 .64-8.98zM247 215h18v242h-18V215z"
+          fill="currentColor"
+          fillOpacity="1"
+        />
+      </g>,
     ],
   },
   barbarian: {

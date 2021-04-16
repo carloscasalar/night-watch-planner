@@ -7,6 +7,8 @@ import { updateCharacterNameAction } from '../character/actions/updateCharacterN
 import { UpdateCharacterName } from '../../usecases/UpdateCharacterName';
 import { addCharacterAction } from '../character/actions/addCharacterAction';
 import { AddCharacterWithName } from '../../usecases/AddCharacterWithName';
+import { removeCharacterAction } from '../character/actions/removeCharacterAction';
+import { RemoveCharacter } from '../../usecases/RemoveCharacter';
 
 export interface PartyState {
   characters: Record<string, Character>;
@@ -46,6 +48,17 @@ export const party = createReducer<PartyState, RootAction>({
 
     return repository.state;
   })
+  .handleAction(
+    removeCharacterAction,
+    (state, { payload: { characterId } }) => {
+      const repository = new PartyStateRepository(state);
+      const useCase = new RemoveCharacter(repository);
+
+      useCase.execute(characterId);
+
+      return repository.state;
+    },
+  )
   .handleAction(
     increaseCharacterSleepTimeAction,
     (state, { payload: { characterId, minutes } }) => {
