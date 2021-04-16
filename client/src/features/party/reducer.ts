@@ -1,11 +1,11 @@
 import { createReducer, RootAction } from 'typesafe-actions';
 import { Character } from '../character/schema';
-import { increaseCharacterSleepTimeAction } from '../character/increaseCharacterSleepTimeAction';
+import { increaseCharacterSleepTimeAction } from '../character/actions/increaseCharacterSleepTimeAction';
 import { PartyStateRepository } from './PartyStateRepository';
 import { IncreaseCharacterSleepTime } from '../../usecases/IncreaseCharacterSleepTime';
-import { updateCharacterNameAction } from '../character/updateCharacterNameAction';
+import { updateCharacterNameAction } from '../character/actions/updateCharacterNameAction';
 import { UpdateCharacterName } from '../../usecases/UpdateCharacterName';
-import { addCharacterAction } from '../character/addCharacterAction';
+import { addCharacterAction } from '../character/actions/addCharacterAction';
 import { AddCharacterWithName } from '../../usecases/AddCharacterWithName';
 
 export interface PartyState {

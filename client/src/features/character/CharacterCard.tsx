@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFormattedCharacter } from './getFormattedCharacter';
 import { RootState } from '../../app/store/rootStore';
 import { Icon } from '../../common/components/icon/Icon';
-import { increaseCharacterSleepTimeAction } from './increaseCharacterSleepTimeAction';
+import { increaseCharacterSleepTimeAction } from './actions/increaseCharacterSleepTimeAction';
 import { CounterControl } from '../../common/components/counterControl/CounterControl';
-import { updateCharacterNameAction } from './updateCharacterNameAction';
+import { updateCharacterNameAction } from './actions/updateCharacterNameAction';
 import { EditableText } from '../../common/components/editableText/EditableText';
 
 const MINUTES_INCREMENT = 30;
