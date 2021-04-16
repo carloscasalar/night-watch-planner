@@ -8,9 +8,11 @@ import { NightWatchConfig } from '../features/config/NightWatchConfig';
 const App: FC = () => {
   return (
     <Provider store={rootStore}>
-      <Header />
-      <PartyTable />
-      <NightWatchConfig />
+      <div className="min-h-screen bg-gradient-to-br from-white to-yellow-50">
+        <Header />
+        <PartyTable />
+        <NightWatchConfig />
+      </div>
     </Provider>
   );
 };
