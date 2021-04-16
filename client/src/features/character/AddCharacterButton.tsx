@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Icon } from '../../common/components/icon/Icon';
 import { useDispatch } from 'react-redux';
-import { addCharacterAction } from './addCharacterAction';
+import { addCharacterAction } from './actions/addCharacterAction';
 
 export const AddCharacterButton: FC = () => {
   const dispatch = useDispatch();
