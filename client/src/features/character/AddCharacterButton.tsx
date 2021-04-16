@@ -2,8 +2,15 @@ import { FC } from 'react';
 import { Icon } from '../../common/components/icon/Icon';
 import { useDispatch } from 'react-redux';
 import { addCharacterAction } from './actions/addCharacterAction';
+import classNames from 'classnames';
 
-export const AddCharacterButton: FC = () => {
+export interface AddCharacterButtonProps {
+  className?: string;
+}
+
+export const AddCharacterButton: FC<AddCharacterButtonProps> = ({
+  className,
+}) => {
   const dispatch = useDispatch();
 
   const addCharacter = () =>
@@ -14,7 +21,12 @@ export const AddCharacterButton: FC = () => {
     );
 
   return (
-    <div className="h-full flex items-center opacity-25 hover:opacity-100">
+    <div
+      className={classNames(
+        'h-full flex items-center opacity-25 hover:opacity-100',
+        className,
+      )}
+    >
       <button
         className="ml-2 rounded-full border-gray-200 border shadow-lg hover:shadow-xl cursor-pointer focus:outline-none"
         onClick={addCharacter}
