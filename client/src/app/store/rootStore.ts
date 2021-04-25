@@ -6,10 +6,12 @@ import { config } from '../../features/config/reducer';
 import { createEpicMiddleware } from 'redux-observable';
 import { ApplicationAction } from './ApplicationAction';
 import { rootEpic } from './epics/rootEpic';
+import { plan } from '../../features/plan/reducer';
 
 const rootReducer = combineReducers({
   party,
   config,
+  plan,
 });
 
 export type RootState = StateType<typeof rootReducer>;
