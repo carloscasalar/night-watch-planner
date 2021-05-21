@@ -7,6 +7,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import { ApplicationAction } from './ApplicationAction';
 import { rootEpic } from './epics/rootEpic';
 import { plan } from '../../features/plan/reducer';
+import { ajax } from 'rxjs/ajax';
 
 const rootReducer = combineReducers({
   party,
@@ -20,7 +21,9 @@ const epicMiddleware = createEpicMiddleware<
   ApplicationAction,
   ApplicationAction,
   RootState
->();
+>({
+  dependencies: { ajaxPost: ajax.post },
+});
 
 const composeEnhancers = composeWithDevTools({ trace: true });
 const enhancers = composeEnhancers(applyMiddleware(epicMiddleware));
