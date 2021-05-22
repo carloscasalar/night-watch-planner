@@ -26,7 +26,7 @@ interface WatchDefinition {
   length: number;
 }
 
-interface PlanResponsePayload {
+export interface PlanResponsePayload {
   totalTime: number;
   score: ScoreDefinition;
   watches: WatchDefinition[];
@@ -40,4 +40,5 @@ export const asyncFetchPlanActions = createAsyncAction(
   'PLAN/FETCH_PLAN_REQUEST',
   'PLAN/FETCH_PLAN_SUCCESS',
   'PLAN/FETCH_PLAN_ERROR',
-)<HttpRequest<PlanRequestPayload>, PlanResponsePayload, ErrorPayload>();
+  'PLAN/CANCEL_PLAN',
+)<HttpRequest<PlanRequestPayload>, PlanResponsePayload, ErrorPayload, string>();
