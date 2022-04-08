@@ -9,7 +9,7 @@ export interface HttpRequest<RequestPayload = unknown> {
   headers?: Record<string, string>;
 }
 
-export const ajaxMethods: Record<HttpMethod, keyof typeof ajax> = {
+export const requestMethods: Record<HttpMethod, keyof typeof ajax> = {
   GET: 'get',
   POST: 'post',
 };
