@@ -9,17 +9,17 @@ import { from, of } from 'rxjs';
 import { PlanAction } from './actions/PlanAction';
 import { EpicDependencies } from '../../app/store/rootStore';
 
-const OPTIMIZER_ENDPOINT = 'http://192.168.100.4:3000/v1/optimize';
+// const OPTIMIZER_ENDPOINT = 'http://localhost:3000/v1/optimize';
 
 export const createPlanEpic: Epic<RootAction, PlanAction, RootState> = (
   action$,
   _, // $state
-  { ajaxPost }: EpicDependencies,
+  { requestPost }: EpicDependencies,
 ) =>
   action$.pipe(
     filter(isActionOf(asyncFetchPlanActions.request)),
     mergeMap(({ payload: { url, headers, payload } }) =>
-      from(ajaxPost(url, payload, headers)).pipe(
+      from(requestPost(url, payload, headers)).pipe(
         map(({ response }) =>
           asyncFetchPlanActions.success(response as PlanResponsePayload),
         ),
