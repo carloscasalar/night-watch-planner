@@ -37,8 +37,8 @@ interface ErrorPayload {
 }
 
 export const asyncFetchPlanActions = createAsyncAction(
-  'PLAN/FETCH_PLAN_REQUEST',
-  'PLAN/FETCH_PLAN_SUCCESS',
-  'PLAN/FETCH_PLAN_ERROR',
-  'PLAN/CANCEL_PLAN',
+  'PLAN/FETCH_REQUEST',
+  'PLAN/FETCH_SUCCESS',
+  'PLAN/FETCH_ERROR',
+  'PLAN/FETCH_CANCEL',
 )<HttpRequest<PlanRequestPayload>, PlanResponsePayload, ErrorPayload, string>();
