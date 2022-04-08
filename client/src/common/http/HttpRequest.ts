@@ -1,5 +1,3 @@
-import { ajax } from 'rxjs/ajax';
-
 export type HttpMethod = 'GET' | 'POST';
 
 export interface HttpRequest<RequestPayload = unknown> {
@@ -8,8 +6,3 @@ export interface HttpRequest<RequestPayload = unknown> {
   payload?: RequestPayload;
   headers?: Record<string, string>;
 }
-
-export const requestMethods: Record<HttpMethod, keyof typeof ajax> = {
-  GET: 'get',
-  POST: 'post',
-};

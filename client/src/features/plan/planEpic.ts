@@ -14,12 +14,12 @@ import { EpicDependencies } from '../../app/store/rootStore';
 export const createPlanEpic: Epic<RootAction, PlanAction, RootState> = (
   action$,
   _, // $state
-  { requestPost }: EpicDependencies,
+  { request }: EpicDependencies,
 ) =>
   action$.pipe(
     filter(isActionOf(asyncFetchPlanActions.request)),
-    mergeMap(({ payload: { url, headers, payload } }) =>
-      from(requestPost(url, payload, headers)).pipe(
+    mergeMap(({ payload: { url, method, headers, payload: body } }) =>
+      from(request({ url, method, headers, body })).pipe(
         map(({ response }) =>
           asyncFetchPlanActions.success(response as PlanResponsePayload),
         ),

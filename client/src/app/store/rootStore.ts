@@ -18,11 +18,11 @@ const rootReducer = combineReducers({
 export type RootState = StateType<typeof rootReducer>;
 
 export interface EpicDependencies {
-  requestPost: typeof ajax.post;
+  request: typeof ajax;
 }
 
 const dependencies: EpicDependencies = {
-  requestPost: ajax.post,
+  request: ajax,
 };
 
 const epicMiddleware = createEpicMiddleware<
