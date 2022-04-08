@@ -1,8 +1,8 @@
 import { asyncFetchPlanActions } from './asyncFetchPlanActions';
 import { ActionType } from 'typesafe-actions';
 
-const ActionCreators = {
+export const actionCreators = {
   asyncFetchPlanActions,
 };
 
-export type PlanAction = ActionType<typeof ActionCreators>;
+export type PlanAction = ActionType<typeof actionCreators>;
