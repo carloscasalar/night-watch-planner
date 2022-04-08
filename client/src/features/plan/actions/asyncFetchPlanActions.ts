@@ -42,3 +42,16 @@ export const asyncFetchPlanActions = createAsyncAction(
   'PLAN/FETCH_ERROR',
   'PLAN/FETCH_CANCEL',
 )<HttpRequest<PlanRequestPayload>, PlanResponsePayload, ErrorPayload, string>();
+
+export const fetchPlanRequest = (
+  maxTotalTimeSpent: number,
+  party: CharacterDefinition[],
+) =>
+  asyncFetchPlanActions.request({
+    url: 'http://localhost:3000/v1/optimize',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    payload: { party, maxTotalTimeSpent },
+  });
