@@ -82,5 +82,9 @@
   },
   "resolutions": {
     "babel-loader": "8.1.0"
+  },
+  "volta": {
+    "node": "16.14.2",
+    "yarn": "1.21.1"
   }
 }
