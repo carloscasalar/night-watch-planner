@@ -33,7 +33,8 @@
   "scripts": {
     "start": "PORT=1234 craco start",
     "build": "craco build",
-    "test": "craco src/test",
+    "test": "craco test",
+    "test:ci": "craco test --ci --watchAll=false --verbose",
     "eject": "react-scripts eject",
     "tsc:check": "tsc --noEmit",
     "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
