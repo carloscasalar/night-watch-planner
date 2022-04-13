@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import { DeleteButton, DeleteButtonProps } from './DeleteButton';
 
 const stories: Meta = {
-  title: 'Common/DeleteButton',
+  title: 'Common/Buttons/DeleteButton',
   component: DeleteButton,
 };
 
