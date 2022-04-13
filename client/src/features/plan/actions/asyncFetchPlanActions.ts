@@ -1,5 +1,6 @@
 import { createAsyncAction } from 'typesafe-actions';
 import { HttpRequest } from '../../../common/http/HttpRequest';
+import { Character } from '../../character/schema';
 
 interface CharacterDefinition {
   name: string;
@@ -36,6 +37,15 @@ interface ErrorPayload {
   message: string;
 }
 
+const toCharacterDefinition = ({
+  id,
+  requiredSleepTime,
+}: Character): CharacterDefinition => ({
+  name: id,
+  requiredSleepTime,
+  senses: ['Normal'],
+});
+
 export const asyncFetchPlanActions = createAsyncAction(
   'PLAN/FETCH_REQUEST',
   'PLAN/FETCH_SUCCESS',
@@ -45,7 +55,7 @@ export const asyncFetchPlanActions = createAsyncAction(
 
 export const fetchPlanRequest = (
   maxTotalTimeSpent: number,
-  party: CharacterDefinition[],
+  party: Character[],
 ) =>
   asyncFetchPlanActions.request({
     url: 'http://localhost:3000/v1/optimize',
@@ -53,5 +63,5 @@ export const fetchPlanRequest = (
     headers: {
       'Content-Type': 'application/json',
     },
-    payload: { party, maxTotalTimeSpent },
+    payload: { party: party.map(toCharacterDefinition), maxTotalTimeSpent },
   });

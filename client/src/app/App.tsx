@@ -4,6 +4,7 @@ import { rootStore } from './store/rootStore';
 import { Header } from './layout/Header';
 import { PartyTable } from '../features/party/PartyTable';
 import { NightWatchConfig } from '../features/config/NightWatchConfig';
+import { PlanPanel } from '../features/plan/PlanPanel';
 
 const App: FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: FC = () => {
         <Header />
         <PartyTable />
         <NightWatchConfig />
+        <PlanPanel />
       </div>
     </Provider>
   );
