@@ -30,7 +30,7 @@ interface WatchDefinition {
 export interface PlanResponsePayload {
   totalTime: number;
   score: ScoreDefinition;
-  watches: WatchDefinition[];
+  watchesSummary: WatchDefinition[];
 }
 
 interface ErrorPayload {

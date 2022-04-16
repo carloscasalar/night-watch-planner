@@ -52,7 +52,7 @@ export const plan = createReducer<PlanState, RootAction>({
             softScore: soft,
           },
           totalTime: totalTimeMinutes,
-          watches: watchesList,
+          watchesSummary: watchesList,
         },
       },
     ) => {
