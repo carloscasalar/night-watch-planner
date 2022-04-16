@@ -4,48 +4,48 @@ jobs:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:10.16
+      - image: cimg/node:lts
 
     steps:
       - checkout
 
       - restore_cache:
-          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          key: yarn-packages-{{ checksum "client/yarn.lock" }}
 
-      - run: cd ~/night-watch-planner/client && npm ci
+      - run: cd ~/night-watch-planner/client && yarn install --immutable
 
       - save_cache:
           paths:
             - ~/night-watch-planner/client/node_modules
-          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          key: yarn-packages-{{ checksum "client/yarn.lock" }}
 
   test-client:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:10.16
+      - image: cimg/node:lts
 
     steps:
       - checkout
 
       - restore_cache:
-          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          key: yarn-packages-{{ checksum "client/yarn.lock" }}
 
-      - run: cd ~/night-watch-planner/client && npm run test:ci
+      - run: cd ~/night-watch-planner/client && yarn test:ci
 
   linter-client:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:10.16
+      - image: cimg/node:lts
 
     steps:
       - checkout
 
       - restore_cache:
-          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          key: yarn-packages-{{ checksum "client/yarn.lock" }}
 
-      - run: cd ~/night-watch-planner/client && npm run lint
+      - run: cd ~/night-watch-planner/client && yarn lint
 
   build-and-test-backend:
 

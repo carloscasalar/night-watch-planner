@@ -37,6 +37,7 @@
     "test:ci": "craco test --ci --watchAll=false --verbose",
     "eject": "react-scripts eject",
     "tsc:check": "tsc --noEmit",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
     "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
