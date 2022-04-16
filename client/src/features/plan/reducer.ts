@@ -4,8 +4,10 @@ import { actionCreators } from './actions/PlanAction';
 import { toIndexedRecordAndOrder } from '../../common/mappers/toIndexedRecordAndOrder';
 import { uuid } from 'uuidv4';
 
+export type FetchState = 'unloaded' | 'loading' | 'error' | 'loaded';
+
 export interface PlanState {
-  fetchState: 'unloaded' | 'loading' | 'error' | 'loaded';
+  fetchState: FetchState;
   message: string | null;
   totalTimeMinutes: number;
   score: Score;
