@@ -28,10 +28,11 @@ export const PlanPanel: FC = () => {
         >
           Generate Plan
         </TextButton>
+
+        {isLoading && <PlanLoader />}
+        {isErrored && <PlanError />}
+        {isLoaded && <PlanResult />}
       </div>
-      {isLoading && <PlanLoader />}
-      {isErrored && <PlanError />}
-      {isLoaded && <PlanResult />}
     </section>
   );
 };
