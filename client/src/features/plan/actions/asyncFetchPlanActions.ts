@@ -1,4 +1,4 @@
-import { createAsyncAction } from 'typesafe-actions';
+import { createAsyncAction, PayloadAction } from 'typesafe-actions';
 import { HttpRequest } from '../../../common/http/HttpRequest';
 import { Character } from '../../character/schema';
 
@@ -56,7 +56,7 @@ export const asyncFetchPlanActions = createAsyncAction(
 export const fetchPlanRequest = (
   maxTotalTimeSpent: number,
   party: Character[],
-) =>
+): PayloadAction<'PLAN/FETCH_REQUEST', HttpRequest<PlanRequestPayload>> =>
   asyncFetchPlanActions.request({
     url: 'http://localhost:3000/v1/optimize',
     method: 'POST',
