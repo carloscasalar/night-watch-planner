@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import { CharacterEntity, CharacterId } from './CharacterEntity';
 import { CharacterNotFoundException } from './CharacterNotFoundException';
 import { toEntityById } from '../common/mappers/toEntityById';

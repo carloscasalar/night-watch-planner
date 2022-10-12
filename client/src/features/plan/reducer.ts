@@ -2,7 +2,7 @@ import { createReducer, RootAction } from 'typesafe-actions';
 import { Score, Watch } from './schema';
 import { actionCreators } from './actions/PlanAction';
 import { toIndexedRecordAndOrder } from '../../common/mappers/toIndexedRecordAndOrder';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 
 export type FetchState = 'unloaded' | 'loading' | 'error' | 'loaded';
 
