@@ -1,4 +1,4 @@
-import { FC } from 'React';
+import { FC } from 'react';
 import classNames from 'classnames';
 import { PropsWithChildren } from 'react';
 

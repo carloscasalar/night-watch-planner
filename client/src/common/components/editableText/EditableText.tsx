@@ -28,6 +28,6 @@ export const EditableText: FC<EditableTextProps> = ({
       tagName={as as string}
       className={className}
       onChange={handleValueChange}
-    ></ContentEditable>
+    />
   );
 };
