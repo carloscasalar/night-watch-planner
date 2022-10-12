@@ -1,10 +1,12 @@
-import { FC } from 'React';
+import { FC } from 'react';
 import { Icon } from '../icon/Icon';
 import classNames from 'classnames';
+
 export interface DeleteButtonProps {
   className?: string;
   onClick: () => void;
 }
+
 export const DeleteButton: FC<DeleteButtonProps> = ({ className, onClick }) => {
   return (
     <button

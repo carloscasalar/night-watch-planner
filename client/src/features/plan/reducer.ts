@@ -70,9 +70,8 @@ export const plan = createReducer<PlanState, RootAction>({
           minutesLength,
         }),
       );
-      const { order: watchOrder, entities: watches } = toIndexedRecordAndOrder(
-        indexedWatches,
-      );
+      const { order: watchOrder, entities: watches } =
+        toIndexedRecordAndOrder(indexedWatches);
       return {
         ...state,
         fetchState: 'loaded',

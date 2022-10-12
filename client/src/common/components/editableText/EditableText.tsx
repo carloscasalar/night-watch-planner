@@ -1,4 +1,4 @@
-import { ElementType, FC } from 'React';
+import { ElementType, FC } from 'react';
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 
 export interface EditableTextProps {
@@ -28,6 +28,6 @@ export const EditableText: FC<EditableTextProps> = ({
       tagName={as as string}
       className={className}
       onChange={handleValueChange}
-    />
+    ></ContentEditable>
   );
 };

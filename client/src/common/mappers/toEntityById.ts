@@ -4,7 +4,7 @@ interface EntityWithId<IdType extends string = string> {
 
 export const toEntityById = <
   IdType extends string,
-  Entity extends EntityWithId<IdType>
+  Entity extends EntityWithId<IdType>,
 >(
   entityList: Entity[],
 ): Record<IdType, Entity> =>

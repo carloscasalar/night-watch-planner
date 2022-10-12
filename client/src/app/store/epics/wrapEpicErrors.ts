@@ -4,22 +4,24 @@ import { catchError } from 'rxjs/operators';
 import { RootAction, RootState } from 'typesafe-actions';
 import { ApplicationAction } from '../ApplicationAction';
 
-export const wrapEpicErrors = (epic: Epic) => (
-  action$: ActionsObservable<RootAction>,
-  state$: StateObservable<RootState>,
-  dependencies: unknown,
-): Observable<ApplicationAction> =>
-  epic(action$, state$, dependencies).pipe(
-    catchError((error, source) =>
-      // eslint-disable-next-line no-console
-      merge(
-        source,
-        ofObservable(
-          console.error(
-            `error thrown from an epic: ${error.toString()}`,
-            error.stack,
+export const wrapEpicErrors =
+  (epic: Epic) =>
+  (
+    action$: ActionsObservable<RootAction>,
+    state$: StateObservable<RootState>,
+    dependencies: unknown,
+  ): Observable<ApplicationAction> =>
+    epic(action$, state$, dependencies).pipe(
+      catchError((error, source) =>
+        // eslint-disable-next-line no-console
+        merge(
+          source,
+          ofObservable(
+            console.error(
+              `error thrown from an epic: ${error.toString()}`,
+              error.stack,
+            ),
           ),
         ),
       ),
-    ),
-  ) as Observable<ApplicationAction>;
+    ) as Observable<ApplicationAction>;
