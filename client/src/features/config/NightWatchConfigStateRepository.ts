@@ -3,8 +3,7 @@ import { NightWatchConfigState } from './reducer';
 import { NightWatchConfigEntity } from '../../domain/NightWatchConfigEntity';
 
 export class NightWatchConfigStateRepository
-  implements NightWatchConfigRepository
-{
+  implements NightWatchConfigRepository {
   private _state: NightWatchConfigState;
 
   constructor(state: NightWatchConfigState) {
