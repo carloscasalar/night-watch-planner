@@ -1,67 +1,93 @@
 {
-  "name": "night-watch-planner",
-  "description": "Night watch planner for rpgs",
-  "license": "MIT",
-  "scripts": {
-    "start": "cross-env NODE_ENV=development parcel public/index.html ",
-    "build": "cross-env NODE_ENV=production parcel build public/index.html --no-minify --public-url /",
-    "test": "jest --watch --coverage",
-    "test:ci": "jest --verbose",
-    "lint": "eslint \"src/**/*.js\" \"src/**/*.jsx\""
-  },
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "autoprefixer": "^7.2.1",
-    "axios": "^0.21.1",
-    "babel-preset-react-app": "^3.1.0",
-    "parcel-bundler": "latest",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.3.0"
+    "@craco/craco": "6.1.1",
+    "@tailwindcss/forms": "0.3.2",
+    "@testing-library/jest-dom": "5.11.4",
+    "@testing-library/react": "11.1.0",
+    "@testing-library/user-event": "12.1.10",
+    "@types/jest": "26.0.15",
+    "@types/node": "12.0.0",
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
+    "classnames": "2.3.1",
+    "react": "18.2.0",
+    "react-contenteditable": "3.3.5",
+    "react-dom": "18.2.0",
+    "react-redux": "7.2.2",
+    "react-scripts": "4.0.3",
+    "redux": "4.0.5",
+    "redux-devtools-extension": "2.13.9",
+    "redux-observable": "1.2.0",
+    "redux-saga": "1.1.3",
+    "reselect": "4.0.0",
+    "rxjs": "6.6.7",
+    "typesafe-actions": "5.1.0",
+    "typescript": "4.1.2",
+    "utility-types": "3.10.0",
+    "uuidv4": "6.2.13",
+    "web-vitals": "1.0.1"
   },
-  "postcss": {
-    "modules": false,
-    "plugins": {
-      "autoprefixer": {
-        "browsers": [
-          ">1%",
-          "last 4 versions",
-          "Firefox ESR",
-          "not ie < 9"
-        ],
-        "flexbox": "no-2009"
-      }
-    }
+  "scripts": {
+    "start": "PORT=1234 craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "test:ci": "craco test --ci --watchAll=false --verbose",
+    "eject": "react-scripts eject",
+    "tsc:check": "tsc --noEmit",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
+    "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
-    "babel-preset-stage-1": "^6.24.1",
-    "cross-env": "^5.1.1",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "jest": "^22.4.3",
-    "less": "^2.7.3"
+    "@carloscasalar/eslint-config-react-ts": "1.0.0",
+    "@carloscasalar/ts-config": "1.0.0",
+    "@storybook/addon-actions": "6.5.9",
+    "@storybook/addon-essentials": "6.5.9",
+    "@storybook/addon-links": "6.5.9",
+    "@storybook/node-logger": "6.5.9",
+    "@storybook/preset-create-react-app": "3.1.7",
+    "@storybook/react": "6.5.9",
+    "@tailwindcss/postcss7-compat": "2.0.3",
+    "@types/classnames": "2.2.11",
+    "@types/react-redux": "7.1.16",
+    "@types/redux": "3.6.0",
+    "@types/redux-mock-store": "1.0.2",
+    "@typescript-eslint/eslint-plugin": "4.16.1",
+    "@typescript-eslint/parser": "4.16.1",
+    "autoprefixer": "9",
+    "eslint": "7.22.0",
+    "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jest": "24.1.5",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-storybook": "0.5.13",
+    "postcss": "7",
+    "prettier": "2.2.1",
+    "redux-mock-store": "1.5.4",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "yarn": "1.22.10"
   },
-  "eslintConfig": {
-    "extends": "airbnb",
-    "parser": "babel-eslint",
-    "env": {
-      "jest": true,
-      "browser": true
-    },
-    "root": true
+  "resolutions": {
+    "babel-loader": "8.1.0"
   },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:carloscasalar/night-watch-planner.git"
-  },
-  "private": true
+  "volta": {
+    "node": "18.10.0",
+    "yarn": "1.21.1"
+  }
 }
