@@ -12,13 +12,19 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
+    project: './tsconfig.json'
   },
   plugins: [
     'react'
   ],
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/triple-slash-reference': 'off'
   }
 }
