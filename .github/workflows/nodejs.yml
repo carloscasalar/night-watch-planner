@@ -12,11 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: volta-cli/action@v3
-      - name: npm install
+      - name: Install
         working-directory: ./client
         run: npm ci
-      - name: npm test
+      - name: Test
         working-directory: ./client
         run: npm run test:ci
         env:
           CI: true
+      - name: Lint
+        working-directory: ./client
+        run: npm run lint
