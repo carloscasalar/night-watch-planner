@@ -1,3 +1,14 @@
 {
-  "eslint.workingDirectories": ["client"]
+  "eslint.workingDirectories": ["client"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "eslint.format.enable": true,
+  "eslint.run": "onSave",
 }

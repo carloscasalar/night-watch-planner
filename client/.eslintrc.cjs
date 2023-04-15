@@ -3,20 +3,14 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: [
-    'plugin:react/recommended',
-    'standard-with-typescript'
-  ],
-  overrides: [
-  ],
+  extends: ['plugin:react/recommended', 'standard-with-typescript', 'plugin:storybook/recommended'],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: './tsconfig.json'
   },
-  plugins: [
-    'react'
-  ],
+  plugins: ['react'],
   settings: {
     react: {
       version: 'detect'
@@ -27,4 +21,4 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/triple-slash-reference': 'off'
   }
-}
+};
