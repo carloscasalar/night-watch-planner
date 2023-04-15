@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { NightWatchConfigEntity } from './NightWatchConfigEntity'
 
 const TWELVE_HOURS_IN_MINUTES = 720

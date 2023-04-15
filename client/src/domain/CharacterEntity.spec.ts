@@ -1,3 +1,4 @@
+import { beforeEach, describe, it, expect } from 'vitest'
 import { CharacterEntity } from './CharacterEntity'
 
 const EIGHT_HOURS_IN_MINUTES = 480
