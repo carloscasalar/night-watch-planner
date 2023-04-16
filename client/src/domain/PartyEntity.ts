@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid'
 import { CharacterEntity, type CharacterId } from './CharacterEntity'
 import { CharacterNotFoundException } from './CharacterNotFoundException'
 import { toEntityById } from '../common/mappers/toEntityById'
@@ -85,6 +84,6 @@ export class PartyEntity {
   }
 
   private newCharacterId (): string {
-    return uuid()
+    return crypto.randomUUID()
   }
 }
