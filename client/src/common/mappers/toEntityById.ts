@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/prefer-reduce-type-parameter */
 interface EntityWithId<IdType extends string = string> {
   id: IdType
 }
@@ -13,5 +15,5 @@ export const toEntityById = <
         ...entityById,
         [entity.id]: entity
       }),
-      {}
+      {} as Record<IdType, Entity>
     )
