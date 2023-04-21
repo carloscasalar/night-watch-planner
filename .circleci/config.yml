@@ -10,14 +10,14 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: yarn-packages-{{ checksum "client/yarn.lock" }}
+          key: npm-packages-{{ checksum "client/package.lock" }}
 
-      - run: cd ~/night-watch-planner/client && yarn install --immutable
+      - run: cd ~/night-watch-planner/client && npm ci
 
       - save_cache:
           paths:
             - ~/night-watch-planner/client/node_modules
-          key: yarn-packages-{{ checksum "client/yarn.lock" }}
+          key: npm-packages-{{ checksum "client/package.lock" }}
 
   test-client:
     working_directory: ~/night-watch-planner
@@ -29,9 +29,9 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: yarn-packages-{{ checksum "client/yarn.lock" }}
+          key: npm-packages-{{ checksum "client/package.lock" }}
 
-      - run: cd ~/night-watch-planner/client && yarn test:ci
+      - run: cd ~/night-watch-planner/client && npm run test:ci
 
   linter-client:
     working_directory: ~/night-watch-planner
@@ -43,9 +43,9 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: yarn-packages-{{ checksum "client/yarn.lock" }}
+          key: npm-packages-{{ checksum "client/package.lock" }}
 
-      - run: cd ~/night-watch-planner/client && yarn lint
+      - run: cd ~/night-watch-planner/client && npm run lint
 
   build-and-test-backend:
 
