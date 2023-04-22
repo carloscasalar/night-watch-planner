@@ -4,6 +4,17 @@ import { toIndexedRecordAndOrder } from '../../common/mappers/toIndexedRecordAnd
 
 export type FetchState = 'unloaded' | 'loading' | 'error' | 'loaded'
 
+export interface Plan {
+  score: {
+    feasible: boolean
+    hard: number
+    medium: number
+    soft: number
+  }
+  totalTimeMinutes: number
+  watches: Watch[]
+}
+
 export interface PlanState {
   fetchState: FetchState
   message: string | null
