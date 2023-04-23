@@ -1,16 +1,16 @@
-import { type Character } from '../character/schema'
-import { type Plan } from './reducer'
+import { type PartyEntity } from './PartyEntity'
+import { type PlanEntity } from './PlanEntity'
 
 export interface PlanRequest {
   requiredSleepTime: number
-  party: Character[]
+  party: PartyEntity
 }
 
 export interface PlanError {
   message: string
 }
 
-export type PlanResponse = [Plan, null] | [null, PlanError]
+export type PlanResponse = [PlanEntity, null] | [null, PlanError]
 
 export interface PlanService {
   generatePlan: (planRequest: PlanRequest) => Promise<PlanResponse>
