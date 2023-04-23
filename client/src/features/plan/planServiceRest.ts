@@ -45,7 +45,7 @@ const toCharacterDefinition = ({
   senses: ['Normal']
 })
 
-const toPayload = (planRequest: PlanRequest) => ({
+const toPlanRequestPayload = (planRequest: PlanRequest): PlanRequestPayload => ({
   party: planRequest.party.map(toCharacterDefinition),
   maxTotalTimeSpent: planRequest.requiredSleepTime
 })
@@ -57,7 +57,7 @@ export const planServiceRest: PlanService = {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(toPayload(planRequest))
+      body: JSON.stringify(toPlanRequestPayload(planRequest))
     })
     if (response.ok) {
       const plan: Plan = await response.json()
