@@ -1,19 +1,9 @@
 import { createSlice, type PayloadAction, type SliceCaseReducers } from '@reduxjs/toolkit'
 import { type Score, type Watch } from './schema'
 import { toIndexedRecordAndOrder } from '../../common/mappers/toIndexedRecordAndOrder'
+import { type PlanEntity } from '../../domain/PlanEntity'
 
 export type FetchState = 'unloaded' | 'loading' | 'error' | 'loaded'
-
-export interface Plan {
-  score: {
-    feasible: boolean
-    hard: number
-    medium: number
-    soft: number
-  }
-  totalTimeMinutes: number
-  watches: Watch[]
-}
 
 export interface PlanState {
   fetchState: FetchState
@@ -22,22 +12,6 @@ export interface PlanState {
   score: Score
   watches: Record<string, Watch>
   watchOrder: string[]
-}
-
-interface RemoteWatch {
-  sleepingCharacters: string[]
-  watchfulCharacters: string[]
-  length: number
-}
-interface RemotePlanPayload {
-  score: {
-    feasible: boolean
-    hardScore: number
-    mediumScore: number
-    softScore: number
-  }
-  totalTime: number
-  watchesSummary: RemoteWatch[]
 }
 
 const planSlice = createSlice<PlanState, SliceCaseReducers<PlanState>>({
@@ -51,25 +25,25 @@ const planSlice = createSlice<PlanState, SliceCaseReducers<PlanState>>({
     watchOrder: []
   },
   reducers: {
-    setPlanFromRemoteAction: (state, action: PayloadAction<RemotePlanPayload>) => {
+    setPlan: (state, action: PayloadAction<PlanEntity>) => {
       // TODO use an useCase like in other features to be consistent
       const {
         payload: {
           score: {
             feasible,
-            hardScore: hard,
-            mediumScore: medium,
-            softScore: soft
+            hard,
+            medium,
+            soft
           },
-          totalTime: totalTimeMinutes,
-          watchesSummary: watchesList
+          totalTimeMinutes,
+          watches: watchesList
         }
       } = action
       const indexedWatches = watchesList.map(
         ({
           sleepingCharacters,
           watchfulCharacters,
-          length: minutesLength
+          minutesLength
         }) => ({
           id: crypto.randomUUID(),
           sleepingCharacters,
