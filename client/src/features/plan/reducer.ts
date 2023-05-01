@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction, type SliceCaseReducers } from '@reduxj
 import { type Score, type Watch } from './schema'
 import { toIndexedRecordAndOrder } from '../../common/mappers/toIndexedRecordAndOrder'
 import { type PlanEntity } from '../../domain/PlanEntity'
+import { type PlanError } from '../../domain/PlanService'
 
 export type FetchState = 'unloaded' | 'loading' | 'error' | 'loaded'
 
@@ -63,9 +64,18 @@ const planSlice = createSlice<PlanState, SliceCaseReducers<PlanState>>({
         watches,
         watchOrder
       }
+    },
+    setPlanGenerationError: (state, action: PayloadAction<PlanError>) => {
+      return {
+        ...state,
+        fetchState: 'error',
+        message: action.payload.message
+      }
     }
   }
 })
 
 export const plan = planSlice.reducer
-export const { setPlanFromRemoteAction } = planSlice.actions
+export const { setPlanFromRemoteAction, setPlanGenerationError } = planSlice.actions
+export type SetPlanFromRemoteAction = typeof setPlanFromRemoteAction
+export type SetPlanGenerationErrorAction = typeof setPlanGenerationError
