@@ -1,12 +1,14 @@
-import { useAppDispatch } from './../../app/store/hooks'
 import { useMutation } from '@tanstack/react-query'
-import { type PlanRequest, type PlanService } from '../../domain/PlanService'
+import { useAppDispatch, useAppSelector } from './../../app/store/hooks'
+import { type PlanService } from '../../domain/PlanService'
 import { setPlanGenerationError, setPlanFromRemoteAction } from './reducer'
+import { getPlanRequest } from './getPlanRequest'
 
 export const useGeneratePlan = (planService: PlanService) => {
   const dispatch = useAppDispatch()
+  const planRequest = useAppSelector(getPlanRequest)
   const mutation = useMutation({
-    mutationFn: async (planRequest: PlanRequest) => {
+    mutationFn: async () => {
       return await planService.generatePlan(planRequest)
     },
     onSettled (data, error: Error | null) {
@@ -28,8 +30,8 @@ export const useGeneratePlan = (planService: PlanService) => {
     }
   })
 
-  const generatePlan = (planRequest: PlanRequest) => {
-    mutation.mutate(planRequest)
+  const generatePlan = () => {
+    mutation.mutate()
   }
 
   const { isError: isErrored, isSuccess: isLoaded, isLoading } = mutation
