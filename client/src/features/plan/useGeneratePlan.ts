@@ -1,28 +1,30 @@
+import { useAppDispatch } from './../../app/store/hooks'
 import { useMutation } from '@tanstack/react-query'
 import { type PlanRequest, type PlanService } from '../../domain/PlanService'
-import { type SetPlanGenerationErrorAction, type SetPlanFromRemoteAction } from './reducer'
+import { setPlanGenerationError, setPlanFromRemoteAction } from './reducer'
 
-export const useGeneratePlan = (planService: PlanService, setPlan: SetPlanFromRemoteAction, setError: SetPlanGenerationErrorAction) => {
+export const useGeneratePlan = (planService: PlanService) => {
+  const dispatch = useAppDispatch()
   const mutation = useMutation({
     mutationFn: async (planRequest: PlanRequest) => {
       return await planService.generatePlan(planRequest)
     },
     onSettled (data, error: Error | null) {
       if (error != null) {
-        setError({ message: `unexpected error: ${error.message}` })
+        dispatch(setPlanGenerationError(`unexpected error: ${error.message}`))
         console.error('unexpected error generating plan', error)
         return
       }
       if (data === undefined) {
-        setError({ message: 'unexpected empty response' })
+        dispatch(setPlanGenerationError('unexpected empty response'))
         return
       }
       const [plan, planError] = data
-      if (planError == null) {
-        setError(planError)
+      if (planError !== null) {
+        dispatch(setPlanGenerationError(planError.message))
         return
       }
-      setPlan(plan)
+      dispatch(setPlanFromRemoteAction(plan))
     }
   })
 

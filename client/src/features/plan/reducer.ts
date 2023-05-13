@@ -77,5 +77,3 @@ const planSlice = createSlice<PlanState, SliceCaseReducers<PlanState>>({
 
 export const plan = planSlice.reducer
 export const { setPlanFromRemoteAction, setPlanGenerationError } = planSlice.actions
-export type SetPlanFromRemoteAction = typeof setPlanFromRemoteAction
-export type SetPlanGenerationErrorAction = typeof setPlanGenerationError
