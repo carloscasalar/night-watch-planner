@@ -2,7 +2,7 @@ import { type PartyEntity } from './PartyEntity'
 import { type PlanEntity } from './PlanEntity'
 
 export interface PlanRequest {
-  requiredSleepTime: number
+  maxTotalTimeSpent: number
   party: PartyEntity
 }
 
