@@ -8,7 +8,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json'
+    project: ['./tsconfig.json', './vite.config.ts']
   },
   plugins: ['react'],
   settings: {
@@ -21,4 +21,4 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/triple-slash-reference': 'off'
   }
-};
+}
