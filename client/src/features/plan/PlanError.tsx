@@ -1,9 +1,9 @@
 import { type FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '@/app/store/hooks'
 import { getErrorMessage } from './getErrorMessage'
 
 export const PlanError: FC = () => {
-  const errorMessage = useSelector(getErrorMessage)
+  const errorMessage = useAppSelector(getErrorMessage)
   const description =
     errorMessage ?? 'An unexpected error occurred, please try again.'
   return (
