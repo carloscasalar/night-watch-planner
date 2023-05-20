@@ -1,9 +1,9 @@
-import { type PartyRepository } from '../../domain/PartyRepository'
+import { toEntityById } from '@mappers/toEntityById'
+import { type PartyRepository } from '@domain/PartyRepository'
+import { PartyEntity } from '@domain/PartyEntity'
+import { CharacterEntity } from '@domain/CharacterEntity'
+import { type Character } from '@features/character/schema'
 import { type PartyState } from './reducer'
-import { PartyEntity } from '../../domain/PartyEntity'
-import { type Character } from '../character/schema'
-import { CharacterEntity } from '../../domain/CharacterEntity'
-import { toEntityById } from '../../common/mappers/toEntityById'
 
 export class PartyStateRepository implements PartyRepository {
   private _state: PartyState
