@@ -65,7 +65,7 @@ const toCharacterDefinition = ({
 
 const toPlanRequestPayload = (planRequest: PlanRequest): PlanRequestPayload => ({
   party: planRequest.party.characters.map(toCharacterDefinition),
-  maxTotalTimeSpent: planRequest.requiredSleepTime
+  maxTotalTimeSpent: planRequest.maxTotalTimeSpent
 })
 
 export const planServiceRest: PlanService = {

@@ -76,4 +76,4 @@ const planSlice = createSlice<PlanState, SliceCaseReducers<PlanState>>({
 })
 
 export const plan = planSlice.reducer
-export const { setPlanFromRemoteAction, setPlanGenerationError } = planSlice.actions
+export const { setPlan, setPlanGenerationError } = planSlice.actions

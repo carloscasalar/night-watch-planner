@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { useAppDispatch, useAppSelector } from './../../app/store/hooks'
 import { type PlanService } from '../../domain/PlanService'
-import { setPlanGenerationError, setPlanFromRemoteAction } from './reducer'
+import { setPlanGenerationError, setPlan } from './reducer'
 import { getPlanRequest } from './getPlanRequest'
 
 export const useGeneratePlan = (planService: PlanService) => {
@@ -26,7 +26,7 @@ export const useGeneratePlan = (planService: PlanService) => {
         dispatch(setPlanGenerationError(planError.message))
         return
       }
-      dispatch(setPlanFromRemoteAction(plan))
+      dispatch(setPlan(plan))
     }
   })
 
