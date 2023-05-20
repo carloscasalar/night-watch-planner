@@ -17,5 +17,8 @@ export default defineConfig({
       '@features': path.resolve(__dirname, './src/features'),
       '@usecases': path.resolve(__dirname, './src/usecases'),
     }
+  },
+  server: {
+    port: 1234
   }
 })
