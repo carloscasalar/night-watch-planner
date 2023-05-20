@@ -38,6 +38,7 @@ export interface PlanResponsePayload {
 
 const toPlanEntity = (response: PlanResponsePayload): PlanEntity => {
   const watches = response.watchesSummary.map((watch) => ({
+    id: crypto.randomUUID(),
     sleepingCharacters: watch.sleepingCharacters,
     watchfulCharacters: watch.watchfulCharacters,
     minutesLength: watch.length

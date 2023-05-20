@@ -7,7 +7,6 @@ import { type PlanError } from '@domain/PlanService'
 export type FetchState = 'unloaded' | 'loading' | 'error' | 'loaded'
 
 export interface PlanState {
-  fetchState: FetchState
   message: string | null
   totalTimeMinutes: number
   score: Score
@@ -18,7 +17,6 @@ export interface PlanState {
 const planSlice = createSlice<PlanState, SliceCaseReducers<PlanState>>({
   name: 'plan',
   initialState: {
-    fetchState: 'unloaded',
     message: null,
     totalTimeMinutes: 0,
     score: { feasible: false, hard: -1, medium: -1, soft: -1 },
@@ -40,24 +38,11 @@ const planSlice = createSlice<PlanState, SliceCaseReducers<PlanState>>({
           watches: watchesList
         }
       } = action
-      const indexedWatches = watchesList.map(
-        ({
-          sleepingCharacters,
-          watchfulCharacters,
-          minutesLength
-        }) => ({
-          id: crypto.randomUUID(),
-          sleepingCharacters,
-          watchfulCharacters,
-          minutesLength
-        })
-      )
       const { order: watchOrder, entities: watches } = toIndexedRecordAndOrder(
-        indexedWatches
+        watchesList
       )
       return {
         ...state,
-        fetchState: 'loaded',
         message: null,
         score: { feasible, hard, medium, soft },
         totalTimeMinutes,
@@ -68,7 +53,6 @@ const planSlice = createSlice<PlanState, SliceCaseReducers<PlanState>>({
     setPlanGenerationError: (state, action: PayloadAction<PlanError>) => {
       return {
         ...state,
-        fetchState: 'error',
         message: action.payload.message
       }
     }

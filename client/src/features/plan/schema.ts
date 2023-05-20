@@ -6,6 +6,7 @@ export interface Score {
 }
 
 export interface Watch {
+  id: string
   sleepingCharacters: string[]
   watchfulCharacters: string[]
   minutesLength: number
