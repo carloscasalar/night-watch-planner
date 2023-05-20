@@ -1,8 +1,8 @@
 import { createSlice, type PayloadAction, type SliceCaseReducers } from '@reduxjs/toolkit'
 import { type Score, type Watch } from './schema'
-import { toIndexedRecordAndOrder } from '../../common/mappers/toIndexedRecordAndOrder'
-import { type PlanEntity } from '../../domain/PlanEntity'
-import { type PlanError } from '../../domain/PlanService'
+import { toIndexedRecordAndOrder } from '@mappers/toIndexedRecordAndOrder'
+import { type PlanEntity } from '@domain/PlanEntity'
+import { type PlanError } from '@domain/PlanService'
 
 export type FetchState = 'unloaded' | 'loading' | 'error' | 'loaded'
 

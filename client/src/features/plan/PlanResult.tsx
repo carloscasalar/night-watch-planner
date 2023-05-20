@@ -1,6 +1,13 @@
 import { type FC } from 'react'
+import { useAppSelector } from '@/app/store/hooks'
+import { getWatchesList } from './getWatchesList'
 
 export const PlanResult: FC = () => {
-  // TODO show plan result
-  return <div>Result!</div>
+  const watchIds = useAppSelector(getWatchesList)
+
+  return (
+    <section>
+      {watchIds.map((id) => <div key={id}>{id}</div>)}
+    </section>
+  )
 }
