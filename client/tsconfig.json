@@ -15,8 +15,17 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/common/components/*"],
+      "@format/*": ["./src/common/format/*"],
+      "@http/*": ["./src/common/http/*"],
+      "@mappers/*": ["./src/common/mappers/*"],
+      "@app/*": ["./src/app/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@features/*": ["./src/features/*"],
+      "@usecases/*": ["./src/usecases/*"],
     },
   },
   "include": ["src"],

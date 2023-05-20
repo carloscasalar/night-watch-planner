@@ -1,10 +1,10 @@
 import { type FC } from 'react'
-import { TextButton } from '../../common/components/textButton/TextButton'
-import { PlanLoader } from './PlanLoader'
+import { TextButton } from '@components/textButton/TextButton'
 import { PlanError } from './PlanError'
+import { PlanLoader } from './PlanLoader'
 import { PlanResult } from './PlanResult'
-import { useGeneratePlan } from './useGeneratePlan'
 import { planServiceRest } from './planServiceRest'
+import { useGeneratePlan } from './useGeneratePlan'
 
 export const PlanPanel: FC = () => {
   const { generatePlan, isErrored, isLoaded, isLoading } = useGeneratePlan(planServiceRest)
