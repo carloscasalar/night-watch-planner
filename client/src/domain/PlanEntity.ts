@@ -7,7 +7,9 @@ export interface Score {
   readonly feasible: boolean
 }
 
+export type WatchId = string
 export interface Watch {
+  readonly id: WatchId
   readonly sleepingCharacters: CharacterId[]
   readonly watchfulCharacters: CharacterId[]
   readonly minutesLength: number
