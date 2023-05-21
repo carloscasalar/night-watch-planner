@@ -4,7 +4,7 @@ import { WatchCard } from './WatchCard'
 import { getPlanSummary } from './getPlanSummary'
 
 export const PlanResult: FC = () => {
-  const [watchIds, duration] = useAppSelector(getPlanSummary)
+  const { watchIds, duration } = useAppSelector(getPlanSummary)
   const [hours, minutes] = duration
 
   return (

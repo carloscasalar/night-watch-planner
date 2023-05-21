@@ -15,7 +15,7 @@ export const WatchCard: FC<WatchCardProps> = ({ id }) => {
       <time className="mb-1 text-sm font-normal leading-none text-gray-500">Shift duration: {hours}h:{minutes}m</time>
       <h3 className="text-lg font-semibold text-gray-900">Watchful Characters</h3>
       <p className="mb-4 text-base font-normal text-gray-400">
-        {watchfulCharacters.map(({ id, name }) => <span key="id" className="mx-3">{name}</span>)}
+        {watchfulCharacters.map(({ id: characterId, name }) => <span key={characterId} className="mx-3">{name}</span>)}
       </p>
     </>
   )
