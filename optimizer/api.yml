@@ -132,7 +132,7 @@ definitions:
   Plan:
     description: Night watch plan
     properties:
-      watches:
+      watchesSummary:
         type: array
         items:
           $ref: '#/definitions/Watch'

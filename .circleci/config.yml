@@ -4,32 +4,32 @@ jobs:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:10.16
+      - image: cimg/node:lts
 
     steps:
       - checkout
 
       - restore_cache:
-          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          key: npm-packages-{{ checksum "client/package-lock.json" }}
 
       - run: cd ~/night-watch-planner/client && npm ci
 
       - save_cache:
           paths:
             - ~/night-watch-planner/client/node_modules
-          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          key: npm-packages-{{ checksum "client/package-lock.json" }}
 
   test-client:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:10.16
+      - image: cimg/node:lts
 
     steps:
       - checkout
 
       - restore_cache:
-          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          key: npm-packages-{{ checksum "client/package-lock.json" }}
 
       - run: cd ~/night-watch-planner/client && npm run test:ci
 
@@ -37,13 +37,13 @@ jobs:
     working_directory: ~/night-watch-planner
 
     docker:
-      - image: circleci/node:10.16
+      - image: cimg/node:lts
 
     steps:
       - checkout
 
       - restore_cache:
-          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          key: npm-packages-{{ checksum "client/package-lock.json" }}
 
       - run: cd ~/night-watch-planner/client && npm run lint
 
