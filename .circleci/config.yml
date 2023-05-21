@@ -10,14 +10,14 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: npm-packages-{{ checksum "client/package.lock" }}
+          key: npm-packages-{{ checksum "client/package-lock.json" }}
 
       - run: cd ~/night-watch-planner/client && npm ci
 
       - save_cache:
           paths:
             - ~/night-watch-planner/client/node_modules
-          key: npm-packages-{{ checksum "client/package.lock" }}
+          key: npm-packages-{{ checksum "client/package-lock.json" }}
 
   test-client:
     working_directory: ~/night-watch-planner
@@ -29,7 +29,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: npm-packages-{{ checksum "client/package.lock" }}
+          key: npm-packages-{{ checksum "client/package-lock.json" }}
 
       - run: cd ~/night-watch-planner/client && npm run test:ci
 
@@ -43,7 +43,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: npm-packages-{{ checksum "client/package.lock" }}
+          key: npm-packages-{{ checksum "client/package-lock.json" }}
 
       - run: cd ~/night-watch-planner/client && npm run lint
 
