@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "start": "vite preview",
     "preview": "vite preview",
+    "start": "serve dist -s -n -L -p $PORT",
     "lint": "eslint src && tsc --noEmit",
     "lint:fix": "eslint src --fix",
     "test": "vitest",
@@ -24,7 +24,8 @@
     "react-contenteditable": "3.3.7",
     "react-dom": "18.2.0",
     "react-redux": "8.0.5",
-    "reselect": "4.1.7"
+    "reselect": "4.1.7",
+    "serve": "14.2.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "7.0.6",
@@ -60,6 +61,6 @@
   },
   "volta": {
     "node": "18.11.0",
-    "npm": "9.6.5"
+    "npm": "9.7.1"
   }
 }
