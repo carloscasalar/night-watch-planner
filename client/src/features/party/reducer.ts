@@ -1,10 +1,11 @@
-import { createSlice, type SliceCaseReducers, type PayloadAction } from '@reduxjs/toolkit'
+import { LOCAL_STORAGE_REDUX_KEY } from '@/app/store/middleware/syncWithLocalStorage'
+import { createSlice, type PayloadAction, type SliceCaseReducers } from '@reduxjs/toolkit'
+import { AddCharacterWithName } from '@usecases/AddCharacterWithName'
+import { IncreaseCharacterSleepTime } from '@usecases/IncreaseCharacterSleepTime'
+import { RemoveCharacter } from '@usecases/RemoveCharacter'
+import { UpdateCharacterName } from '@usecases/UpdateCharacterName'
 import { type Character } from '../character/schema'
 import { PartyStateRepository } from './PartyStateRepository'
-import { IncreaseCharacterSleepTime } from '../../usecases/IncreaseCharacterSleepTime'
-import { UpdateCharacterName } from '../../usecases/UpdateCharacterName'
-import { AddCharacterWithName } from '../../usecases/AddCharacterWithName'
-import { RemoveCharacter } from '../../usecases/RemoveCharacter'
 
 export interface PartyState {
   characters: Record<string, Character>
@@ -29,12 +30,18 @@ interface WithCharacterIdAndName {
   name: string
 }
 
-const partySlice = createSlice<PartyState, SliceCaseReducers<PartyState>>({
-  name: 'party',
-  initialState: {
+const initialState: PartyState = (() => {
+  const emptyPartyState: PartyState = {
     characters: {},
     order: []
-  },
+  }
+  const persistedState = localStorage.getItem(LOCAL_STORAGE_REDUX_KEY)
+  return persistedState ? JSON.parse(persistedState).party : emptyPartyState
+})()
+
+const partySlice = createSlice<PartyState, SliceCaseReducers<PartyState>>({
+  name: 'party',
+  initialState,
   reducers: {
     addCharacterAction: (state, { payload: { name } }: PayloadAction<WithName>) => {
       const repository = new PartyStateRepository(state)
