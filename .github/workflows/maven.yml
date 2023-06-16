@@ -2,6 +2,9 @@ name: Java CI
 
 on: [push]
 
+env:
+  NWP_CLIENT_URL: "http://localhost:1234"
+
 jobs:
   build:
 

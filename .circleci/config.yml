@@ -68,7 +68,11 @@ jobs:
             - ~/.m2
           key: circleci-night-watch-planner-{{ checksum "optimizer/pom.xml" }}
 
-      - run: mvn -f optimizer/pom.xml package
+      - run:
+          name: Run tests
+          environment:
+            NWP_CLIENT_URL: http://localhost:1234
+          command: mvn -f optimizer/pom.xml package
 
       - store_test_results:
           path: optimizer/target/surefire-reports

@@ -1,8 +1,0 @@
-server:
-  port: 3000
-client:
-  url: ${NWP_CLIENT_URL}
-logging:
-  level:
-    #ROOT: DEBUG
-    org.optaplanner: debug

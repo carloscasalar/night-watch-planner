@@ -13,11 +13,8 @@ RUN chmod +x ./mvnw
 # download the dependency if needed or if the pom file is changed
 RUN ./mvnw dependency:go-offline -B
 
-# Define the RAILWAY_SERVICE_NWP_FRONTEND_URL build argument
-ARG RAILWAY_SERVICE_NWP_FRONTEND_URL
-
 # Set the NWP_CLIENT_URL environment variable
-ENV NWP_CLIENT_URL=$RAILWAY_SERVICE_NWP_FRONTEND_URL
+ARG NWP_CLIENT_URL
 
 COPY src src
 
