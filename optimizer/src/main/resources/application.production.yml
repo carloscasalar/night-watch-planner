@@ -1,7 +1,7 @@
 server:
   port: 3000
 client:
-  url: http://localhost:1234
+  url: ${NWP_CLIENT_URL}
 logging:
   level:
     #ROOT: DEBUG

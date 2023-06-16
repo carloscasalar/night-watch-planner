@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@CrossOrigin(origins = {"http://localhost:1234", "https://night-watch-planner.up.railway.app"})
+@CrossOrigin(origins = "${client.url}")
 @RequestMapping(path = "/v1/optimize")
 @AllArgsConstructor
 public class PlanController {
