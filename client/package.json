@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:railway": "sh ./scripts/railwayenv.sh && tsc && vite build",
     "preview": "vite preview",
     "start": "serve dist -s -n -L -p $PORT",
     "lint": "eslint src && tsc --noEmit",
