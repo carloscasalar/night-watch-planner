@@ -1,0 +1,30 @@
+# See https://docs.render.com/configure-environment-variables
+# and https://docs.render.com/environment-variables
+services:
+- type: web
+  name: night-watch-planner
+  runtime: docker
+  repo: https://github.com/carloscasalar/night-watch-planner
+  plan: free
+  envVars:
+  - key: NWP_CLIENT_URL
+    type: pserv
+    name: nwp
+    envVarKey: RENDER_EXTERNAL_URL
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: optimizer
+- type: web
+  name: nwp
+  runtime: static
+  repo: https://github.com/carloscasalar/night-watch-planner
+  envVars:
+  - key: VITE_PLAN_REST_API_HOST
+    type: pserv
+    name: night-watch-planner
+    envVarKey: RENDER_EXTERNAL_URL
+  buildCommand: npm ci; npm run build
+  staticPublishPath: dist
+  rootDir: client
+version: "1"

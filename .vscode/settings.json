@@ -1,8 +1,8 @@
 {
   "eslint.workingDirectories": ["client"],
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll.eslint": true
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": [
     "javascript",
@@ -12,9 +12,7 @@
   ],
   "eslint.format.enable": true,
   "eslint.run": "onSave",
-  "cSpell.words": [
-    "reduxjs"
-  ],
+  "cSpell.words": ["reduxjs"],
   // Makes vscode aware of import aliases defined in client/tsconfig.json
   "typescript.tsdk": "client/node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -26,5 +24,5 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.suggest.paths": true,
-  "typescript.suggest.paths": true,
+  "typescript.suggest.paths": true
 }
