@@ -8,9 +8,10 @@ services:
   plan: free
   envVars:
   - key: NWP_CLIENT_URL
-    type: pserv
-    name: nwp
-    envVarKey: RENDER_EXTERNAL_URL
+    fromService:
+      type: pserv
+      name: nwp
+      envVarKey: RENDER_EXTERNAL_URL
   region: oregon
   dockerContext: .
   dockerfilePath: ./Dockerfile
@@ -21,9 +22,10 @@ services:
   repo: https://github.com/carloscasalar/night-watch-planner
   envVars:
   - key: VITE_PLAN_REST_API_HOST
-    type: pserv
-    name: night-watch-planner
-    envVarKey: RENDER_EXTERNAL_URL
+    fromService:
+      type: pserv
+      name: night-watch-planner
+      envVarKey: RENDER_EXTERNAL_URL
   buildCommand: npm ci; npm run build
   staticPublishPath: dist
   rootDir: client
