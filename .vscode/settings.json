@@ -4,15 +4,10 @@
     "source.organizeImports": "explicit",
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "javascriptreact",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact"],
   "eslint.format.enable": true,
   "eslint.run": "onSave",
-  "cSpell.words": ["reduxjs"],
+  "cSpell.words": ["pserv", "reduxjs", "VITE"],
   // Makes vscode aware of import aliases defined in client/tsconfig.json
   "typescript.tsdk": "client/node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

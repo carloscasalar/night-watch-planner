@@ -9,7 +9,7 @@ services:
   envVars:
   - key: NWP_CLIENT_URL
     fromService:
-      type: pserv
+      type: web
       name: nwp
       envVarKey: RENDER_EXTERNAL_URL
   region: oregon
@@ -23,7 +23,7 @@ services:
   envVars:
   - key: VITE_PLAN_REST_API_HOST
     fromService:
-      type: pserv
+      type: web
       name: night-watch-planner
       envVarKey: RENDER_EXTERNAL_URL
   buildCommand: npm ci; npm run build
