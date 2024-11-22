@@ -1,5 +1,4 @@
 # Night Watch Planner v0.1.0 [![CircleCI](https://circleci.com/gh/carloscasalar/night-watch-planner/tree/master.svg?style=svg)](https://circleci.com/gh/carloscasalar/night-watch-planner/tree/master)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/carloscasalar/night-watch-planner)
 
 Just a Night watch planner optimizer for use in RPGs like _[Pathfinder](http://paizo.com/pathfinder)_.
 
@@ -77,3 +76,7 @@ Optimizer follow this rules in order to find the best night watch plan:
     * No oversleeping time.
   * Soft rules (nice to have):
     * No overloaded watches (more than two characters in the same watch).
+
+## Deploy
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/carloscasalar/night-watch-planner)
