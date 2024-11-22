@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react-swc'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/night-watch-planner/',
   plugins: [react()],
   resolve: {
     alias: {
