@@ -7,8 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-# Skip optional dependencies to avoid platform-specific package issues in CI
-RUN npm ci --omit=optional
+RUN npm ci
 
 # Copy source files
 COPY . .

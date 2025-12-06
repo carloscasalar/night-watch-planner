@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           key: npm-packages-{{ checksum "client/package-lock.json" }}
 
-      - run: cd ~/night-watch-planner/client && npm ci --omit=optional
+      - run: cd ~/night-watch-planner/client && npm ci
 
       - save_cache:
           paths:
