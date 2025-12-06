@@ -7,8 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-# Disable strict SSL due to certificate issues in build environment
-RUN npm config set strict-ssl false && npm ci
+RUN npm ci
 
 # Copy source files
 COPY . .
