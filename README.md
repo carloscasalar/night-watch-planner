@@ -77,6 +77,47 @@ Optimizer follow this rules in order to find the best night watch plan:
   * Soft rules (nice to have):
     * No overloaded watches (more than two characters in the same watch).
 
+## Docker Setup
+
+### Running with Docker Compose
+
+The application can be run using Docker Compose, which orchestrates both the backend optimizer and the React client:
+
+```bash
+# Build and start both services
+docker compose up --build
+
+# Or run in detached mode
+docker compose up -d --build
+```
+
+This will:
+- Start the optimizer backend on `http://localhost:3000`
+- Start the React client on `http://localhost:8080`
+- Configure CORS to allow the client to communicate with the backend
+
+Access the application at: `http://localhost:8080`
+
+To stop the services:
+```bash
+docker compose down
+```
+
+### Individual Services
+
+You can also build and run services individually:
+
+```bash
+# Build only the client
+docker compose build client
+
+# Build only the optimizer
+docker compose build optimizer
+
+# Run a specific service
+docker compose up client
+```
+
 ## Deploy
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/carloscasalar/night-watch-planner)
