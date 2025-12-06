@@ -1,7 +1,8 @@
 
 # Build Stage for Spring boot application image
 # Copy pasted from https://github.com/vumanhducnd/quanlytaisan/blob/35edc3f3d329a784e73b63b8f6077adc232dc269/Dockerfile
-FROM openjdk:8-jdk-alpine as build
+# Updated to use Eclipse Temurin (openjdk:8 images are deprecated)
+FROM eclipse-temurin:8-jdk-alpine as build
 
 WORKDIR /app
 
@@ -22,7 +23,7 @@ RUN ./mvnw package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 # Production Stage for Spring boot application image
-FROM openjdk:8-jre-alpine as production
+FROM eclipse-temurin:8-jre-alpine as production
 ARG DEPENDENCY=/app/target/dependency
 
 # Copy the dependency application file from build stage artifact

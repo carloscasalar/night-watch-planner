@@ -7,8 +7,11 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-# Disable strict SSL due to certificate issues in build environment
-RUN npm config set strict-ssl false && npm ci
+RUN npm ci
+
+# Debug: Check if tsc exists
+RUN ls -la node_modules/.bin/ | grep tsc || echo "tsc not found"
+RUN which tsc || echo "tsc not in PATH"
 
 # Copy source files
 COPY . .
