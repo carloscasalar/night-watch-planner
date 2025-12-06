@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  optimizer:
+    build:
+      context: ./optimizer
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NWP_CLIENT_URL=http://localhost:8080
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/v1/optimize"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  client:
+    build:
+      context: ./client
+      args:
+        VITE_PLAN_REST_API_HOST: http://localhost:3000
+    ports:
+      - "8080:80"
+    depends_on:
+      - optimizer
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
