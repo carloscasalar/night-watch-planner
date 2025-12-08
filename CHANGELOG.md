@@ -3,7 +3,7 @@
 ## v0.3.0 2025-12-08
 
 ### Add
-* Added Spring Boot Actuator health endpoint for liveness probes at `v1/health`.
+* Added Spring Boot Actuator health endpoint for liveness probes at `/v1/health`.
 * Updated Docker health checks to use HTTP-based health monitoring.
 * Added curl to Docker image for health check support.
 
