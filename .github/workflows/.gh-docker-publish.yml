@@ -25,15 +25,15 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
-          registry: ${{ env. REGISTRY }}
-          username: ${{ github. actor }}
-          password: ${{ secrets. GITHUB_TOKEN }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env. REGISTRY }}/${{ env.IMAGE_PREFIX }}-optimizer
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}-optimizer
           tags: |
             type=ref,event=tag
             type=ref,event=branch
@@ -44,7 +44,7 @@ jobs:
         with:
           context: ./optimizer
           push: true
-          tags: ${{ steps. meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             NWP_CLIENT_URL=https://your-client-url.com
@@ -62,15 +62,15 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
-          registry: ${{ env. REGISTRY }}
-          username: ${{ github. actor }}
-          password: ${{ secrets. GITHUB_TOKEN }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env. IMAGE_PREFIX }}-client
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}-client
           tags: |
             type=ref,event=tag
             type=ref,event=branch
@@ -82,5 +82,5 @@ jobs:
           context: ./client
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta. outputs.labels }}
+          labels: ${{ steps.meta.outputs.labels }}
 
