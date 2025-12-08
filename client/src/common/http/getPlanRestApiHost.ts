@@ -1,8 +1,8 @@
 declare global {
   interface Window {
     __APP_CONFIG__?: {
-      PLAN_REST_API_HOST?: string;
-    };
+      PLAN_REST_API_HOST?: string
+    }
   }
 }
 
@@ -17,6 +17,6 @@ declare global {
  *
  * @returns The Plan REST API host URL
  */
-export function getPlanRestApiHost(): string {
-  return window.__APP_CONFIG__?.PLAN_REST_API_HOST ?? import.meta.env.VITE_PLAN_REST_API_HOST ?? "";
+export function getPlanRestApiHost (): string {
+  return window.__APP_CONFIG__?.PLAN_REST_API_HOST ?? import.meta.env.VITE_PLAN_REST_API_HOST ?? ''
 }
