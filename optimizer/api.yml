@@ -38,6 +38,22 @@ paths:
               message:
                 type: string
                 description: Error message
+  /health:
+    get:
+      summary: Health check endpoint for liveness probes
+      description: Returns the health status of the application for monitoring and liveness probes
+      operationId: getHealth
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Application is healthy
+          schema:
+            $ref: '#/definitions/Health'
+        503:
+          description: Application is not healthy
+          schema:
+            $ref: '#/definitions/Health'
 definitions:
   Sense:
     description: Relevant senses that allows a _PC_ to be aware of intruders at a relevant distance.
@@ -144,3 +160,15 @@ definitions:
       - watches
       - totalTime
       - score
+
+  Health:
+    description: Health status of the application
+    properties:
+      status:
+        type: string
+        enum:
+          - UP
+          - DOWN
+        description: Current health status
+    required:
+      - status
