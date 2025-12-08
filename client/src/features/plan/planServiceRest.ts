@@ -1,39 +1,39 @@
-import { type CharacterEntity } from '../../domain/CharacterEntity'
-import { type PlanEntity } from '../../domain/PlanEntity'
-import { type PlanError, type PlanRequest, type PlanResponse, type PlanService } from '../../domain/PlanService'
+import { getPlanRestApiHost } from "../../common/http/getPlanRestApiHost";
+import { type CharacterEntity } from "../../domain/CharacterEntity";
+import { type PlanEntity } from "../../domain/PlanEntity";
+import { type PlanError, type PlanRequest, type PlanResponse, type PlanService } from "../../domain/PlanService";
 
-const host: string = import.meta.env.VITE_PLAN_REST_API_HOST
-const planEndpointURL = `${host}/v1/optimize`
+const getPlanEndpointURL = (): string => `${getPlanRestApiHost()}/v1/optimize`;
 
 interface CharacterDefinition {
-  name: string
-  senses: string[]
-  requiredSleepTime: number
+  name: string;
+  senses: string[];
+  requiredSleepTime: number;
 }
 
 interface PlanRequestPayload {
-  maxTotalTimeSpent: number
-  party: CharacterDefinition[]
+  maxTotalTimeSpent: number;
+  party: CharacterDefinition[];
 }
 
 interface ScoreDefinition {
-  initScore: number
-  hardScore: number
-  mediumScore: number
-  softScore: number
-  feasible: boolean
+  initScore: number;
+  hardScore: number;
+  mediumScore: number;
+  softScore: number;
+  feasible: boolean;
 }
 
 interface WatchDefinition {
-  sleepingCharacters: string[]
-  watchfulCharacters: string[]
-  length: number
+  sleepingCharacters: string[];
+  watchfulCharacters: string[];
+  length: number;
 }
 
 export interface PlanResponsePayload {
-  totalTime: number
-  score: ScoreDefinition
-  watchesSummary: WatchDefinition[]
+  totalTime: number;
+  score: ScoreDefinition;
+  watchesSummary: WatchDefinition[];
 }
 
 const toPlanEntity = (response: PlanResponsePayload): PlanEntity => {
@@ -41,49 +41,46 @@ const toPlanEntity = (response: PlanResponsePayload): PlanEntity => {
     id: crypto.randomUUID(),
     sleepingCharacters: watch.sleepingCharacters,
     watchfulCharacters: watch.watchfulCharacters,
-    minutesLength: watch.length
-  }))
+    minutesLength: watch.length,
+  }));
   return {
     score: {
       soft: response.score.softScore,
       medium: response.score.mediumScore,
       hard: response.score.hardScore,
-      feasible: response.score.feasible
+      feasible: response.score.feasible,
     },
     totalTimeMinutes: response.totalTime,
-    watches
-  }
-}
+    watches,
+  };
+};
 
-const toCharacterDefinition = ({
-  id,
-  requiredSleepTime
-}: CharacterEntity): CharacterDefinition => ({
+const toCharacterDefinition = ({ id, requiredSleepTime }: CharacterEntity): CharacterDefinition => ({
   name: id,
   requiredSleepTime,
-  senses: ['Normal']
-})
+  senses: ["Normal"],
+});
 
 const toPlanRequestPayload = (planRequest: PlanRequest): PlanRequestPayload => ({
   party: planRequest.party.characters.map(toCharacterDefinition),
-  maxTotalTimeSpent: planRequest.maxTotalTimeSpent
-})
+  maxTotalTimeSpent: planRequest.maxTotalTimeSpent,
+});
 
 export const planServiceRest: PlanService = {
   generatePlan: async (planRequest: PlanRequest): Promise<PlanResponse> => {
-    const response = await fetch(planEndpointURL, {
-      method: 'POST',
+    const response = await fetch(getPlanEndpointURL(), {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(toPlanRequestPayload(planRequest))
-    })
+      body: JSON.stringify(toPlanRequestPayload(planRequest)),
+    });
     if (response.ok) {
-      const planResponse: PlanResponsePayload = await response.json()
-      return [toPlanEntity(planResponse), null]
+      const planResponse: PlanResponsePayload = await response.json();
+      return [toPlanEntity(planResponse), null];
     } else {
-      const error: PlanError = await response.json()
-      return [null, error]
+      const error: PlanError = await response.json();
+      return [null, error];
     }
-  }
-}
+  },
+};

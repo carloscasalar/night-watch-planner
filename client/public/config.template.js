@@ -1,0 +1,3 @@
+window.__APP_CONFIG__ = {
+  PLAN_REST_API_HOST: "${PLAN_REST_API_HOST}",
+};
