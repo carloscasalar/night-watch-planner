@@ -4,12 +4,13 @@
 
 ### Add
 * Added Spring Boot Actuator health endpoint for liveness probes at `/v1/health`.
+
+### Modify
 * Updated Docker health checks to use HTTP-based health monitoring.
-* Added wget to Docker image for health check support.
 
 ## v0.2.0 2023-04-14
 
-### Modified
+### Modify
 * vite build based.
 * Client refactored to use TS instead of plain JS
 
@@ -20,7 +21,7 @@
 
 ## v0.0.3 2018-02-05
 
-### Modified
+### Modify
 * Plan request contains maximum total time instead of maximum number of watches.
 * Plan is initialized with a number of watches equal to the minimum character sleep hours
   time plus the maximum required character sleep time.
