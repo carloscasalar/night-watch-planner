@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_PREFIX: ${{ github. repository_owner }}/night-watch-planner
+  IMAGE_PREFIX: ${{ github.repository_owner }}/night-watch-planner
 
 jobs:
   build-and-push-optimizer:
