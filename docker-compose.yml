@@ -8,7 +8,11 @@ services:
       - PORT=3000
       - NWP_CLIENT_URL=http://localhost:8080
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/v1/health"]
+      test:
+        [
+          "CMD-SHELL",
+          "wget --no-verbose --tries=1 --spider http://localhost:3000/v1/health || exit 1",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3

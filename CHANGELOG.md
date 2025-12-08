@@ -3,9 +3,9 @@
 ## v0.3.0 2025-12-08
 
 ### Add
-* Added Spring Boot Actuator health endpoint for liveness probes
-* Updated Docker health checks to use HTTP-based health monitoring
-* Added curl to Docker image for health check support
+* Added Spring Boot Actuator health endpoint for liveness probes at `v1/health`.
+* Updated Docker health checks to use HTTP-based health monitoring.
+* Added curl to Docker image for health check support.
 
 ## v0.2.0 2023-04-14
 
@@ -22,16 +22,16 @@
 
 ### Modified
 * Plan request contains maximum total time instead of maximum number of watches.
-* Plan is initialized with a number of watches equal to the minimum character sleep hours 
+* Plan is initialized with a number of watches equal to the minimum character sleep hours
   time plus the maximum required character sleep time.
-* Solver max time is now 10 seconds.   
+* Solver max time is now 10 seconds.
 
 ### Add
 * All non lazy characters sleep at minimum their required sleep time in all found solutions.
 * New hard rules:
   * Total time spent is not greater than the one specified in plan request.
 * New medium rules:
-  * Oversleep time penalizes. -1 point for each 30 minutes of oversleep time.  
+  * Oversleep time penalizes. -1 point for each 30 minutes of oversleep time.
 
 ## v0.0.2 2017-12-15
 
@@ -46,7 +46,7 @@
     * No overloaded watches (more than two characters in the same watch).
 ### Modify
 * `Plan` model has been modified. There are three value providers for watches.
-* `Plan` is initialized with a `PlanRequest`.    
+* `Plan` is initialized with a `PlanRequest`.
 
 ## v0.0.1 2017-07-27
 
