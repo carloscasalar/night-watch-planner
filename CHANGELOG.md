@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.3.1 2025-12-08
+
+### Modify
+* Docker images (optimizer and client) now support multi-architecture builds for linux/amd64 and linux/arm64.
+
 ## v0.3.0 2025-12-08
 
 ### Add
