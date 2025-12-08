@@ -1,9 +1,9 @@
+import { getPlanRestApiHost } from '../../common/http/getPlanRestApiHost'
 import { type CharacterEntity } from '../../domain/CharacterEntity'
 import { type PlanEntity } from '../../domain/PlanEntity'
 import { type PlanError, type PlanRequest, type PlanResponse, type PlanService } from '../../domain/PlanService'
 
-const host: string = import.meta.env.VITE_PLAN_REST_API_HOST
-const planEndpointURL = `${host}/v1/optimize`
+const getPlanEndpointURL = (): string => `${getPlanRestApiHost()}/v1/optimize`
 
 interface CharacterDefinition {
   name: string
@@ -55,10 +55,7 @@ const toPlanEntity = (response: PlanResponsePayload): PlanEntity => {
   }
 }
 
-const toCharacterDefinition = ({
-  id,
-  requiredSleepTime
-}: CharacterEntity): CharacterDefinition => ({
+const toCharacterDefinition = ({ id, requiredSleepTime }: CharacterEntity): CharacterDefinition => ({
   name: id,
   requiredSleepTime,
   senses: ['Normal']
@@ -71,7 +68,7 @@ const toPlanRequestPayload = (planRequest: PlanRequest): PlanRequestPayload => (
 
 export const planServiceRest: PlanService = {
   generatePlan: async (planRequest: PlanRequest): Promise<PlanResponse> => {
-    const response = await fetch(planEndpointURL, {
+    const response = await fetch(getPlanEndpointURL(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -12,24 +12,30 @@ RUN npm ci
 # Copy source files
 COPY . .
 
-# Build argument for API host (needed at build time for Vite)
-ARG VITE_PLAN_REST_API_HOST
-ENV VITE_PLAN_REST_API_HOST=$VITE_PLAN_REST_API_HOST
-
-# Build the application
+# Build the application (no build-time env vars needed for k8s image)
 RUN npm run build
 
 # Production Stage
 FROM nginx:alpine as production
 
+WORKDIR /usr/share/nginx/html
+
 # Copy built assets from build stage
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist ./
 
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Copy entrypoint script for runtime configuration
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+# Environment variable for runtime configuration
+ENV PLAN_REST_API_HOST=""
+
 # Expose port 80
 EXPOSE 80
 
-# Start nginx
+# Use entrypoint to generate config.js at runtime
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
