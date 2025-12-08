@@ -6,3 +6,12 @@ logging:
   level:
     #ROOT: DEBUG
     org.optaplanner: debug
+management:
+  endpoints:
+    web:
+      base-path: /v1
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
