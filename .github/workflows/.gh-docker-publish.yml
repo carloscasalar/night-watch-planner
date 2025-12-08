@@ -47,7 +47,7 @@ jobs:
           tags: ${{ steps. meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NWP_CLIENT_URL=https://your-client-url. com
+            NWP_CLIENT_URL=https://your-client-url.com
 
   build-and-push-client:
     runs-on: ubuntu-latest
