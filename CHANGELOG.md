@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## V0.1.0 2019-12-11
+## v0.2.0 2023-04-14
+
+### Modified
+* vite build based.
+* Client refactored to use TS instead of plain JS
+
+## v0.1.0 2019-12-11
 
 ### Add
 * Web client to build a party and request for a night watch plan.
