@@ -9,6 +9,7 @@ logging:
 management:
   endpoints:
     web:
+      base-path: /v1
       exposure:
         include: health
   endpoint:
